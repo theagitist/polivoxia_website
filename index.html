@@ -359,7 +359,14 @@ h3 {
   flex-direction: column;
   justify-content: flex-end;
   padding: 18px;
-  background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05) 60%, transparent);
+  background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.15) 60%, transparent);
+}
+
+.card-text-container {
+  background: rgba(0,0,0,0.6);
+  padding: 12px 16px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
 }
 .badge {
   position: absolute;
@@ -378,11 +385,12 @@ h3 {
   color: #fff;
   font: 700 24px/1.3 'bmx-radical', 'Arial Black', Arial, sans-serif;
   letter-spacing: 1px;
+  margin-bottom: 4px;
 }
 .subtitle {
-  margin-top: 4px;
-  color: rgba(255,255,255,0.85);
-  font: 400 13px/1.4 "Lato", sans-serif;
+  margin-top: 0;
+  color: rgba(255,255,255,0.9);
+  font: 400 15px/1.4 'courier-std', 'Courier New', monospace;
 }
 
 @media (max-width: 640px) {
@@ -390,7 +398,7 @@ h3 {
     font-size: 18px;
   }
   .subtitle {
-    font-size: 12px;
+    font-size: 14px;
   }
   .badge {
     font-size: 10px;
@@ -403,7 +411,7 @@ h3 {
     font-size: 16px;
   }
   .subtitle {
-    font-size: 11px;
+    font-size: 13px;
   }
   .badge {
     font-size: 9px;
@@ -489,8 +497,10 @@ h3 {
         <img class="card-media" alt="Stories in Whispers preview" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpolivoxia.com%2Fstories_in_whispers%2F?w=1200"/>
         <span class="badge">Interactive</span>
         <div class="card-content">
-          <div class="title">Stories in Whispers</div>
-          <div class="subtitle">Catch whispers. Create poetry. Share.</div>
+          <div class="card-text-container">
+            <div class="title">Stories in Whispers</div>
+            <div class="subtitle">Catch whispers. Create poetry. Share.</div>
+          </div>
         </div>
       </a>
 
@@ -498,8 +508,10 @@ h3 {
         <img class="card-media" alt="Costa Rica site preview" src="https://costarica.polivoxia.com/content/images/size/w960/format/webp/2025/01/Firefly-costa-rica-s-flag--without-the-crest--clashing-with-the-light-blue--pink--white-flag.-17006-7.jpg"/>
         <span class="badge">Human Rights</span>
         <div class="card-content">
-          <div class="title">Transphobia in Costa Rica</div>
-          <div class="subtitle">An updated compilation of reports, stories and news.</div>
+          <div class="card-text-container">
+            <div class="title">Transphobia in Costa Rica</div>
+            <div class="subtitle">An updated compilation of reports, stories and news.</div>
+          </div>
         </div>
       </a>
 
@@ -507,8 +519,10 @@ h3 {
         <img class="card-media" alt="TransRants preview" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.transrants.com?w=1200"/>
         <span class="badge">Writing</span>
         <div class="card-content">
-          <div class="title">TransRants</div>
-          <div class="subtitle">Rants. Poetry. Essays. Thoughts in motion.</div>
+          <div class="card-text-container">
+            <div class="title">TransRants</div>
+            <div class="subtitle">Rants. Poetry. Essays. Thoughts in motion.</div>
+          </div>
         </div>
       </a>
 
@@ -516,8 +530,10 @@ h3 {
         <img class="card-media" alt="Sujeto del Inconsciente preview" src="img/sujeto.jpg"/>
         <span class="badge">Art</span>
         <div class="card-content">
-          <div class="title">Sujeto del Inconsciente</div>
-          <div class="subtitle">A video dance ensemble with live visuals and dancers.</div>
+          <div class="card-text-container">
+            <div class="title">Sujeto del Inconsciente</div>
+            <div class="subtitle">A video dance ensemble with live visuals and dancers.</div>
+          </div>
         </div>
       </a>
 
@@ -525,8 +541,10 @@ h3 {
         <img class="card-media" alt="Ounces - Stemmata preview" src="img/ounces.png"/>
         <span class="badge">Music</span>
         <div class="card-content">
-          <div class="title">Ounces - Stemmata</div>
-          <div class="subtitle">Concert visuals: in-sync video across four screens for live shows.</div>
+          <div class="card-text-container">
+            <div class="title">Ounces - Stemmata</div>
+            <div class="subtitle">Concert visuals: in-sync video across four screens for live shows.</div>
+          </div>
         </div>
       </a>
 
@@ -534,8 +552,10 @@ h3 {
         <img class="card-media" alt="Programa Convivir preview" src="https://image.thum.io/get/width/1200/https://theagitist.com/programa-convivir" onerror="this.onerror=null; this.src='https://api.screenshotmachine.com?key=free&url=https://theagitist.com/programa-convivir&dimension=1200x800'"/>
         <span class="badge">Documentary</span>
         <div class="card-content">
-          <div class="title">Programa Convivir</div>
-          <div class="subtitle">Three short documentaries about rural high school communities in Costa Rica.</div>
+          <div class="card-text-container">
+            <div class="title">Programa Convivir</div>
+            <div class="subtitle">Three short documentaries about rural high school communities in Costa Rica.</div>
+          </div>
         </div>
       </a>
     </div>
@@ -551,8 +571,10 @@ h3 {
         <img class="card-media" alt="Stories in Whispers preview" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpolivoxia.com%2Fstories_in_whispers%2F?w=1200"/>
         <span class="badge">Interactive</span>
         <div class="card-content">
-          <div class="title">Stories in Whispers</div>
-          <div class="subtitle">Catch whispers. Create poetry. Share.</div>
+          <div class="card-text-container">
+            <div class="title">Stories in Whispers</div>
+            <div class="subtitle">Catch whispers. Create poetry. Share.</div>
+          </div>
         </div>
       </a>
 
@@ -560,8 +582,10 @@ h3 {
         <img class="card-media" alt="Costa Rica site preview" src="https://costarica.polivoxia.com/content/images/size/w960/format/webp/2025/01/Firefly-costa-rica-s-flag--without-the-crest--clashing-with-the-light-blue--pink--white-flag.-17006-7.jpg"/>
         <span class="badge">Human Rights</span>
         <div class="card-content">
-          <div class="title">Transphobia in Costa Rica</div>
-          <div class="subtitle">An updated compilation of reports, stories and news.</div>
+          <div class="card-text-container">
+            <div class="title">Transphobia in Costa Rica</div>
+            <div class="subtitle">An updated compilation of reports, stories and news.</div>
+          </div>
         </div>
       </a>
 
@@ -569,8 +593,10 @@ h3 {
         <img class="card-media" alt="TransRants preview" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.transrants.com?w=1200"/>
         <span class="badge">Writing</span>
         <div class="card-content">
-          <div class="title">TransRants</div>
-          <div class="subtitle">Rants. Poetry. Essays. Thoughts in motion.</div>
+          <div class="card-text-container">
+            <div class="title">TransRants</div>
+            <div class="subtitle">Rants. Poetry. Essays. Thoughts in motion.</div>
+          </div>
         </div>
       </a>
 
@@ -578,8 +604,10 @@ h3 {
         <img class="card-media" alt="Sujeto del Inconsciente preview" src="img/sujeto.jpg"/>
         <span class="badge">Art</span>
         <div class="card-content">
-          <div class="title">Sujeto del Inconsciente</div>
-          <div class="subtitle">A video dance ensemble with live visuals and dancers.</div>
+          <div class="card-text-container">
+            <div class="title">Sujeto del Inconsciente</div>
+            <div class="subtitle">A video dance ensemble with live visuals and dancers.</div>
+          </div>
         </div>
       </a>
 
@@ -587,8 +615,10 @@ h3 {
         <img class="card-media" alt="Ounces - Stemmata preview" src="img/ounces.png"/>
         <span class="badge">Music</span>
         <div class="card-content">
-          <div class="title">Ounces - Stemmata</div>
-          <div class="subtitle">Concert visuals: in-sync video across four screens for live shows.</div>
+          <div class="card-text-container">
+            <div class="title">Ounces - Stemmata</div>
+            <div class="subtitle">Concert visuals: in-sync video across four screens for live shows.</div>
+          </div>
         </div>
       </a>
 
@@ -596,8 +626,10 @@ h3 {
         <img class="card-media" alt="Programa Convivir preview" src="https://image.thum.io/get/width/1200/https://theagitist.com/programa-convivir" onerror="this.onerror=null; this.src='https://api.screenshotmachine.com?key=free&url=https://theagitist.com/programa-convivir&dimension=1200x800'"/>
         <span class="badge">Documentary</span>
         <div class="card-content">
-          <div class="title">Programa Convivir</div>
-          <div class="subtitle">Three short documentaries about rural high school communities in Costa Rica.</div>
+          <div class="card-text-container">
+            <div class="title">Programa Convivir</div>
+            <div class="subtitle">Three short documentaries about rural high school communities in Costa Rica.</div>
+          </div>
         </div>
       </a>
     </div>
