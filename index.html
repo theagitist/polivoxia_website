@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>POLIVOXIA.COM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.typekit.net/dke3jnn.css">
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+  background-color: #000;
+  background-image: url("img/polivoxia_logo.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  /*opacity: 0.65;*/
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.bgimg-1 {
+  height: 100vh;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .bgimg-1 {
+    height: auto;
+    min-height: 180px;
+    padding-bottom: 0;
+  }
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+
+h3 {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font: 20px "Lato", sans-serif;
+  color: #111;
+}
+
+/* Graffiti title styles */
+.graffiti-title {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'bmx-radical', 'Arial Black', Arial, sans-serif;
+  font-size: 7rem;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+
+.graffiti-subtitle {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'courier-std', 'Courier New', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(200,200,200,0.8), 0 0 8px rgba(200,200,200,0.6);
+  text-transform: uppercase;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  .graffiti-title {
+    font-size: 6rem;
+    letter-spacing: 6px;
+    top: 20px;
+  }
+  .graffiti-subtitle {
+    font-size: 1.6rem;
+    top: 140px;
+    letter-spacing: 2px;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    white-space: normal;
+    line-height: 1.4;
+  }
+  .gallery {
+    bottom: -50px;
+    padding: 30px 20px 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .graffiti-title {
+    font-size: 5.5rem;
+    letter-spacing: 5px;
+    top: 10px;
+  }
+  .graffiti-subtitle {
+    font-size: 1.8rem;
+    top: 120px;
+    letter-spacing: 2px;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 640px) {
+  .graffiti-title {
+    font-size: 4.5rem;
+    letter-spacing: 4px;
+    top: 8px;
+  }
+  .graffiti-subtitle {
+    font-size: 1.6rem;
+    top: 110px;
+    letter-spacing: 1.5px;
+    width: 100%;
+    text-align: center;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .graffiti-title {
+    font-size: 4rem;
+    letter-spacing: 3px;
+    top: 5px;
+  }
+  .graffiti-subtitle {
+    font-size: 1.4rem;
+    top: 100px;
+    letter-spacing: 1px;
+    width: 100%;
+    text-align: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+}
+
+/* Gallery styles */
+.gallery {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  padding: 40px 20px 60px;
+}
+
+/* Mobile Gallery */
+.mobile-gallery {
+  display: none;
+  background: transparent;
+  padding: 20px 20px 20px;
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    display: none;
+  }
+  .mobile-gallery {
+    display: block;
+  }
+}
+.gallery-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.gallery-title {
+  margin: 0 0 18px;
+  color: #fff;
+  font: 700 26px/1.3 "Lato", sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+@media (max-width: 1200px) {
+  .cards { 
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+  }
+}
+@media (max-width: 900px) {
+  .cards { 
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+@media (max-width: 640px) {
+  .cards { 
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .cards { 
+    gap: 8px;
+  }
+}
+.card {
+  position: relative;
+  display: block;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #eaeaea;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.08);
+  transform: translateZ(0);
+  transition: transform 320ms ease, box-shadow 320ms ease, filter 320ms ease;
+  will-change: transform;
+}
+@media (max-width: 1200px) {
+  .card { height: 220px; }
+}
+@media (max-width: 900px) {
+  .card { height: 200px; }
+}
+@media (max-width: 640px) {
+  .card { height: 180px; }
+}
+@media (max-width: 480px) {
+  .card { height: 160px; }
+}
+/* Media layer for real site screenshots */
+.card-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: rgba(0,0,0,0.5);
+  filter: saturate(1.08) contrast(1.03) brightness(0.9);
+  transform: scale(1.0);
+  transition: transform 600ms ease, filter 320ms ease;
+}
+.card:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(1000px 400px at -10% -10%, rgba(255,255,255,0.18), transparent 40%),
+              linear-gradient(135deg, rgba(0,0,0,0.35), rgba(0,0,0,0.25)),
+              conic-gradient(from 180deg at 60% 0%, rgba(255,99,71,0.20), rgba(255,215,0,0.16), rgba(72,209,204,0.18), rgba(186,85,211,0.14), rgba(255,99,71,0.20));
+  mix-blend-mode: overlay;
+  transition: opacity 320ms ease;
+}
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.10);
+}
+.card:hover .card-media {
+  transform: scale(1.08);
+  filter: saturate(1.25) contrast(1.1) brightness(0.85);
+}
+.card-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05) 60%, transparent);
+}
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  font: 600 11px/1 "Lato", sans-serif;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+.title {
+  color: #fff;
+  font: 700 20px/1.3 "Lato", sans-serif;
+  letter-spacing: 1px;
+}
+.subtitle {
+  margin-top: 4px;
+  color: rgba(255,255,255,0.85);
+  font: 400 13px/1.4 "Lato", sans-serif;
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 18px;
+  }
+  .subtitle {
+    font-size: 12px;
+  }
+  .badge {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 16px;
+  }
+  .subtitle {
+    font-size: 11px;
+  }
+  .badge {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+}
+
+/* Subtle float animation */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+.card { animation: floaty 6s ease-in-out infinite; }
+.card:nth-child(2) { animation-delay: 0.6s; }
+.card:nth-child(3) { animation-delay: 1.2s; }
+</style>
+</head>
+<body>
+
+<div class="bgimg-1">
+  <h1 class="graffiti-title">POLIVOXIA.COM</h1>
+  <h2 class="graffiti-subtitle">Random projects by Adri M.</h2>
+  <section class="gallery">
+  <div class="gallery-inner">
+    <div class="cards" id="cards">
+      <a class="card" href="https://polivoxia.com/stories_in_whispers/" target="_blank" rel="noopener">
+        <img class="card-media" alt="Stories in Whispers preview" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpolivoxia.com%2Fstories_in_whispers%2F?w=1200"/>
+        <span class="badge">Interactive</span>
+        <div class="card-content">
+          <div class="title">Stories in Whispers</div>
+          <div class="subtitle">Catch whispers. Create poetry. Share.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://costarica.polivoxia.com" target="_blank" rel="noopener">
+        <img class="card-media" alt="Costa Rica site preview" src="https://costarica.polivoxia.com/content/images/size/w960/format/webp/2025/01/Firefly-costa-rica-s-flag--without-the-crest--clashing-with-the-light-blue--pink--white-flag.-17006-7.jpg"/>
+        <span class="badge">Human Rights</span>
+        <div class="card-content">
+          <div class="title">Transphobia in Costa Rica</div>
+          <div class="subtitle">An updated compilation of reports, stories and news.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://www.transrants.com" target="_blank" rel="noopener">
+        <img class="card-media" alt="TransRants preview" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.transrants.com?w=1200"/>
+        <span class="badge">Writing</span>
+        <div class="card-content">
+          <div class="title">TransRants</div>
+          <div class="subtitle">Rants. Poetry. Essays. Thoughts in motion.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://theagitist.com/sujeto-del-inconsciente" target="_blank" rel="noopener">
+        <img class="card-media" alt="Sujeto del Inconsciente preview" src="img/sujeto.jpg"/>
+        <span class="badge">Art</span>
+        <div class="card-content">
+          <div class="title">Sujeto del Inconsciente</div>
+          <div class="subtitle">A video dance ensemble with live visuals and dancers.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://theagitist.com/stemmata" target="_blank" rel="noopener">
+        <img class="card-media" alt="Ounces - Stemmata preview" src="img/ounces.png"/>
+        <span class="badge">Music</span>
+        <div class="card-content">
+          <div class="title">Ounces - Stemmata</div>
+          <div class="subtitle">Concert visuals: in-sync video across four screens for live shows.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://theagitist.com/programa-convivir" target="_blank" rel="noopener">
+        <img class="card-media" alt="Programa Convivir preview" src="https://image.thum.io/get/width/1200/https://theagitist.com/programa-convivir" onerror="this.onerror=null; this.src='https://api.screenshotmachine.com?key=free&url=https://theagitist.com/programa-convivir&dimension=1200x800'"/>
+        <span class="badge">Documentary</span>
+        <div class="card-content">
+          <div class="title">Programa Convivir</div>
+          <div class="subtitle">Three short documentaries about rural high school communities in Costa Rica.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  </section>
+</div>
+
+<!-- Mobile Gallery Section -->
+<section class="mobile-gallery">
+  <div class="gallery-inner">
+    <div class="cards" id="mobile-cards">
+      <a class="card" href="https://polivoxia.com/stories_in_whispers/" target="_blank" rel="noopener">
+        <img class="card-media" alt="Stories in Whispers preview" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpolivoxia.com%2Fstories_in_whispers%2F?w=1200"/>
+        <span class="badge">Interactive</span>
+        <div class="card-content">
+          <div class="title">Stories in Whispers</div>
+          <div class="subtitle">Catch whispers. Create poetry. Share.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://costarica.polivoxia.com" target="_blank" rel="noopener">
+        <img class="card-media" alt="Costa Rica site preview" src="https://costarica.polivoxia.com/content/images/size/w960/format/webp/2025/01/Firefly-costa-rica-s-flag--without-the-crest--clashing-with-the-light-blue--pink--white-flag.-17006-7.jpg"/>
+        <span class="badge">Human Rights</span>
+        <div class="card-content">
+          <div class="title">Transphobia in Costa Rica</div>
+          <div class="subtitle">An updated compilation of reports, stories and news.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://www.transrants.com" target="_blank" rel="noopener">
+        <img class="card-media" alt="TransRants preview" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.transrants.com?w=1200"/>
+        <span class="badge">Writing</span>
+        <div class="card-content">
+          <div class="title">TransRants</div>
+          <div class="subtitle">Rants. Poetry. Essays. Thoughts in motion.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://theagitist.com/sujeto-del-inconsciente" target="_blank" rel="noopener">
+        <img class="card-media" alt="Sujeto del Inconsciente preview" src="img/sujeto.jpg"/>
+        <span class="badge">Art</span>
+        <div class="card-content">
+          <div class="title">Sujeto del Inconsciente</div>
+          <div class="subtitle">A video dance ensemble with live visuals and dancers.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://theagitist.com/stemmata" target="_blank" rel="noopener">
+        <img class="card-media" alt="Ounces - Stemmata preview" src="img/ounces.png"/>
+        <span class="badge">Music</span>
+        <div class="card-content">
+          <div class="title">Ounces - Stemmata</div>
+          <div class="subtitle">Concert visuals: in-sync video across four screens for live shows.</div>
+        </div>
+      </a>
+
+      <a class="card" href="https://theagitist.com/programa-convivir" target="_blank" rel="noopener">
+        <img class="card-media" alt="Programa Convivir preview" src="https://image.thum.io/get/width/1200/https://theagitist.com/programa-convivir" onerror="this.onerror=null; this.src='https://api.screenshotmachine.com?key=free&url=https://theagitist.com/programa-convivir&dimension=1200x800'"/>
+        <span class="badge">Documentary</span>
+        <div class="card-content">
+          <div class="title">Programa Convivir</div>
+          <div class="subtitle">Three short documentaries about rural high school communities in Costa Rica.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Subtle parallax on mouse move
+  (function(){
+    const containers = [document.getElementById('cards'), document.getElementById('mobile-cards')];
+    
+    containers.forEach(container => {
+      if (!container) return;
+      const cards = Array.from(container.querySelectorAll('.card'));
+      let raf = null;
+      
+      function onMove(e){
+        const rect = container.getBoundingClientRect();
+        const cx = e.clientX - rect.left;
+        const cy = e.clientY - rect.top;
+        const nx = (cx / rect.width) - 0.5;
+        const ny = (cy / rect.height) - 0.5;
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          cards.forEach((card, i) => {
+            const depth = 3 + i * 2;
+            card.style.transform = `translateY(${Math.sin((Date.now()/900)+(i*0.6)) * 3}px) translateZ(0) rotateX(${ny*depth}deg) rotateY(${nx*-depth}deg)`;
+          });
+        });
+      }
+      
+      container.addEventListener('mousemove', onMove);
+      container.addEventListener('mouseleave', () => {
+        cards.forEach((card) => { card.style.transform = ''; });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
