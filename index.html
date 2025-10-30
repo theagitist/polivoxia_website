@@ -286,9 +286,71 @@ h3 {
   transform: translateY(-6px) scale(1.02);
   box-shadow: 0 18px 40px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.10);
 }
+
+/* Different card hover effects */
+.card:nth-child(1):hover {
+  transform: translateY(-8px) scale(1.05) rotate(1deg);
+  box-shadow: 0 25px 50px rgba(255,99,71,0.3), inset 0 0 0 1px rgba(255,255,255,0.15);
+}
+
+.card:nth-child(2):hover {
+  transform: translateY(-10px) scale(1.03) rotate(-1deg);
+  box-shadow: 0 30px 60px rgba(72,209,204,0.4), inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+
+.card:nth-child(3):hover {
+  transform: translateY(-12px) scale(1.08) rotate(2deg);
+  box-shadow: 0 35px 70px rgba(186,85,211,0.35), inset 0 0 0 1px rgba(255,255,255,0.18);
+}
+
+.card:nth-child(4):hover {
+  transform: translateY(-7px) scale(1.04) rotate(-0.5deg);
+  box-shadow: 0 20px 45px rgba(255,215,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.14);
+}
+
+.card:nth-child(5):hover {
+  transform: translateY(-9px) scale(1.06) rotate(1.5deg);
+  box-shadow: 0 28px 55px rgba(255,99,71,0.4), inset 0 0 0 1px rgba(255,255,255,0.16);
+}
+
+.card:nth-child(6):hover {
+  transform: translateY(-11px) scale(1.07) rotate(-2deg);
+  box-shadow: 0 32px 65px rgba(72,209,204,0.35), inset 0 0 0 1px rgba(255,255,255,0.13);
+}
 .card:hover .card-media {
   transform: scale(1.08);
   filter: saturate(1.25) contrast(1.1) brightness(0.85);
+}
+
+/* Different hover effects for each card */
+.card:nth-child(1):hover .card-media {
+  transform: scale(1.15) rotate(3deg);
+  filter: saturate(1.4) contrast(1.3) brightness(0.9) hue-rotate(20deg);
+}
+
+.card:nth-child(2):hover .card-media {
+  transform: scale(1.12) rotate(-2deg);
+  filter: saturate(1.6) contrast(1.2) brightness(1.1) hue-rotate(-15deg);
+}
+
+.card:nth-child(3):hover .card-media {
+  transform: scale(1.2) rotate(1deg);
+  filter: saturate(1.3) contrast(1.4) brightness(0.8) hue-rotate(45deg);
+}
+
+.card:nth-child(4):hover .card-media {
+  transform: scale(1.1) rotate(-1deg);
+  filter: saturate(1.8) contrast(1.1) brightness(0.95) hue-rotate(-30deg);
+}
+
+.card:nth-child(5):hover .card-media {
+  transform: scale(1.18) rotate(2deg);
+  filter: saturate(1.5) contrast(1.5) brightness(0.85) hue-rotate(60deg);
+}
+
+.card:nth-child(6):hover .card-media {
+  transform: scale(1.14) rotate(-3deg);
+  filter: saturate(1.7) contrast(1.3) brightness(1.05) hue-rotate(-45deg);
 }
 .card-content {
   position: absolute;
@@ -354,9 +416,65 @@ h3 {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-6px); }
 }
-.card { animation: floaty 6s ease-in-out infinite; }
-.card:nth-child(2) { animation-delay: 0.6s; }
-.card:nth-child(3) { animation-delay: 1.2s; }
+
+/* Super intense vibration effect - BRRRRR! */
+@keyframes shiver {
+  0%, 99.5%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+  0.5% { transform: translateX(-3px) translateY(-1.5px) rotate(-2deg); }
+  1% { transform: translateX(3px) translateY(1.5px) rotate(2deg); }
+  1.5% { transform: translateX(-1.5px) translateY(3px) rotate(-1.5deg); }
+  2% { transform: translateX(1.5px) translateY(-3px) rotate(1.5deg); }
+  2.5% { transform: translateX(-3px) translateY(1.5px) rotate(-2.5deg); }
+  3% { transform: translateX(3px) translateY(-1.5px) rotate(2.5deg); }
+  3.5% { transform: translateX(-1.5px) translateY(-1.5px) rotate(-1deg); }
+  4% { transform: translateX(1.5px) translateY(1.5px) rotate(1deg); }
+  4.5% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+}
+
+@keyframes shiver2 {
+  0%, 99.2%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+  0.4% { transform: translateX(3px) translateY(-1.5px) rotate(2.5deg); }
+  0.8% { transform: translateX(-3px) translateY(1.5px) rotate(-2.5deg); }
+  1.2% { transform: translateX(1.5px) translateY(3px) rotate(1.8deg); }
+  1.6% { transform: translateX(-1.5px) translateY(-3px) rotate(-1.8deg); }
+  2% { transform: translateX(3px) translateY(-1.5px) rotate(2deg); }
+  2.4% { transform: translateX(-3px) translateY(1.5px) rotate(-2deg); }
+  2.8% { transform: translateX(1.5px) translateY(-1.5px) rotate(1.2deg); }
+  3.2% { transform: translateX(-1.5px) translateY(1.5px) rotate(-1.2deg); }
+  3.6% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+}
+
+@keyframes shiver3 {
+  0%, 99.8%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+  0.2% { transform: translateX(-2.5px) translateY(1.5px) rotate(-3deg); }
+  0.4% { transform: translateX(2.5px) translateY(-1.5px) rotate(3deg); }
+  0.6% { transform: translateX(-1.5px) translateY(-2.5px) rotate(-2deg); }
+  0.8% { transform: translateX(1.5px) translateY(2.5px) rotate(2deg); }
+  1% { transform: translateX(-2.5px) translateY(1.5px) rotate(-2.8deg); }
+  1.2% { transform: translateX(2.5px) translateY(-1.5px) rotate(2.8deg); }
+  1.4% { transform: translateX(-1.5px) translateY(1.5px) rotate(-1.5deg); }
+  1.6% { transform: translateX(1.5px) translateY(-1.5px) rotate(1.5deg); }
+  1.8% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+}
+
+.card { 
+  animation: floaty 6s ease-in-out infinite, shiver3 25s linear infinite; 
+}
+.card:nth-child(2) { 
+  animation: floaty 6s ease-in-out infinite 0.6s, shiver3 30s linear infinite 5s; 
+}
+.card:nth-child(3) { 
+  animation: floaty 6s ease-in-out infinite 1.2s, shiver3 35s linear infinite 12s; 
+}
+.card:nth-child(4) { 
+  animation: floaty 6s ease-in-out infinite 1.8s, shiver3 20s linear infinite 3s; 
+}
+.card:nth-child(5) { 
+  animation: floaty 6s ease-in-out infinite 2.4s, shiver3 28s linear infinite 8s; 
+}
+.card:nth-child(6) { 
+  animation: floaty 6s ease-in-out infinite 3s, shiver3 22s linear infinite 15s; 
+}
 </style>
 </head>
 <body>
