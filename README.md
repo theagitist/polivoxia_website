@@ -1,6 +1,6 @@
 # POLIVOXIA.COM
 
-Portfolio website showcasing random projects by Adri M.
+Portfolio website showcasing liminal spaces by Adri M.
 
 ## Overview
 
@@ -10,6 +10,7 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 
 - `index.html` - Main portfolio page with gallery
 - `img/` - Image assets including logos and project previews
+- `favicon.png`, `favicon-16.png`, `favicon-32.png` - Favicon files generated from logo
 - `costarica/` - Subdirectory for Costa Rica project
 - `stories_in_whispers/` - Interactive poetry project
 - `downloads/` - Downloadable resources
@@ -20,7 +21,8 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - Interactive card-based gallery with hover effects and animations
 - Parallax effects on mouse movement
 - Custom typography using TypeKit fonts (bmx-radical, courier-std, Lato)
-- Instagram integration
+- Social media integration (Instagram and Medium)
+- Custom favicon based on site logo
 
 ## Projects Featured
 
