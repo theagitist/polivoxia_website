@@ -3,6 +3,24 @@
 <head>
 <title>POLIVOXIA.COM</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Analytics - will be initialized after cookie consent -->
+<script>
+  // Initialize Google Analytics only after cookie consent
+  function initGoogleAnalytics() {
+    // Load gtag.js script
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-K3ME7VXJWS';
+    document.head.appendChild(script);
+    
+    // Initialize dataLayer and gtag
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-K3ME7VXJWS');
+  }
+</script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -878,12 +896,22 @@ h3 {
     setTimeout(() => {
       banner.style.display = 'none';
     }, 300);
+    // Initialize Google Analytics after consent
+    if (typeof initGoogleAnalytics === 'function') {
+      initGoogleAnalytics();
+    }
   }
 
   // Check if user has already accepted cookies
   function checkCookieConsent() {
     const consent = localStorage.getItem('cookieConsent');
-    if (!consent) {
+    if (consent === 'accepted') {
+      // User has already accepted, initialize Google Analytics
+      if (typeof initGoogleAnalytics === 'function') {
+        initGoogleAnalytics();
+      }
+    } else {
+      // Show cookie banner
       const banner = document.getElementById('cookieBanner');
       banner.style.display = 'flex';
       setTimeout(() => {

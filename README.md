@@ -2,7 +2,7 @@
 
 Portfolio website showcasing liminal spaces by Adri M.
 
-**Version:** 1.0.1
+**Version:** 1.0.2
 
 ## Overview
 
@@ -26,6 +26,7 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - Social media integration (Instagram and Medium)
 - Custom favicon based on site logo
 - Cookie consent banner with localStorage persistence
+- Google Analytics integration (respects cookie consent)
 
 ## Projects Featured
 
@@ -42,10 +43,16 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - HTML5
 - CSS3 (with animations and responsive design)
 - JavaScript (for parallax effects and cookie consent)
+- Google Analytics 4 (GA4) for website analytics
 - External services for screenshot generation (WordPress mshots, Thum.io, Screenshot Machine)
 - localStorage for cookie consent persistence
 
 ## Changelog
+
+### Version 1.0.2
+- Added Google Analytics 4 (GA4) integration
+- Google Analytics now respects cookie consent (only loads after user accepts)
+- Privacy-compliant analytics implementation
 
 ### Version 1.0.1
 - Added cookie consent banner at the bottom of the page
