@@ -2,7 +2,7 @@
 
 Portfolio website showcasing liminal spaces by Adri M.
 
-**Version:** 1.0.2
+**Version:** 1.0.3
 
 ## Overview
 
@@ -48,6 +48,12 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - localStorage for cookie consent persistence
 
 ## Changelog
+
+### Version 1.0.3
+- Enhanced cookie banner prominence with larger size and improved styling
+- Updated accept button to white/gray gradient matching background image tones
+- Added slide-up animation and pulse effect to cookie banner
+- Improved visual hierarchy and user engagement
 
 ### Version 1.0.2
 - Added Google Analytics 4 (GA4) integration
