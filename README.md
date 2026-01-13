@@ -11,7 +11,7 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 ## Structure
 
 - `index.html` - Main portfolio page with gallery
-- `img/` - Image assets including logos and project previews
+- `img/` - Image assets (logo background, project previews)
 - `favicon.png`, `favicon-16.png`, `favicon-32.png` - Favicon files generated from logo
 - `costarica/` - Subdirectory for Costa Rica project
 - `stories_in_whispers/` - Interactive poetry project
@@ -54,6 +54,7 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - Updated accept button to white/gray gradient matching background image tones
 - Added slide-up animation and pulse effect to cookie banner
 - Improved visual hierarchy and user engagement
+- Removed unused logo image variants (cleaned up img/ directory)
 
 ### Version 1.0.2
 - Added Google Analytics 4 (GA4) integration
