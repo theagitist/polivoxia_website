@@ -2,6 +2,8 @@
 
 Portfolio website showcasing liminal spaces by Adri M.
 
+**Version:** 1.0.1
+
 ## Overview
 
 This is a single-page portfolio website featuring an interactive gallery of projects. The site displays various creative works including interactive web projects, writing, art, music, documentaries, and games.
@@ -23,6 +25,7 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - Custom typography using TypeKit fonts (bmx-radical, courier-std, Lato)
 - Social media integration (Instagram and Medium)
 - Custom favicon based on site logo
+- Cookie consent banner with localStorage persistence
 
 ## Projects Featured
 
@@ -38,8 +41,19 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 
 - HTML5
 - CSS3 (with animations and responsive design)
-- JavaScript (for parallax effects)
+- JavaScript (for parallax effects and cookie consent)
 - External services for screenshot generation (WordPress mshots, Thum.io, Screenshot Machine)
+- localStorage for cookie consent persistence
+
+## Changelog
+
+### Version 1.0.1
+- Added cookie consent banner at the bottom of the page
+- Implemented localStorage-based consent tracking
+- Responsive cookie banner design for mobile and desktop
+
+### Version 1.0.0
+- Initial release
 
 ## Browser Support
 
