@@ -1,8 +1,8 @@
-# POLIVOXIA.COM
+# POLIVOXIA.CA
 
 Portfolio website showcasing liminal spaces by Adri M.
 
-**Version:** 1.0.3
+**Version:** 1.0.4
 
 ## Overview
 
@@ -48,6 +48,11 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - localStorage for cookie consent persistence
 
 ## Changelog
+
+### Version 1.0.4
+- Updated all domain references from polivoxia.com to polivoxia.ca
+- Updated title, headings, links, and image URLs to use .ca domain
+- Updated redirect URLs for subdomains
 
 ### Version 1.0.3
 - Enhanced cookie banner prominence with larger size and improved styling
