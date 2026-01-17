@@ -2,7 +2,7 @@
 
 Portfolio website showcasing liminal spaces by Adri M.
 
-**Version:** 1.0.6
+**Version:** 1.0.7
 
 ## Overview
 
@@ -52,6 +52,10 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - SEO best practices (semantic HTML, descriptive meta tags, sitemap)
 
 ## Changelog
+
+### Version 1.0.7
+- Updated all links from costarica.polivoxia.ca to costarica.polivoxia.com
+- Fixed domain references in card links and redirect pages
 
 ### Version 1.0.6
 - Fixed thumbnail image for Transphobia in Costa Rica card
