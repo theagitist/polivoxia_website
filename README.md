@@ -2,7 +2,7 @@
 
 Portfolio website showcasing liminal spaces by Adri M.
 
-**Version:** 1.0.4
+**Version:** 1.0.5
 
 ## Overview
 
@@ -11,6 +11,7 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 ## Structure
 
 - `index.html` - Main portfolio page with gallery
+- `sitemap.xml` - XML sitemap for search engine optimization
 - `img/` - Image assets (logo background, project previews)
 - `favicon.png`, `favicon-16.png`, `favicon-32.png` - Favicon files generated from logo
 - `costarica/` - Subdirectory for Costa Rica project
@@ -27,12 +28,14 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - Custom favicon based on site logo
 - Cookie consent banner with localStorage persistence
 - Google Analytics integration (respects cookie consent)
+- SEO optimization with descriptive title tags and image alt text
+- XML sitemap for search engine indexing
 
 ## Projects Featured
 
 1. **Stories in Whispers** - Interactive poetry creation platform
 2. **Transphobia in Costa Rica** - Human rights documentation
-3. **Journeyways** - Board game about becoming
+3. **Journeyways** - Game about becoming
 4. **TransRants** - Writing blog (rants, poetry, essays)
 5. **Sujeto del Inconsciente** - Video dance ensemble with live visuals
 6. **Ounces - Stemmata** - Concert visuals for live shows
@@ -46,8 +49,14 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - Google Analytics 4 (GA4) for website analytics
 - External services for screenshot generation (WordPress mshots, Thum.io, Screenshot Machine)
 - localStorage for cookie consent persistence
+- SEO best practices (semantic HTML, descriptive meta tags, sitemap)
 
 ## Changelog
+
+### Version 1.0.5
+- Added SEO-friendly title tags to all pages
+- Updated all image alt text with descriptive, keyword-rich descriptions
+- Generated sitemap.xml for search engine optimization
 
 ### Version 1.0.4
 - Updated all domain references from polivoxia.com to polivoxia.ca
