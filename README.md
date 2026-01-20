@@ -2,7 +2,7 @@
 
 Portfolio website showcasing liminal spaces by Adri M.
 
-**Version:** 1.0.7
+**Version:** 1.0.8
 
 ## Overview
 
@@ -24,7 +24,7 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - Interactive card-based gallery with hover effects and animations
 - Parallax effects on mouse movement
 - Custom typography using TypeKit fonts (bmx-radical, courier-std, Lato)
-- Social media integration (Instagram and Medium)
+- Social media integration (Instagram, GitHub, Medium, and ORCID)
 - Custom favicon based on site logo
 - Cookie consent banner with localStorage persistence
 - Google Analytics integration (respects cookie consent)
@@ -52,6 +52,12 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - SEO best practices (semantic HTML, descriptive meta tags, sitemap)
 
 ## Changelog
+
+### Version 1.0.8
+- Added GitHub icon to social media links
+- Added ORCID icon to social media links
+- Added tooltips to all social media icons for better accessibility
+- Updated GitHub remote repository URL
 
 ### Version 1.0.7
 - Updated all links from costarica.polivoxia.ca to costarica.polivoxia.com
