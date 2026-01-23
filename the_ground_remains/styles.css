@@ -63,7 +63,7 @@ header {
     background-color: var(--primary-color);
     background-image: 
         linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-        url('the_ground_remains_map_bg_optimized.png');
+        url('img/the_ground_remains_map_bg_optimized.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -103,70 +103,101 @@ header h1 {
     text-shadow: 1px 1px 0px var(--gray-dark);
 }
 
-/* Navigation */
-nav {
+/* Navigation – tabs (pastel post-it style) */
+nav.tabs {
     background-color: var(--gray-light);
     position: sticky;
     top: 0;
     z-index: 100;
     filter: contrast(1.05);
+    border-bottom: 2px solid var(--primary-color);
+    padding: 0.5rem 0 0;
 }
 
-nav ul {
+.tab-list {
     list-style: none;
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap;
-    padding: 1rem 0;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    gap: 0.5rem;
 }
 
-nav li {
-    margin: 0 0.8rem;
-    white-space: nowrap;
+.tab-list li {
+    margin: 0;
 }
 
-nav a {
+.tab-btn {
     font-family: "nunito", sans-serif;
     font-style: normal;
     font-weight: 700;
     color: var(--primary-color);
-    text-decoration: none;
-    padding: 0.8rem 1rem;
-    display: block;
-    transition: all 0.2s ease;
-    background-color: transparent;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.85rem;
+    background: #f5f5dc;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: none;
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
     white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: -2px;
+    border-radius: 2px 2px 0 0;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-nav a:hover {
-    color: var(--gray-dark);
-    transform: rotate(-1deg) scale(1.05);
+.tab-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Main Content */
-main {
-    padding: 1.5rem 0 4rem 0;
+.tab-btn.active {
+    position: relative;
+    z-index: 1;
+    border-bottom: 2px solid var(--paper-white);
+    transform: translateY(2px);
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tab-statement { background: #fef9c3; }
+.tab-statement:hover { background: #fef59f; }
+.tab-statement.active { background: #fffde7; }
+
+.tab-rules { background: #fce4ec; }
+.tab-rules:hover { background: #f8bbd9; }
+.tab-rules.active { background: #fdf2f8; }
+
+.tab-chaos { background: #c8e6c9; }
+.tab-chaos:hover { background: #a5d6a7; }
+.tab-chaos.active { background: #e8f5e9; }
+
+.tab-theory { background: #bbdefb; }
+.tab-theory:hover { background: #90caf9; }
+.tab-theory.active { background: #e3f2fd; }
+
+.tab-downloads { background: #e1bee7; }
+.tab-downloads:hover { background: #ce93d8; }
+.tab-downloads.active { background: #f3e5f5; }
+
+/* Main Content – book page */
+main.book-content {
+    padding: 2rem 0 4rem 0;
     background-color: var(--paper-white);
+    min-height: 60vh;
 }
 
-.section {
-    margin-bottom: 3rem;
+.tab-panel[hidden] {
+    display: none !important;
+}
+
+.section.tab-panel {
+    margin: 0;
     background-color: var(--bg-color);
     padding: 2.5rem 2.5rem;
     position: relative;
     transform: rotate(0.3deg);
     filter: contrast(1.05);
-}
-
-.section:nth-child(even) {
-    transform: rotate(-0.3deg);
-}
-
-.section:first-of-type {
-    margin-top: 0;
 }
 
 .section h2 {
@@ -184,6 +215,7 @@ main {
     letter-spacing: 0.1em;
     transform: rotate(-0.5deg);
     filter: contrast(1.2);
+    text-align: center;
 }
 
 .section h3 {
@@ -259,6 +291,15 @@ main {
     filter: contrast(1.05);
 }
 
+/* Reduce spacing in Cacophony Grid section */
+#game-board .section h2 {
+    margin-bottom: 0.5rem;
+}
+
+#game-board .board-container {
+    margin-top: 0.5rem;
+}
+
 .game-board-image {
     max-width: 100%;
     height: auto;
@@ -327,11 +368,11 @@ main {
 
 /* Footer */
 footer {
-    background-color: var(--primary-color);
-    color: var(--paper-white);
+    background-color: var(--gray-medium);
+    color: var(--primary-color);
     text-align: center;
-    padding: 3rem 0;
-    margin-top: 5rem;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
     font-family: "nunito", sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -340,10 +381,40 @@ footer {
 }
 
 footer p {
-    margin-bottom: 0.8rem;
-    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    color: var(--primary-color);
+}
+
+footer p.license {
+    text-transform: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    margin-top: 0.5rem;
+    color: var(--primary-color);
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+footer a:hover {
+    color: var(--gray-dark);
+}
+
+footer p em {
+    font-family: "rubik-glitch", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+footer p.license em {
+    font-family: "nunito", sans-serif;
+    font-style: italic;
+    font-weight: 400;
 }
 
 /* Responsive Design */
@@ -363,13 +434,23 @@ footer p {
         transform: rotate(0deg);
     }
     
-    nav ul {
+    .tab-list {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
     }
     
-    nav li {
-        margin: 0.5rem 0;
+    .tab-list li {
+        margin: 0;
+    }
+    
+    .tab-btn {
+        border-radius: 0;
+        margin-bottom: 0;
+        border-bottom: 1px solid var(--primary-color);
+    }
+    
+    .tab-btn.active {
+        border-bottom: 1px solid var(--primary-color);
     }
     
     .section {
@@ -449,14 +530,22 @@ body::before {
 
 /* Print Styles */
 @media print {
-    nav {
+    nav.tabs {
         display: none;
     }
     
-    .section {
-        page-break-inside: avoid;
+    .tab-panel[hidden] {
+        display: block !important;
+    }
+    
+    .section.tab-panel {
+        page-break-before: always;
         box-shadow: none;
         transform: none;
+    }
+    
+    .section.tab-panel:first-of-type {
+        page-break-before: avoid;
     }
     
     .game-board-image {

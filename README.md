@@ -2,7 +2,7 @@
 
 Portfolio website showcasing liminal spaces by Adri M.
 
-**Version:** 1.0.8
+**Version:** 1.0.9
 
 ## Overview
 
@@ -40,6 +40,7 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 5. **Sujeto del Inconsciente** - Video dance ensemble with live visuals
 6. **Ounces - Stemmata** - Concert visuals for live shows
 7. **Programa Convivir** - Documentary series about rural high school communities
+8. **The Ground Remains** - Print-and-play game/zine inspired by Indigenomicon by Jodi A. Byrd
 
 ## Technologies
 
@@ -52,6 +53,14 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - SEO best practices (semantic HTML, descriptive meta tags, sitemap)
 
 ## Changelog
+
+### Version 1.0.9
+- Added "The Ground Remains" print-and-play game/zine mini-website
+- Implemented tabbed navigation interface for game sections
+- Added comprehensive SEO meta tags to The Ground Remains page
+- Updated sitemap.xml to include The Ground Remains page
+- Organized game assets into downloads and img subdirectories
+- Added Creative Commons license (CC BY-NC-SA) to The Ground Remains
 
 ### Version 1.0.8
 - Added GitHub icon to social media links
