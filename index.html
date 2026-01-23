@@ -491,6 +491,11 @@ h3 {
   transform: scale(1.14) rotate(-3deg);
   filter: saturate(1.7) contrast(1.3) brightness(1.05) hue-rotate(-45deg);
 }
+
+.card:nth-child(7):hover .card-media {
+  transform: scale(1.16) rotate(2.5deg);
+  filter: saturate(1.6) contrast(1.4) brightness(0.9) hue-rotate(30deg);
+}
 .card-content {
   position: absolute;
   inset: 0;
@@ -622,6 +627,9 @@ h3 {
 }
 .card:nth-child(6) { 
   animation: floaty 6s ease-in-out infinite 3s, shiver3 22s linear infinite 15s; 
+}
+.card:nth-child(7) { 
+  animation: floaty 6s ease-in-out infinite 3.6s, shiver3 26s linear infinite 18s; 
 }
 
 /* Cookie Consent Banner */
@@ -778,6 +786,17 @@ h3 {
   <section class="gallery">
   <div class="gallery-inner">
     <div class="cards" id="cards">
+      <a class="card" href="https://polivoxia.ca/the_ground_remains/" target="_blank" rel="noopener">
+        <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by Indigenomicon by Jodi A. Byrd" src="the_ground_remains/img/the_ground_remains_map_bg_optimized.png"/>
+        <span class="badge">Game</span>
+        <div class="card-content">
+          <div class="card-text-container">
+            <div class="title">The Ground Remains</div>
+            <div class="subtitle">A print-and-play game/zine inspired by Indigenomicon by Jodi A. Byrd.</div>
+          </div>
+        </div>
+      </a>
+
       <a class="card" href="https://polivoxia.ca/stories_in_whispers/" target="_blank" rel="noopener">
         <img class="card-media" alt="Screenshot of Stories in Whispers interactive poetry creation platform showing the game interface where users catch whispers to build poems" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpolivoxia.ca%2Fstories_in_whispers%2F?w=1200"/>
         <span class="badge">Interactive</span>
@@ -863,6 +882,17 @@ h3 {
 <section class="mobile-gallery">
   <div class="gallery-inner">
     <div class="cards" id="mobile-cards">
+      <a class="card" href="https://polivoxia.ca/the_ground_remains/" target="_blank" rel="noopener">
+        <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by Indigenomicon by Jodi A. Byrd" src="the_ground_remains/img/the_ground_remains_map_bg_optimized.png"/>
+        <span class="badge">Game</span>
+        <div class="card-content">
+          <div class="card-text-container">
+            <div class="title">The Ground Remains</div>
+            <div class="subtitle">A print-and-play game/zine inspired by Indigenomicon by Jodi A. Byrd.</div>
+          </div>
+        </div>
+      </a>
+
       <a class="card" href="https://polivoxia.ca/stories_in_whispers/" target="_blank" rel="noopener">
         <img class="card-media" alt="Screenshot of Stories in Whispers interactive poetry creation platform showing the game interface where users catch whispers to build poems" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpolivoxia.ca%2Fstories_in_whispers%2F?w=1200"/>
         <span class="badge">Interactive</span>

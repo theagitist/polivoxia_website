@@ -2,7 +2,7 @@
 
 Portfolio website showcasing liminal spaces by Adri M.
 
-**Version:** 1.0.9
+**Version:** 1.1.0
 
 ## Overview
 
@@ -53,6 +53,10 @@ This is a single-page portfolio website featuring an interactive gallery of proj
 - SEO best practices (semantic HTML, descriptive meta tags, sitemap)
 
 ## Changelog
+
+### Version 1.1.0
+- Added "The Ground Remains" card to homepage gallery as the first featured project
+- Updated homepage to showcase The Ground Remains print-and-play game/zine prominently
 
 ### Version 1.0.9
 - Added "The Ground Remains" print-and-play game/zine mini-website
