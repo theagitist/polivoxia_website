@@ -172,10 +172,6 @@ nav.tabs {
 .tab-chaos:hover { background: #a5d6a7; }
 .tab-chaos.active { background: #e8f5e9; }
 
-.tab-theory { background: #bbdefb; }
-.tab-theory:hover { background: #90caf9; }
-.tab-theory.active { background: #e3f2fd; }
-
 .tab-downloads { background: #e1bee7; }
 .tab-downloads:hover { background: #ce93d8; }
 .tab-downloads.active { background: #f3e5f5; }
@@ -291,7 +287,7 @@ main.book-content {
     filter: contrast(1.05);
 }
 
-/* Reduce spacing in Cacophony Grid section */
+/* Reduce spacing in Colonial Grid section */
 #game-board .section h2 {
     margin-bottom: 0.5rem;
 }
@@ -322,12 +318,16 @@ main.book-content {
 }
 
 .download-list li {
-    margin-bottom: 2.5rem;
-    padding: 2rem 0;
+    margin-bottom: 0;
+    padding: 0.75rem 0;
     background-color: transparent;
     transform: rotate(0.2deg);
     position: relative;
     filter: contrast(1.05);
+}
+
+.download-list li:not(:last-child) {
+    margin-bottom: 0.5rem;
 }
 
 .download-list li:nth-child(even) {
