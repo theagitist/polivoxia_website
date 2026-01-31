@@ -7,6 +7,8 @@
     var buttons = tabList.querySelectorAll('.tab-btn');
     var panels = document.querySelectorAll('.tab-panel');
 
+    var STORAGE_KEY = 'tgr_tab';
+
     function showPanel(id) {
         panels.forEach(function (panel) {
             if (panel.id === id) {
@@ -20,6 +22,8 @@
             btn.classList.toggle('active', isActive);
             btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
         });
+        try { sessionStorage.setItem(STORAGE_KEY, id); } catch (e) {}
+        window.location.hash = id;
     }
 
     function handleClick(e) {
@@ -68,9 +72,20 @@
         }
     });
 
-    // Support hash on load (e.g. #game-board)
-    var hash = window.location.hash.slice(1);
-    if (hash && document.getElementById(hash)) {
-        showPanel(hash);
+    // Restore tab on load (refresh keeps current tab) — run after DOM is ready
+    function restoreTab() {
+        var validIds = ['designers-statement', 'game-rules', 'game-board', 'downloads'];
+        var saved = null;
+        try { saved = sessionStorage.getItem(STORAGE_KEY); } catch (e) {}
+        var hash = window.location.hash.slice(1);
+        var idToShow = null;
+        if (saved && validIds.indexOf(saved) !== -1 && document.getElementById(saved)) idToShow = saved;
+        else if (hash && validIds.indexOf(hash) !== -1 && document.getElementById(hash)) idToShow = hash;
+        if (idToShow) showPanel(idToShow);
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', restoreTab);
+    } else {
+        restoreTab();
     }
 })();
