@@ -52,7 +52,7 @@ body, html {
   font: 400 15px/1.8 "Lato", sans-serif;
   color: #777;
   background-color: #000;
-  background-image: url("img/polivoxia_logo.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("img/polivoxia_logo.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -121,6 +121,12 @@ h3 {
   padding: 0;
 }
 
+.tagline-dot {
+  font-weight: 800;
+  margin: 0 0.35em;
+  color: #000;
+}
+
 .graffiti-subtitle {
   position: absolute;
   top: 140px;
@@ -131,19 +137,29 @@ h3 {
   font-weight: 700;
   color: #333;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(200,200,200,0.8), 0 0 8px rgba(200,200,200,0.6);
   text-transform: uppercase;
   z-index: 10;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.graffiti-subtitle-text {
+  display: block;
+}
+
+.graffiti-subtitle-icons {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
 .instagram-icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   opacity: 0.8;
   transition: opacity 0.3s ease, transform 0.3s ease;
   cursor: pointer;
@@ -170,8 +186,8 @@ h3 {
 }
 
 .medium-icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   opacity: 0.8;
   transition: opacity 0.3s ease, transform 0.3s ease;
   cursor: pointer;
@@ -184,8 +200,8 @@ h3 {
 }
 
 .orcid-icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   opacity: 0.8;
   transition: opacity 0.3s ease, transform 0.3s ease;
   cursor: pointer;
@@ -193,6 +209,20 @@ h3 {
 }
 
 .orcid-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.itch-icon {
+  width: 28px;
+  height: 28px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  color: #000;
+}
+
+.itch-icon:hover {
   opacity: 1;
   transform: scale(1.1);
 }
@@ -761,7 +791,8 @@ h3 {
 <div class="bgimg-1">
   <h1 class="graffiti-title">POLIVOXIA.CA</h1>
   <h2 class="graffiti-subtitle">
-    Liminal spaces by Adri M.
+    <span class="graffiti-subtitle-text">Art <span class="tagline-dot">•</span> Computers <span class="tagline-dot">•</span> Community</span>
+    <span class="graffiti-subtitle-icons">
     <a href="https://www.instagram.com/theagitist/" target="_blank" rel="noopener" title="Instagram">
       <svg class="instagram-icon" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -777,17 +808,21 @@ h3 {
         <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
       </svg>
     </a>
-    <a href="https://orcid.org/0009-0000-2834-2780" target="_blank" rel="noopener" title="ORCID">
-      <svg class="orcid-icon" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm-2.5 5.5c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5S8 7.828 8 7s.672-1.5 1.5-1.5zm-1.5 3h3v9h-3v-9zm5.5 0h3c.552 0 1 .448 1 1v7c0 .552-.448 1-1 1h-3v-9z"/>
+    <a href="https://polivoxia.itch.io" target="_blank" rel="noopener" title="itch.io">
+      <svg class="itch-icon" viewBox="0 0 245.371 220.736" fill="currentColor">
+        <path d="M31.99 1.365C21.287 7.72 0.2 31.945 0 38.298v10.516C0 62.144 12.46 73.86 23.773 73.86c13.584 0 24.902-11.258 24.903-24.62 0 13.362 10.93 24.62 24.515 24.62 13.586 0 24.165-11.258 24.165-24.62 0 13.362 11.622 24.62 25.207 24.62h.246c13.586 0 25.208-11.258 25.208-24.62 0 13.362 10.58 24.62 24.164 24.62 13.585 0 24.515-11.258 24.515-24.62 0 13.362 11.32 24.62 24.903 24.62 11.313 0 23.773-11.714 23.773-25.046V38.298c-.2-6.354-21.287-30.58-31.988-36.933C180.118.197 157.056-.005 122.685 0c-34.37.003-81.228.54-90.697 1.365zm65.194 66.217a28.025 28.025 0 0 1-4.78 6.155c-5.128 5.014-12.157 8.122-19.906 8.122a28.482 28.482 0 0 1-19.948-8.126c-1.858-1.82-3.27-3.766-4.563-6.032l-.006.004c-1.292 2.27-3.092 4.215-4.954 6.037a28.5 28.5 0 0 1-19.948 8.12c-.934 0-1.906-.258-2.692-.528-1.092 11.372-1.553 22.24-1.716 30.164l-.002.045c-.02 4.024-.04 7.333-.06 11.93.21 23.86-2.363 77.334 10.52 90.473 19.964 4.655 56.7 6.775 93.555 6.788h.006c36.854-.013 73.59-2.133 93.554-6.788 12.883-13.14 10.31-66.614 10.52-90.474-.022-4.596-.04-7.905-.06-11.93l-.003-.045c-.162-7.926-.623-18.793-1.715-30.165-.786.27-1.757.528-2.692.528a28.5 28.5 0 0 1-19.948-8.12c-1.862-1.822-3.662-3.766-4.955-6.037l-.006-.004c-1.294 2.266-2.705 4.213-4.563 6.032a28.48 28.48 0 0 1-19.947 8.125c-7.748 0-14.778-3.11-19.906-8.123a28.025 28.025 0 0 1-4.78-6.155 27.99 27.99 0 0 1-4.736 6.155 28.49 28.49 0 0 1-19.95 8.124c-.27 0-.54-.012-.81-.02h-.007c-.27.008-.54.02-.813.02a28.49 28.49 0 0 1-19.95-8.123 27.992 27.992 0 0 1-4.736-6.155zm-20.486 26.49l-.002.01h.015c8.113.017 15.32 0 24.25 9.746 7.028-.737 14.372-1.105 21.722-1.094h.006c7.35-.01 14.694.357 21.723 1.094 8.93-9.747 16.137-9.73 24.25-9.746h.014l-.002-.01c3.833 0 19.166 0 29.85 30.007L210 165.244c8.504 30.624-2.723 31.373-16.727 31.4-20.768-.773-32.267-15.855-32.267-30.935-11.496 1.884-24.907 2.826-38.318 2.827h-.006c-13.412 0-26.823-.943-38.318-2.827 0 15.08-11.5 30.162-32.267 30.935-14.004-.027-25.23-.775-16.726-31.4L46.85 124.08C57.534 94.073 72.867 94.073 76.7 94.073zm45.985 23.582v.006c-.02.02-21.863 20.08-25.79 27.215l14.304-.573v12.474c0 .584 5.74.346 11.486.08h.006c5.744.266 11.485.504 11.485-.08v-12.474l14.304.573c-3.928-7.135-25.79-27.215-25.79-27.215v-.006l-.003.002z"/>
       </svg>
     </a>
+    <a href="https://orcid.org/0009-0000-2834-2780" target="_blank" rel="noopener" title="ORCID">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAeFBMVEWmzjn///+kzTKjzC2hyybm8cv0+OW+23SlzTXs9NrT5qOhzCijzTDR5aDs9digyyL9/vn4+/DW6KvG34jo8tG62W3f7b3i78T6/PT2+uzb67eq0ELK4ZLC3X7A3Hmv01Cz1Vmx1FTI4I221mXO45mpz0C01mDY6bBmyOCbAAAMcklEQVR4nN2d2WKiMBSGQ4IaDDaIUlek1u3933AAaysEMCcLxPmv5qbqN1lOTnIW5FnXOlht432aXI/Z5YIQulyy4zVJ9/F2Faztfz2y+Nnz8ec5/aKcM0ZCTClFD+X/xiFhjHP8lZ4/g7nFX2GJcB1sF6eLzwj+w2oWxYRxdF1sbY2nDcIgTnaEhfQV3BMmDRnZJXFg4deYJoxWByoxcm2jSdOV6aE0SrjZJtxXovuj9HlyM7oszRHOPyc+wxp0D2HmT7bmIE0RLlPkm8B7QF4OS0O/zAjhOs78UGdyiqKYZXFk4scZIBx/c2YW7weS8MXYAcLlhIcW8O4K+UR7smoSLk/c3OprEmYnTUYtwo/EyOb5kvFjIMJxYnD37GT0TxrrUZlw/m15flYY+ULZQCoSRjEivfEVImiqaDvUCJeZFfvQJcqyUW+E0aJ3vpLRT1WGUYFwhfudoH8iZNUD4frAhxjAuyg/gJ0rKOFoN9QA3kV20NUIJNwPsgKfRcneIuEmYwPzFSLZxhbhiPRn47uECWSmAghn/tAz9CHKzhYIo4kLM/QhNpE2jbKE82zYPbQukskeVCUJA+rGEvwTxpI+lRzhyvAtjAlR8mmO8Da4FWwS9W+mCGM+NEyLeGyGcOYPTdIqf2aC8OzqCBbirw3jS0KnAWUQXxHO3AbMEV9N1BeEsbtr8CH/xXbTTXhzfQQL8W6j0Um4cn8EC/mddxtdhIGDJ5km0bDrdbyDcK71mtunKO44hrcTRpncYRszEoakhweMrt+QtTtT7YQTKXeJktM2WK/Hq4QMOeJkAiecSTm8+O/q6+NrSA+StZrFNsKR1DaKn/3QKLH3VPpaftvdTQvhRmrOUVpd4bsBJyolLTdwLYRyu0zdEAVDHhBwBiHcy+0yX/W/S4bcUVuuihsJR3J7BhHO9Z+D3sexxqXYRLiWXE++EEOwGfQcS3dNzzZNhAfJbZ8Jh6X1sDdy5CBHuJIdCCISDnypyhvO4CJhJH0cFef9eGBvi2Lx9CYSLqTHIRQ2r+3QN/9k8ZpwKe8TUuG8ex3cGxF3vzphlAF+JJtW/1h6BdsTFex+nTAGzTNWeTuYo8GHMP9J9WubGiHwR1L6tJ1uji683lA07ySU32Z+Pg//TtTtxQXAfLP57iKE7/aUoP0qCEaznTOvN3zcQahycqahz7k/qIdfFU7aCT/e4/bwlfyPVsJBnR9zqg7iM+Fy6BOJKbFlC+Hp/xjCfBBPzYTL4U8kpsSXjYST/2UI80GcNBEO7fkY1ZNN/CNcDHnbaVrhQiRcKw0hJk9q+i+iRE5hiDEgJfOleCQQxioXEHgxnf1quhd/IT3G09eanff79JAcL75PDL3o/bkYv4QQv/BX1av0jfifhNtfTERF880y/v7yTRwB//zEB6Gata8SjjUJH6Cj/YVrQ/5a/QdhqrTPWCEstJkemd58DdMq4UbNPbdGmOtjgXQcMnqZVwgVL8lsEnrefHrROCn7nxVCxfOMXcLchM0aTZCUHl99J5wrOoa2CXPGVDmBhcyfCG+Ks8E+Yb4eVeOv2e2JUNVv6oPQi77VkgR+HOGSMFI9dPdCWOSSKSHeT24loXJ0V0+E3hipbDj3R/iS8KDqGUIJxx9NCoJN9CJ9IroqLEac/hIqH+qhhAlvE85O39PlphU0SuCIlD4IA2W7CiXsMLtF0SFOvhajthA1uRitispH6oJQyXEqZZDwLhqyy6Q5mDK6gtdiaS8KQvVrUuOEqCxRg6ZNIQfRBbqYSnuRE0bqoUw2CFF5MTBrYNxA9wu6i0rCQD28wBJhLnZpyPlZQTeMIpYCaT2+2yNE1J+Ie84Z+FPZtiTUuGSzSJj7sEisanKEzdPiyg1phRdYJURUjMIHGjZ6LQh1Xt/tEjZlxMjFFD5UOPpIK2TSNqEY+hvBxoOPc0KdeELrhEjIMdyCvAT2mROeNWLR7BNWnpFKgS52yTknVHYsUC+ElNSMBmjO5e4F8r40rux6IERhNfAAFrVFv3JCnXvXPgiLtVTRFLCscgcKqb05/agXwnro7wbyIXyNtOLreyEUTAbkU3iAwKfZZ/VDWE/rkMt2uYutkFbQaz+EQrwhYNqxLVJ38FFvhHSnPE1JjPY6z/c9EdbNPmDehXuU6sSY9EUYVsO3AWkdOEWJ8/YQFWGx1Wkqb/RpgrSCz/sirCevyL9Y0ysCes1V9UdYdTHkjzX0iDLF7yzVGyGu5vsAUiYytFP8zlK9EdJj5XM28oQ7dFH8zlL9EV4qx5q5/OWwFl+PhAhXwtMjrd0Dov4Iq7kr/cVr90dYSzmGXEy8xzosb6+fJH8Su7zJXopI1SDK39Pv3sQe5j6CImH2Jmea+qFGmjA/07zHuVR5Hebn0rfwLYTcUOm9NPct3sI/FPLGpe1h7h++hY+fj0X1TCN9jZ37+O9wTyOk98qfS0n8FndtQk5hQ8x8i9j2He5Lc5HqpbC8f8hW73DnjWr5dpAYJx68wbtFIVINeJM3AHz9Bm9PSFiG8uWaircn598Py++pPrDJp9mV74c6Jr+3O+/qJJXf/8s3YMff8QvVrrwBYenlO77bsRilePXIBghLL2MxdHJH+yGsB4sDDillPI3LMVF31YwhIEztHhPlblzbj8LaEAKiRe9xbc7GJj5+ZVgrFwj4vT+xiW7Gl/59R+2JG5JI+BNf6mSM8N8nXKuAIOv2EyMsW2KvQfYJKa3N0Q0gQ+gR5+1YrH71N9b3UVAVpEesvkv5FsIX1OPZQc7eb76FEzkzzZ9fvUPMBfITfnNm+st7gsZ5CxkJoGJr9/iGfnPXQISYCLH6Y1Ai4lPuWm/5h5B8C3YV8i0iWEW4p/zD3nJI5QlD3NDyAFhN7imHVNle2CLE7NDQWxXYiuI5D7i3XG4pQhrySVMvJ2jdyUoud1/5+K8JaejT78beuEtoMRD2nI/fV02Fzq+hOGQkS1tqq39A87mrNRX6qouR8OYKQ4z5HO+Sxba1s/EInLDOqnUxFB19KOF21qRpfPscjTddHUY/wfVq6rVNXKtPU9MUXselXp/GpRpDgqKDgr0WagyZqBNliVCp9IdYJwpYQLhHQrXmoA21vpRObvYJR0e1Xb6hXpvSlZttwvFEsbtrU809pbtvu4TjlKu6dY11E1XONTYJlwemXSOqRqhQv9Qa4Xh6VB4/VI1G1atBa4cwmB5DrZp7bTVoFay+ccL1Mk6YdknB1jrCcEeYzEarX41u4p/T0ziQ0HK02sbnxenCfQO9v9trQSvU8yb+k5qOHrS1qtCz8j9mhISGCph21PP+Pwp6d9Vk/z9qCXfW1fe+3eovrqLu3ghuNOHQ0qv+Fmouhkt61aMEVrHAQYndfXR6Bbko4b1Rq9+Tg5Lp9wTo2eWe5Hp2udC1SVVyfdfke+c5J9neeTrBGYNKvv+hbA9L10Ske1hCa4Y5IgboQyrbS9YpwXrJenOHOlTJCdoPGFTlxglBezrL9uV2RvC+3Ep1e4eTSm/13Mt4n90GCx6FDKE3N9nZxqrqpbJkCb3gTc7gNBQaE0sSqkeD9at6i3cAoXd7BzdDrFQLIIQGWg2heqQ7kNCbuT6KvNUQShJ6Z7cRxUrDYEK3EV8DShB6U3fXov9qisoRerGro8hfbDLShN5NMSLCrqhQJ1qd0FsZ6tlnUjTsNPRAQi+grh3DMe06qsEJvblqXylLIlnHYVuJ0IsmLrnEbPKiuZACoWoInQ3Rdo9ei9AbGYiTMCHcfDFqgNDbZC7MVJK13KoZIPS8vU5bSSOipPni1xShNxp4TyU7yAxVIfTWB+WWi/qi/NAV0W+GsOjVN9QwEix3jNEl9KLFIKuR+qm0EdQk9L" alt="ORCID" class="orcid-icon">
+    </a>
+    </span>
   </h2>
   <section class="gallery">
   <div class="gallery-inner">
     <div class="cards" id="cards">
       <a class="card" href="https://polivoxia.ca/the_ground_remains/" target="_blank" rel="noopener">
-        <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by Indigenomicon by Jodi A. Byrd" src="the_ground_remains/img/the_ground_remains_map_bg_optimized.png"/>
+        <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by Indigenomicon by Jodi A. Byrd" src="the_ground_remains/img/map_bg.png"/>
         <span class="badge">Game</span>
         <div class="card-content">
           <div class="card-text-container">
@@ -883,7 +918,7 @@ h3 {
   <div class="gallery-inner">
     <div class="cards" id="mobile-cards">
       <a class="card" href="https://polivoxia.ca/the_ground_remains/" target="_blank" rel="noopener">
-        <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by Indigenomicon by Jodi A. Byrd" src="the_ground_remains/img/the_ground_remains_map_bg_optimized.png"/>
+        <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by Indigenomicon by Jodi A. Byrd" src="the_ground_remains/img/map_bg.png"/>
         <span class="badge">Game</span>
         <div class="card-content">
           <div class="card-text-container">
