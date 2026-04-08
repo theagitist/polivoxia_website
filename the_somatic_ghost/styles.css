@@ -1,0 +1,359 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #000000;
+    --secondary-color: #1a1a1a;
+    --accent-color: #333333;
+    --gray-light: #f0ede8;
+    --gray-medium: #b0a99f;
+    --gray-dark: #444444;
+    --text-color: #1a1a1a;
+    --bg-color: #f5f2ed;
+    --paper-white: #faf8f4;
+    --border-color: #000000;
+    --link-color: #000000;
+    --link-hover: #555555;
+}
+
+html {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.015) 3px, rgba(0,0,0,0.015) 4px),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
+        url('img/cover_header_v3.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    color: var(--paper-white);
+    padding: 4.5rem 0 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 2px,
+            rgba(255,255,255,0.03) 2px,
+            rgba(255,255,255,0.03) 4px
+        ),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+header h1 {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: 3.8rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+    color: #ffffff;
+    text-shadow: 2px 2px 0px rgba(255,255,255,0.1);
+}
+
+header .subtitle {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.75);
+    display: block;
+    margin-top: 0.75rem;
+    position: relative;
+}
+
+header .cycle-tag {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    display: block;
+    margin-top: 1.5rem;
+    position: relative;
+}
+
+/* Epigraph bar */
+.epigraph {
+    background: var(--primary-color);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 1.2rem 2rem;
+    font-family: "Special Elite", "Courier New", monospace;
+    font-style: italic;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Main Content */
+main {
+    padding: 3rem 0 4rem;
+}
+
+.section {
+    margin-bottom: 3rem;
+}
+
+.section h2 {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.content {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--text-color);
+}
+
+.content p {
+    margin-bottom: 1.5rem;
+}
+
+.content strong {
+    font-weight: 700;
+}
+
+.content em {
+    font-style: italic;
+}
+
+/* Pull quote */
+.pull-quote {
+    border-left: 3px solid var(--primary-color);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--accent-color);
+    background: rgba(0,0,0,0.02);
+}
+
+.pull-quote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    font-style: normal;
+    color: var(--gray-dark);
+}
+
+/* Metadata block */
+.meta-block {
+    font-size: 0.85rem;
+    color: var(--gray-dark);
+    border: 1px solid rgba(0,0,0,0.12);
+    padding: 1.2rem 1.5rem;
+    margin-top: 2rem;
+    background: rgba(0,0,0,0.02);
+    line-height: 1.7;
+}
+
+.meta-block span {
+    display: block;
+}
+
+/* Downloads */
+.download-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.download-list li {
+    margin-bottom: 1.8rem;
+    padding: 1.5rem;
+    border: 1px solid var(--primary-color);
+    background: var(--paper-white);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.download-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0px var(--primary-color);
+}
+
+.download-list li:nth-child(odd) {
+    transform: rotate(-0.3deg);
+}
+
+.download-list li:nth-child(even) {
+    transform: rotate(0.3deg);
+}
+
+.download-list li:nth-child(odd):hover {
+    transform: rotate(-0.3deg) translateY(-2px);
+    box-shadow: 3px 3px 0px var(--primary-color);
+}
+
+.download-list li:nth-child(even):hover {
+    transform: rotate(0.3deg) translateY(-2px);
+    box-shadow: 3px 3px 0px var(--primary-color);
+}
+
+.download-list a {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: 1.1rem;
+    color: var(--link-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.download-list a:hover {
+    color: var(--link-hover);
+}
+
+.download-list p {
+    margin: 0.4rem 0 0;
+    font-size: 0.88rem;
+    color: var(--gray-dark);
+    line-height: 1.5;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: rgba(255,255,255,0.6);
+    padding: 2.5rem 0;
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.7;
+}
+
+footer a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+footer a:hover {
+    color: #ffffff;
+}
+
+footer .license {
+    margin-top: 0.8rem;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.4);
+}
+
+footer .back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+footer .back-link:hover {
+    color: rgba(255,255,255,0.8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.6rem;
+    }
+
+    header .subtitle {
+        font-size: 1rem;
+    }
+
+    .section h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 3rem 0 2.5rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+        letter-spacing: 0.04em;
+    }
+
+    header .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .container {
+        padding: 0 18px;
+    }
+
+    .download-list li {
+        padding: 1.2rem;
+    }
+
+    .download-list li:nth-child(odd),
+    .download-list li:nth-child(even) {
+        transform: none;
+    }
+
+    .download-list li:nth-child(odd):hover,
+    .download-list li:nth-child(even):hover {
+        transform: translateY(-2px);
+    }
+}
+
+@media print {
+    header, footer {
+        background-color: #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
