@@ -22,7 +22,7 @@ Site version: 1.0.1 (see `VERSION`).
 
 ## Tech
 
-Static HTML/CSS/JS. Typekit (Adobe Fonts): bmx-radical, courier-std, Nunito (the_ground_remains). Cookie consent and Google Analytics (opt-in). Images: PNGs optimized with optipng, JPGs with jpegoptim. Images: PNGs optimized with optipng, JPGs with jpegoptim.
+Static HTML/CSS/JS. Google Fonts: Special Elite, Nunito. Cookie consent and Google Analytics (opt-in). Images: PNGs optimized with optipng, JPGs with jpegoptim.
 
 ## License
 
