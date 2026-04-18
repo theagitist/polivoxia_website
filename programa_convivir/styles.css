@@ -1,13 +1,13 @@
 /* Programa Convivir — warm rural documentary */
 
 :root {
-    --bg: #fdfaf4;
-    --bg-elev: #f3ebd8;
-    --text: #2d3320;
-    --text-dim: #6c6e5a;
-    --accent: #5c8a3b;
-    --accent-deep: #3f6325;
-    --line: #d9d1bb;
+    --bg: #161c0e;
+    --bg-elev: #232c19;
+    --text: #ede5d0;
+    --text-dim: #9a9275;
+    --accent: #a6c374;
+    --accent-deep: #d9c87a;
+    --line: #2f3a25;
     --sun: #e8a849;
 }
 
@@ -27,14 +27,13 @@ body {
     line-height: 1.7;
     color: var(--text);
     background: var(--bg);
-    background-image:
-        radial-gradient(ellipse at top left, rgba(232, 168, 73, 0.12), transparent 55%),
-        radial-gradient(ellipse at bottom right, rgba(92, 138, 59, 0.1), transparent 60%);
+    background-image: linear-gradient(180deg, #2c3a1f 0%, #1a2210 45%, #0a0e05 100%);
+    background-attachment: fixed;
     min-height: 100vh;
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1180px;
     margin: 0 auto;
     padding: 0 2rem;
 }
@@ -64,11 +63,11 @@ header .subtitle {
 }
 
 main {
-    padding: 2rem 0;
+    padding: 0.5rem 0;
 }
 
 .section {
-    padding: 2.5rem 0;
+    padding: 1.25rem 0;
 }
 
 .section h2 {
@@ -79,11 +78,13 @@ main {
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--line);
+    text-align: center;
 }
 
 .content p {
-    margin-bottom: 1.2rem;
+    margin: 0 auto 1.2rem;
     max-width: 68ch;
+    text-align: center;
 }
 
 .content p em {
@@ -91,11 +92,56 @@ main {
     font-style: italic;
 }
 
-.video-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+.docs {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding: 1rem 0 3rem;
+}
+
+.doc-card {
+    background: rgba(35, 44, 25, 0.7);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.75rem 1.75rem 1.5rem;
+    box-shadow: 0 18px 50px -10px rgba(0, 0, 0, 0.55), 0 1px 0 rgba(232, 168, 73, 0.06) inset;
+    backdrop-filter: blur(4px);
+}
+
+.doc-card.reveal {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.doc-card.reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.doc-caption {
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
+}
+
+.doc-school {
+    display: block;
+    font-family: "Nunito", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    color: var(--accent-deep);
+    margin-bottom: 0.2rem;
+}
+
+.doc-loc {
+    display: block;
+    font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--text-dim);
 }
 
 .video {
@@ -106,7 +152,7 @@ main {
     border: 1px solid var(--line);
     border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 4px 16px rgba(45, 51, 32, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 .video iframe {
@@ -116,10 +162,6 @@ main {
     height: 100%;
     border: 0;
     display: block;
-}
-
-.video-wide {
-    width: 100%;
 }
 
 footer {
@@ -164,8 +206,15 @@ footer em {
         padding: 3rem 0 2rem;
     }
 
-    .video-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+    .docs {
+        gap: 2.5rem;
+    }
+
+    .doc-card {
+        padding: 1rem 1rem 0.9rem;
+    }
+
+    .doc-school {
+        font-size: 1.15rem;
     }
 }

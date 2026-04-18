@@ -25,10 +25,16 @@ body {
     font-size: 17px;
     line-height: 1.7;
     color: var(--text);
-    background: var(--bg);
+    background-color: var(--bg);
     background-image:
         radial-gradient(ellipse at top, rgba(184, 162, 232, 0.09), transparent 60%),
-        radial-gradient(ellipse at bottom right, rgba(106, 80, 133, 0.12), transparent 55%);
+        radial-gradient(ellipse at bottom right, rgba(106, 80, 133, 0.12), transparent 55%),
+        linear-gradient(rgba(10, 10, 15, 0.72), rgba(10, 10, 15, 0.8)),
+        url("../img/sujeto.jpg");
+    background-size: auto, auto, auto, cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: 100vh;
 }
 

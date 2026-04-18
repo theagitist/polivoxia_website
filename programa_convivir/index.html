@@ -31,7 +31,7 @@
 
     <link rel="preload" href="../fonts/Nunito/Nunito[wght].woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../fonts/fonts.css?v=2">
-    <link rel="stylesheet" href="styles.css?v=1">
+    <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
     <header>
@@ -54,16 +54,36 @@
         <section class="section">
             <div class="container">
                 <h2>Documentaries</h2>
-                <div class="video-grid">
-                    <div class="video">
-                        <iframe src="https://www.youtube.com/embed/zHRJO1RMGv8?si=gAYZ5jb-chYLU6C_" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Programa Convivir — Documentary I"></iframe>
-                    </div>
-                    <div class="video">
-                        <iframe src="https://www.youtube.com/embed/bKbKlwETG8I?si=nqvMJbAHU9Blw42E" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Programa Convivir — Documentary II"></iframe>
-                    </div>
-                </div>
-                <div class="video video-wide">
-                    <iframe src="https://www.youtube.com/embed/WZoqkgGE0P8?si=NYfVohoSCjGS_Zd9" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Programa Convivir — Documentary III"></iframe>
+                <div class="docs">
+                    <article class="doc-card">
+                        <div class="video">
+                            <iframe src="https://www.youtube.com/embed/zHRJO1RMGv8?si=gAYZ5jb-chYLU6C_" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Liceo Rural San Carlos, Tarrazú — Programa Convivir"></iframe>
+                        </div>
+                        <div class="doc-caption">
+                            <h3 class="doc-school">Liceo Rural San Carlos</h3>
+                            <span class="doc-loc">Tarrazú</span>
+                        </div>
+                    </article>
+
+                    <article class="doc-card">
+                        <div class="video">
+                            <iframe src="https://www.youtube.com/embed/bKbKlwETG8I?si=nqvMJbAHU9Blw42E" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Liceo Académico Copey, Dota — Programa Convivir"></iframe>
+                        </div>
+                        <div class="doc-caption">
+                            <h3 class="doc-school">Liceo Académico Copey</h3>
+                            <span class="doc-loc">Dota</span>
+                        </div>
+                    </article>
+
+                    <article class="doc-card">
+                        <div class="video">
+                            <iframe src="https://www.youtube.com/embed/WZoqkgGE0P8?si=NYfVohoSCjGS_Zd9" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="CTP San Pablo, León Cortés — Programa Convivir"></iframe>
+                        </div>
+                        <div class="doc-caption">
+                            <h3 class="doc-school">CTP San Pablo</h3>
+                            <span class="doc-loc">León Cortés</span>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -71,9 +91,25 @@
 
     <footer>
         <div class="container">
-            <p><em>Programa Convivir</em><br>documentaries by Adri M.</p>
+            <p><em>Programa Convivir</em><br>documentaries by Adri M. and <a href="https://natachamonestel.com">Natacha Monestel</a> for UNICEF</p>
             <a class="back-link" href="https://polivoxia.ca/">polivoxia.ca</a>
         </div>
     </footer>
+
+    <script>
+        if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+            const cards = document.querySelectorAll('.doc-card');
+            cards.forEach(c => c.classList.add('reveal'));
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+            cards.forEach(c => io.observe(c));
+        }
+    </script>
 </body>
 </html>

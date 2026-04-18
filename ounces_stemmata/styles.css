@@ -26,10 +26,16 @@ body {
     font-size: 17px;
     line-height: 1.7;
     color: var(--text);
-    background: var(--bg);
+    background-color: var(--bg);
     background-image:
         radial-gradient(ellipse at top, rgba(166, 33, 30, 0.12), transparent 55%),
-        radial-gradient(ellipse at bottom, rgba(90, 14, 12, 0.18), transparent 60%);
+        radial-gradient(ellipse at bottom, rgba(90, 14, 12, 0.18), transparent 60%),
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+        url("../img/ounces.png");
+    background-size: auto, auto, auto, cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: 100vh;
 }
 
