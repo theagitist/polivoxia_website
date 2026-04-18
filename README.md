@@ -28,39 +28,29 @@ Static HTML/CSS/JS. Self-hosted fonts (subsetted `.woff2` with `.ttf` fallback):
 
 ## Server config
 
-Deployed via nginx. The site config (`/etc/nginx/sites-available/polivoxia.ca.conf`) handles hiding, security headers, and cache policy.
+Deployed via nginx. Server-level config is split into **global drop-ins** (`/etc/nginx/conf.d/*.conf`, auto-loaded into every `http`/`server`) and **reusable snippets** (`/etc/nginx/snippets/*.conf`, `include`d per site).
 
-**Hide private paths** (in each `server { }` block):
+**Global (`conf.d/`)** — no opt-out, applies to every site on the VPS:
 
-```nginx
-# Dotfiles/dotdirs (.git, .gitignore, .claude, .env, .DS_Store, ...)
-location ~ /\. {
-    deny all;
-    return 404;
-}
+- `brotli.conf` — brotli compression (see below)
+- `gzip.conf` — gzip types + vary header (extends the base `gzip on;` from `nginx.conf`)
+- `server-tokens.conf` — `server_tokens off;` to hide the nginx version banner
 
-# Markdown docs (CLAUDE.md, README.md)
-location ~ \.md$ {
-    return 404;
-}
-```
+**Snippets (`snippets/`)** — opt-in per site via `include snippets/NAME.conf;`:
 
-**Security headers** (in the 443 server block):
+- `security-hardening.conf` — dotfile/`.md` hides, with `/.well-known/acme-challenge/` carveout for Let's Encrypt. Also silences the access/not-found logs for blocked paths.
+- `security-headers.conf` — HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy.
+- `static-cache.conf` — `expires 1y` for fonts/css/js, `30d` for images/pdf.
+
+**Example `polivoxia.ca.conf` (443 block) body after SSL directives:**
 
 ```nginx
-add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;
-add_header X-Frame-Options "DENY" always;
-add_header X-Content-Type-Options "nosniff" always;
-add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+include snippets/security-hardening.conf;
+include snippets/security-headers.conf;
+include snippets/static-cache.conf;
 ```
 
-**Cache policy:**
-
-```nginx
-location ~* \.(woff2|woff|ttf|otf|css|js)$ { expires 1y; }
-location ~* \.(png|jpg|jpeg|gif|webp|svg|ico|pdf)$ { expires 30d; }
-```
+When propagating snippets to other sites, check for collisions — `ssl-params.conf` already defines HSTS and X-Frame-Options; including `security-headers.conf` on top would duplicate those headers.
 
 **Gzip compression** (global) lives at `/etc/nginx/conf.d/gzip.conf`. The base `gzip on;` is in `nginx.conf`; the drop-in adds types, vary header, and comp level 6 to mirror brotli.
 
