@@ -62,6 +62,22 @@ location ~* \.(woff2|woff|ttf|otf|css|js)$ { expires 1y; }
 location ~* \.(png|jpg|jpeg|gif|webp|svg|ico|pdf)$ { expires 30d; }
 ```
 
+**Brotli compression** (global, applies to every site on the VPS) lives at `/etc/nginx/conf.d/brotli.conf`:
+
+```nginx
+brotli on;
+brotli_static on;
+brotli_comp_level 6;
+brotli_min_length 256;
+brotli_types
+    text/plain text/css text/xml text/javascript
+    application/javascript application/json
+    application/xml application/xml+rss application/atom+xml application/rss+xml
+    application/wasm font/ttf font/otf image/svg+xml;
+```
+
+Requires `libnginx-mod-http-brotli-filter` and `libnginx-mod-http-brotli-static`. `font/woff2` is intentionally excluded since `.woff2` is already brotli-compressed internally.
+
 Verify after editing: `sudo nginx -t && sudo systemctl reload nginx`.
 
 ## License
