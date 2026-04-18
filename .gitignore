@@ -1,3 +1,6 @@
 # Ignore stories_in_whispers directory
 stories_in_whispers/
 
+# Claude Code local settings
+.claude/
+

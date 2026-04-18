@@ -28,7 +28,9 @@ Static HTML/CSS/JS. Self-hosted fonts (subsetted `.woff2` with `.ttf` fallback):
 
 ## Server config
 
-Deployed via nginx. The site config (`/etc/nginx/sites-available/polivoxia.ca.conf`) blocks paths that shouldn't be web-accessible. Add these inside each `server { }` block:
+Deployed via nginx. The site config (`/etc/nginx/sites-available/polivoxia.ca.conf`) handles hiding, security headers, and cache policy.
+
+**Hide private paths** (in each `server { }` block):
 
 ```nginx
 # Dotfiles/dotdirs (.git, .gitignore, .claude, .env, .DS_Store, ...)
@@ -41,6 +43,23 @@ location ~ /\. {
 location ~ \.md$ {
     return 404;
 }
+```
+
+**Security headers** (in the 443 server block):
+
+```nginx
+add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;
+add_header X-Frame-Options "DENY" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+```
+
+**Cache policy:**
+
+```nginx
+location ~* \.(woff2|woff|ttf|otf|css|js)$ { expires 1y; }
+location ~* \.(png|jpg|jpeg|gif|webp|svg|ico|pdf)$ { expires 30d; }
 ```
 
 Verify after editing: `sudo nginx -t && sudo systemctl reload nginx`.
