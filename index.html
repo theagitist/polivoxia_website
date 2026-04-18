@@ -55,6 +55,7 @@ body, html {
   color: #777;
   background-color: #e5e5e5;
   background-image: url("img/polivoxia_logo.jpg");
+  background-image: image-set(url("img/polivoxia_logo.webp") type("image/webp"), url("img/polivoxia_logo.jpg") type("image/jpeg"));
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -847,7 +848,10 @@ h3 {
       </a>
 
       <a class="card" href="https://polivoxia.ca/the_ground_remains/" target="_blank" rel="noopener">
-        <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by <em>Indigenomicon</em> by Jodi A. Byrd" src="the_ground_remains/img/map_bg.png"/>
+        <picture>
+          <source srcset="the_ground_remains/img/map_bg.webp" type="image/webp">
+          <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by <em>Indigenomicon</em> by Jodi A. Byrd" src="the_ground_remains/img/map_bg.png"/>
+        </picture>
         <span class="badge">Game</span>
         <div class="card-content">
           <div class="card-text-container">
@@ -943,7 +947,10 @@ h3 {
   <div class="gallery-inner">
     <div class="cards" id="mobile-cards">
       <a class="card" href="https://polivoxia.ca/the_ground_remains/" target="_blank" rel="noopener">
-        <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by <em>Indigenomicon</em> by Jodi A. Byrd" src="the_ground_remains/img/map_bg.png"/>
+        <picture>
+          <source srcset="the_ground_remains/img/map_bg.webp" type="image/webp">
+          <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by <em>Indigenomicon</em> by Jodi A. Byrd" src="the_ground_remains/img/map_bg.png"/>
+        </picture>
         <span class="badge">Game</span>
         <div class="card-content">
           <div class="card-text-container">

@@ -64,6 +64,9 @@ header {
     background-image:
         linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
         url('/the_ground_remains/img/map_bg.png');
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+        image-set(url('/the_ground_remains/img/map_bg.webp') type('image/webp'), url('/the_ground_remains/img/map_bg.png') type('image/png'));
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -401,6 +404,9 @@ footer {
     background-image:
         linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
         url('/the_ground_remains/img/map_bg.png');
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+        image-set(url('/the_ground_remains/img/map_bg.webp') type('image/webp'), url('/the_ground_remains/img/map_bg.png') type('image/png'));
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
