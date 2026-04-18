@@ -62,6 +62,8 @@ location ~* \.(woff2|woff|ttf|otf|css|js)$ { expires 1y; }
 location ~* \.(png|jpg|jpeg|gif|webp|svg|ico|pdf)$ { expires 30d; }
 ```
 
+**Gzip compression** (global) lives at `/etc/nginx/conf.d/gzip.conf`. The base `gzip on;` is in `nginx.conf`; the drop-in adds types, vary header, and comp level 6 to mirror brotli.
+
 **Brotli compression** (global, applies to every site on the VPS) lives at `/etc/nginx/conf.d/brotli.conf`:
 
 ```nginx
