@@ -54,6 +54,20 @@ When propagating snippets to other sites, check for collisions — `ssl-params.c
 
 **Gzip compression** (global) lives at `/etc/nginx/conf.d/gzip.conf`. The base `gzip on;` is in `nginx.conf`; the drop-in adds types, vary header, and comp level 6 to mirror brotli.
 
+**Rate limiting** (global zones, opt-in per site) lives at `/etc/nginx/conf.d/rate-limits.conf`:
+
+```nginx
+limit_req_zone $binary_remote_addr zone=general:10m rate=30r/s;
+limit_req_zone $binary_remote_addr zone=strict:10m rate=5r/s;
+limit_conn_zone $binary_remote_addr zone=conn_per_ip:10m;
+limit_req_status 429;
+limit_conn_status 429;
+```
+
+Apply per-site: `limit_req zone=general burst=60 nodelay;` in the server block. For WebSocket-heavy sites (e.g. `play.journeyways.ca`): also `limit_conn conn_per_ip 20;`.
+
+**CSP (Content-Security-Policy)** is **site-specific** (every site has different allowed origins) so it's set per-server-block, not globally. Recommended rollout: deploy as `Content-Security-Policy-Report-Only` first, watch for violations in the browser console for a week of real traffic, refine, then switch to enforcing `Content-Security-Policy`.
+
 **Brotli compression** (global, applies to every site on the VPS) lives at `/etc/nginx/conf.d/brotli.conf`:
 
 ```nginx
