@@ -1,0 +1,3 @@
+[submodule "stories_in_whispers"]
+	path = stories_in_whispers
+	url = git@github.com:theagitist/stories_in_whispers.git
