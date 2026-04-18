@@ -24,7 +24,26 @@ Site version: 1.0.1 (see `VERSION`).
 
 ## Tech
 
-Static HTML/CSS/JS. Google Fonts: Special Elite, Nunito, Fraunces, Atkinson Hyperlegible, Courier Prime. Cookie consent and Google Analytics (opt-in). Images: PNGs optimized with optipng, JPGs with jpegoptim.
+Static HTML/CSS/JS. Self-hosted fonts (subsetted `.woff2` with `.ttf` fallback): Special Elite, Nunito, Fraunces, Atkinson Hyperlegible, Courier Prime, Lato, Rock Salt, Rubik Glitch. Cookie consent and Google Analytics (opt-in). Images: PNGs optimized with optipng, JPGs with jpegoptim.
+
+## Server config
+
+Deployed via nginx. The site config (`/etc/nginx/sites-available/polivoxia.ca.conf`) blocks paths that shouldn't be web-accessible. Add these inside each `server { }` block:
+
+```nginx
+# Dotfiles/dotdirs (.git, .gitignore, .claude, .env, .DS_Store, ...)
+location ~ /\. {
+    deny all;
+    return 404;
+}
+
+# Markdown docs (CLAUDE.md, README.md)
+location ~ \.md$ {
+    return 404;
+}
+```
+
+Verify after editing: `sudo nginx -t && sudo systemctl reload nginx`.
 
 ## License
 
