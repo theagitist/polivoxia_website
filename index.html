@@ -668,13 +668,13 @@ h3 {
   <section class="gallery">
   <div class="gallery-inner">
     <div class="cards" id="cards">
-      <a class="card" href="https://starmaps.polivoxia.ca/trace-elements" target="_blank" rel="noopener">
-        <img class="card-media" alt="Trace Elements starmap constellation showing wireframe toroidal nodes connected across a dark starfield, with a labelled cluster Internal Theoretical Anchors" src="img/trace_elements.jpg"/>
+      <a class="card" href="https://www.telaris.ca" target="_blank" rel="noopener">
+        <img class="card-media" alt="Telaris homepage showing the wordmark TELARIS over a dark starfield with a glowing constellation of linked nodes and the tagline weaving memory" src="img/telaris.jpg"/>
         <span class="badge">Interactive</span>
         <div class="card-content">
           <div class="card-text-container">
-            <div class="title">Trace Elements</div>
-            <div class="subtitle">The persistence of data.</div>
+            <div class="title">Telaris</div>
+            <div class="subtitle">A decolonial knowledge archive. Relational, P2P, non-hierarchical. Threaded by meaning.</div>
           </div>
         </div>
       </a>
@@ -697,17 +697,6 @@ h3 {
           <div class="card-text-container">
             <div class="title">The Somatic Ghost</div>
             <div class="subtitle">A counter-archive of the 28th cycle. From liquid fire to first light.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://starmaps.polivoxia.ca/failing-through" target="_blank" rel="noopener">
-        <img class="card-media" alt="Failing Through starmap showing a cyan haloed gate node and a wireframe torus labelled Begin, floating in a black starfield" src="img/failing_through.jpg"/>
-        <span class="badge">Interactive</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Failing Through</div>
-            <div class="subtitle">There is no correct path. There is no test to pass.</div>
           </div>
         </div>
       </a>
@@ -749,12 +738,12 @@ h3 {
       </a>
 
       <a class="card" href="https://www.journeyways.ca" target="_blank" rel="noopener">
-        <img class="card-media" alt="Journeyways, a game about becoming - screenshot showing the game board and components for this transformative tabletop game" src="img/journeyways.jpg"/>
+        <img class="card-media" alt="Journeyways, a game about becoming, screenshot showing the board game components for this UBC GRSJ research project" src="img/journeyways.jpg"/>
         <span class="badge">Game</span>
         <div class="card-content">
           <div class="card-text-container">
             <div class="title">JOURNEYWAYS</div>
-            <div class="subtitle">A board game about becoming.</div>
+            <div class="subtitle">A board game and a digital game about becoming. A UBC research project exploring identity through collaborative play.</div>
           </div>
         </div>
       </a>
@@ -811,24 +800,13 @@ h3 {
 <section class="mobile-gallery">
   <div class="gallery-inner">
     <div class="cards" id="mobile-cards">
-      <a class="card" href="https://starmaps.polivoxia.ca/trace-elements" target="_blank" rel="noopener">
-        <img class="card-media" alt="Trace Elements starmap constellation showing wireframe toroidal nodes connected across a dark starfield, with a labelled cluster Internal Theoretical Anchors" src="img/trace_elements.jpg"/>
+      <a class="card" href="https://www.telaris.ca" target="_blank" rel="noopener">
+        <img class="card-media" alt="Telaris homepage showing the wordmark TELARIS over a dark starfield with a glowing constellation of linked nodes and the tagline weaving memory" src="img/telaris.jpg"/>
         <span class="badge">Interactive</span>
         <div class="card-content">
           <div class="card-text-container">
-            <div class="title">Trace Elements</div>
-            <div class="subtitle">The persistence of data.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://starmaps.polivoxia.ca/failing-through" target="_blank" rel="noopener">
-        <img class="card-media" alt="Failing Through starmap showing a cyan haloed gate node and a wireframe torus labelled Begin, floating in a black starfield" src="img/failing_through.jpg"/>
-        <span class="badge">Interactive</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Failing Through</div>
-            <div class="subtitle">There is no correct path. There is no test to pass.</div>
+            <div class="title">Telaris</div>
+            <div class="subtitle">A decolonial knowledge archive. Relational, P2P, non-hierarchical. Threaded by meaning.</div>
           </div>
         </div>
       </a>
@@ -870,12 +848,12 @@ h3 {
       </a>
 
       <a class="card" href="https://www.journeyways.ca" target="_blank" rel="noopener">
-        <img class="card-media" alt="Journeyways, a game about becoming - screenshot showing the game board and components for this transformative tabletop game" src="img/journeyways.jpg"/>
+        <img class="card-media" alt="Journeyways, a game about becoming, screenshot showing the board game components for this UBC GRSJ research project" src="img/journeyways.jpg"/>
         <span class="badge">Game</span>
         <div class="card-content">
           <div class="card-text-container">
             <div class="title">JOURNEYWAYS</div>
-            <div class="subtitle">A board game about becoming.</div>
+            <div class="subtitle">A board game and a digital game about becoming. A UBC research project exploring identity through collaborative play.</div>
           </div>
         </div>
       </a>
@@ -928,6 +906,24 @@ h3 {
 </section>
 
 <script>
+  // Pin Telaris and Journeyways as the first two cards; shuffle the rest each load
+  (function(){
+    const pinned = ['telaris.ca', 'journeyways.ca']; // in display order
+    const rank = href => { const i = pinned.findIndex(p => href.includes(p)); return i === -1 ? pinned.length : i; };
+    ['cards', 'mobile-cards'].forEach(id => {
+      const container = document.getElementById(id);
+      if (!container) return;
+      const cards = Array.from(container.querySelectorAll('.card'));
+      // Fisher-Yates shuffle, then stable-sort pinned cards to the front in fixed order
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      cards.sort((a, b) => rank(a.href) - rank(b.href));
+      cards.forEach(card => container.appendChild(card));
+    });
+  })();
+
   // Subtle parallax on mouse move
   (function(){
     const containers = [document.getElementById('cards'), document.getElementById('mobile-cards')];

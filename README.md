@@ -27,7 +27,7 @@ Site version: 1.0.1 (see `VERSION`).
 
 ## Tech
 
-Static HTML/CSS/JS. Self-hosted fonts (subsetted `.woff2` with `.ttf` fallback): Special Elite, Nunito, Fraunces, Atkinson Hyperlegible, Courier Prime, Lato, Rock Salt, Rubik Glitch. Cookie consent and Google Analytics (opt-in). Images: PNGs optimized with optipng, JPGs with jpegoptim.
+Static HTML/CSS/JS. Self-hosted fonts (subsetted `.woff2` with `.ttf` fallback): Special Elite, Nunito, Fraunces, Atkinson Hyperlegible, Courier Prime, Lato, Rock Salt, Rubik Glitch. Images: PNGs optimized with optipng, JPGs with jpegoptim.
 
 ## Server config
 
