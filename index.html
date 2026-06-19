@@ -527,6 +527,24 @@ h3 {
   text-transform: uppercase;
   backdrop-filter: blur(4px);
 }
+.fav-star {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+.fav-star svg {
+  width: 16px;
+  height: 16px;
+  fill: #ffd54a;
+}
 .title {
   color: #fff;
   font: 700 19px/1.3 'Special Elite', 'Courier New', monospace;
@@ -563,6 +581,16 @@ h3 {
   .badge {
     font-size: 9px;
     padding: 3px 6px;
+  }
+  .fav-star {
+    width: 24px;
+    height: 24px;
+    top: 10px;
+    right: 10px;
+  }
+  .fav-star svg {
+    width: 13px;
+    height: 13px;
   }
 }
 
@@ -670,11 +698,34 @@ h3 {
     <div class="cards" id="cards">
       <a class="card" href="https://www.telaris.ca" target="_blank" rel="noopener">
         <img class="card-media" alt="Telaris homepage showing the wordmark TELARIS over a dark starfield with a glowing constellation of linked nodes and the tagline weaving memory" src="img/telaris.jpg"/>
+        <span class="fav-star" aria-label="Favourite project" title="Favourite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26 6.9.6-5.2 4.52 1.56 6.74L12 17.27 5.84 20.62 7.4 13.88 2.2 9.36l6.9-.6z"/></svg></span>
         <span class="badge">Interactive</span>
         <div class="card-content">
           <div class="card-text-container">
             <div class="title">Telaris</div>
             <div class="subtitle">A decolonial knowledge archive. Relational, P2P, non-hierarchical. Threaded by meaning.</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="https://pumice.polivoxia.ca" target="_blank" rel="noopener">
+        <img class="card-media" alt="The Pumice app icon, a stylized pumice stone, centered on a dark charcoal background" src="img/pumice.jpg"/>
+        <span class="badge">App</span>
+        <div class="card-content">
+          <div class="card-text-container">
+            <div class="title">Pumice</div>
+            <div class="subtitle">Local-first PDF annotation for iPad. Apple Pencil markup written back into the file, no cloud.</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="https://tracet.polivoxia.ca" target="_blank" rel="noopener">
+        <img class="card-media" alt="Tracet homepage showing the app name over a dark background with the tagline private, local transcription for macOS, a waveform icon, and download buttons for Apple Silicon and Intel Macs" src="img/tracet.jpg"/>
+        <span class="badge">App</span>
+        <div class="card-content">
+          <div class="card-text-container">
+            <div class="title">Tracet</div>
+            <div class="subtitle">Private, local transcription for macOS. whisperX, speaker diarization, editable transcripts. No cloud, no telemetry.</div>
           </div>
         </div>
       </a>
@@ -739,6 +790,7 @@ h3 {
 
       <a class="card" href="https://www.journeyways.ca" target="_blank" rel="noopener">
         <img class="card-media" alt="Journeyways, a game about becoming, screenshot showing the board game components for this UBC GRSJ research project" src="img/journeyways.jpg"/>
+        <span class="fav-star" aria-label="Favourite project" title="Favourite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26 6.9.6-5.2 4.52 1.56 6.74L12 17.27 5.84 20.62 7.4 13.88 2.2 9.36l6.9-.6z"/></svg></span>
         <span class="badge">Game</span>
         <div class="card-content">
           <div class="card-text-container">
@@ -802,11 +854,34 @@ h3 {
     <div class="cards" id="mobile-cards">
       <a class="card" href="https://www.telaris.ca" target="_blank" rel="noopener">
         <img class="card-media" alt="Telaris homepage showing the wordmark TELARIS over a dark starfield with a glowing constellation of linked nodes and the tagline weaving memory" src="img/telaris.jpg"/>
+        <span class="fav-star" aria-label="Favourite project" title="Favourite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26 6.9.6-5.2 4.52 1.56 6.74L12 17.27 5.84 20.62 7.4 13.88 2.2 9.36l6.9-.6z"/></svg></span>
         <span class="badge">Interactive</span>
         <div class="card-content">
           <div class="card-text-container">
             <div class="title">Telaris</div>
             <div class="subtitle">A decolonial knowledge archive. Relational, P2P, non-hierarchical. Threaded by meaning.</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="https://pumice.polivoxia.ca" target="_blank" rel="noopener">
+        <img class="card-media" alt="The Pumice app icon, a stylized pumice stone, centered on a dark charcoal background" src="img/pumice.jpg"/>
+        <span class="badge">App</span>
+        <div class="card-content">
+          <div class="card-text-container">
+            <div class="title">Pumice</div>
+            <div class="subtitle">Local-first PDF annotation for iPad. Apple Pencil markup written back into the file, no cloud.</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="https://tracet.polivoxia.ca" target="_blank" rel="noopener">
+        <img class="card-media" alt="Tracet homepage showing the app name over a dark background with the tagline private, local transcription for macOS, a waveform icon, and download buttons for Apple Silicon and Intel Macs" src="img/tracet.jpg"/>
+        <span class="badge">App</span>
+        <div class="card-content">
+          <div class="card-text-container">
+            <div class="title">Tracet</div>
+            <div class="subtitle">Private, local transcription for macOS. whisperX, speaker diarization, editable transcripts. No cloud, no telemetry.</div>
           </div>
         </div>
       </a>
@@ -849,6 +924,7 @@ h3 {
 
       <a class="card" href="https://www.journeyways.ca" target="_blank" rel="noopener">
         <img class="card-media" alt="Journeyways, a game about becoming, screenshot showing the board game components for this UBC GRSJ research project" src="img/journeyways.jpg"/>
+        <span class="fav-star" aria-label="Favourite project" title="Favourite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26 6.9.6-5.2 4.52 1.56 6.74L12 17.27 5.84 20.62 7.4 13.88 2.2 9.36l6.9-.6z"/></svg></span>
         <span class="badge">Game</span>
         <div class="card-content">
           <div class="card-text-container">
