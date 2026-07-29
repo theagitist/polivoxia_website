@@ -91,6 +91,23 @@ body::before {
 }
 .shot:focus-visible { outline: 2px solid #ffd54a; outline-offset: 3px; }
 
+/* Source label (e.g. Journeyways) */
+.shot .tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.72);
+  color: #fff;
+  font: 600 10px/1 "Special Elite", "Courier New", monospace;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+  z-index: 2;
+}
+
 /* Lightbox */
 .lightbox {
   position: fixed;
@@ -119,6 +136,13 @@ body::before {
   color: rgba(255,255,255,0.85);
   padding: 0 20px;
 }
+.lb-cap a {
+  color: #ffd54a;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,213,74,0.5);
+  white-space: nowrap;
+}
+.lb-cap a:hover { border-bottom-color: #ffd54a; }
 .lb-btn {
   position: absolute;
   top: 50%;

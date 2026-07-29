@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
 <link rel="stylesheet" href="../fonts/fonts.css?v=2">
-<link rel="stylesheet" href="styles.css?v=2">
+<link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
 <div class="wrap">
@@ -68,6 +68,26 @@
     <button class="shot" data-full="img/abstract-2.jpg" data-cap="Single gestural brush stroke.">
       <picture><source srcset="img/abstract-2.webp" type="image/webp"><img src="img/abstract-2.jpg" loading="lazy" alt="Minimalist illustration of a single wavy black brush stroke trailing a soft cream shadow."></picture>
     </button>
+    <button class="shot" data-full="img/abstract-3.jpg" data-cap="Ink-and-marker art-journal page.">
+      <picture><source srcset="img/abstract-3.webp" type="image/webp"><img src="img/abstract-3.jpg" loading="lazy" alt="Densely inked art-journal page in reds and pinks, layered with handwriting, eyes and spiral motifs."></picture>
+    </button>
+
+    <button class="shot" data-full="img/journeyways-1.jpg" data-cap="Journeyways card art." data-link="https://www.journeyways.ca/components-cards.html">
+      <span class="tag">Journeyways</span>
+      <picture><source srcset="img/journeyways-1.webp" type="image/webp"><img src="img/journeyways-1.jpg" loading="lazy" alt="Journeyways card art: a small ink figure walking beside a large watercolour fish, in blues, purples and warm splashes."></picture>
+    </button>
+    <button class="shot" data-full="img/journeyways-2.jpg" data-cap="Journeyways card art." data-link="https://www.journeyways.ca/components-cards.html">
+      <span class="tag">Journeyways</span>
+      <picture><source srcset="img/journeyways-2.webp" type="image/webp"><img src="img/journeyways-2.jpg" loading="lazy" alt="Journeyways card art: two ink-and-watercolour faces in profile facing each other across a white field."></picture>
+    </button>
+    <button class="shot" data-full="img/journeyways-3.jpg" data-cap="Journeyways tile art." data-link="https://www.journeyways.ca/components-tiles.html">
+      <span class="tag">Journeyways</span>
+      <picture><source srcset="img/journeyways-3.webp" type="image/webp"><img src="img/journeyways-3.jpg" loading="lazy" alt="Journeyways tile art: a luminous forest path lit by fireflies, with vivid splatter-painted trees and grass."></picture>
+    </button>
+    <button class="shot" data-full="img/journeyways-4.jpg" data-cap="Journeyways tile art." data-link="https://www.journeyways.ca/components-tiles.html">
+      <span class="tag">Journeyways</span>
+      <picture><source srcset="img/journeyways-4.webp" type="image/webp"><img src="img/journeyways-4.jpg" loading="lazy" alt="Journeyways tile art: an ink-drawn ferris wheel bursting with rainbow paint splatters on a white background."></picture>
+    </button>
   </div>
 </div>
 
@@ -92,6 +112,15 @@
     lbImg.src = el.dataset.full;
     lbImg.alt = el.querySelector('img').alt;
     lbCap.textContent = el.dataset.cap || '';
+    if (el.dataset.link) {
+      var a = document.createElement('a');
+      a.href = el.dataset.link;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'see the full gallery →';
+      lbCap.appendChild(document.createTextNode(' '));
+      lbCap.appendChild(a);
+    }
   }
   function open(i) {
     idx = i; show();
