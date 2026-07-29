@@ -49,6 +49,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://polivoxia.ca/illustrations/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://polivoxia.ca/downloads/</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>yearly</changefreq>
