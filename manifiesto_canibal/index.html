@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="/favicon.png">
+<style>
+  *{box-sizing:border-box}
+  html{color-scheme:light dark}
+  :root{padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+<title>Manifiesto Caníbal</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Spectral:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap">
+<style>
+  :root{
+    --paper:#efe7d6; --ink:#16120c; --red:#c1121f;
+    --faint:rgba(22,18,12,.26); --rule:rgba(22,18,12,.2); --hint:rgba(22,18,12,.5);
+    --disp:"Anton",Impact,"Haettenschweiler",sans-serif;
+    --body:"Spectral",Georgia,"Times New Roman",serif;
+    --mono:"Space Mono",ui-monospace,"Courier New",monospace;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#0e0c09; --ink:#efe7d6; --red:#e5493b;
+    --faint:rgba(239,231,214,.24); --rule:rgba(239,231,214,.18); --hint:rgba(239,231,214,.55);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0e0c09; --ink:#efe7d6; --red:#e5493b;
+    --faint:rgba(239,231,214,.24); --rule:rgba(239,231,214,.18); --hint:rgba(239,231,214,.55);
+  }
+
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.5;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .wrap{max-width:44rem;margin:0 auto;padding-inline:20px;}
+
+  /* mouth line — where the text gets digested */
+  #mouth{position:fixed;left:0;right:0;top:20%;height:0;z-index:5;pointer-events:none;
+    border-top:1.5px dashed var(--red);opacity:.5;}
+  #mouth b{position:absolute;right:12px;top:6px;font-family:var(--mono);font-size:10px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:700;}
+
+  /* header */
+  header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
+    background:color-mix(in srgb,var(--paper) 88%,transparent);
+    backdrop-filter:blur(6px);border-bottom:1.5px solid var(--ink);}
+  .bar{max-width:44rem;margin:0 auto;padding:10px 20px;display:flex;align-items:baseline;
+    justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .brand{font-family:var(--mono);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    font-size:11px;}
+  .toggle{display:flex;gap:2px;border:1.5px solid var(--ink);}
+  .toggle button{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.1em;
+    background:transparent;color:var(--ink);border:0;padding:8px 11px;min-height:36px;cursor:pointer;}
+  .toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+  .toggle button:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+
+  /* hero */
+  .hero{padding-block:14vh 8vh;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--red);margin:0 0 1.2rem;}
+  .dadahero{font-family:var(--disp);font-weight:400;color:var(--red);line-height:.82;
+    font-size:clamp(4.5rem,26vw,13rem);margin:0;letter-spacing:-.02em;
+    text-transform:uppercase;word-break:break-word;}
+  .thesis{font-family:var(--disp);font-weight:400;text-transform:uppercase;line-height:.95;
+    font-size:clamp(1.6rem,7vw,3rem);margin:.4rem 0 0;text-wrap:balance;}
+  .scrollcue{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--hint);margin-top:2.4rem;display:flex;align-items:center;gap:.6em;}
+  .scrollcue::before{content:"";width:2.2em;height:1px;background:var(--hint);}
+
+  /* manifesto */
+  .st{font-size:clamp(1.15rem,4.6vw,1.5rem);margin:1.35em 0;text-wrap:pretty;}
+  .st.open{font-family:var(--disp);text-transform:uppercase;font-weight:400;
+    font-size:clamp(1.7rem,7vw,2.6rem);line-height:1.02;margin-bottom:.6em;}
+  .st.line{margin:.15em 0;font-style:italic;}
+  .st.line.last{margin-bottom:1.2em;}
+  .st.litany{margin:.12em 0;font-size:clamp(1.25rem,5.4vw,1.8rem);}
+  .st.beat{font-family:var(--disp);text-transform:uppercase;color:var(--red);
+    font-size:clamp(1.6rem,8vw,2.8rem);letter-spacing:.02em;margin:.5em 0;}
+
+  .w{display:inline-block;transition:opacity .55s ease,transform .55s ease,filter .55s ease,color .3s;}
+  .w.dada{font-family:var(--disp);color:var(--red);text-transform:uppercase;}
+  .w.nihil{font-family:var(--disp);color:var(--red);text-transform:uppercase;}
+  .litany .w.nihil{font-size:1.15em;}
+  .w.eaten{opacity:0;transform:translateY(-.55em) rotate(-6deg) scale(.55);filter:blur(2px);}
+
+  /* the void + the surviving line */
+  .void{min-height:62vh;display:flex;align-items:flex-end;}
+  .void p{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--faint);margin:0;}
+  .punch{font-family:var(--body);font-size:clamp(1.4rem,6vw,2.1rem);line-height:1.32;
+    border-top:2px solid var(--red);padding-top:1.4rem;margin:0 0 8vh;}
+  .punch em{font-style:normal;color:var(--red);}
+
+  /* coda */
+  .coda{border-top:1.5px solid var(--ink);padding-block:2.4rem 5rem;}
+  .coda .note{font-size:1.05rem;margin:0 0 1.6rem;}
+  .coda .note b{color:var(--red);font-weight:600;}
+  .coda .src{font-family:var(--mono);font-size:11px;line-height:1.8;letter-spacing:.03em;
+    color:var(--hint);margin:0;}
+  .coda .more{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;margin:0 0 1.4rem;}
+  .coda a{color:var(--red);text-underline-offset:3px;text-decoration-thickness:1px;}
+
+  @media (prefers-reduced-motion:reduce){
+    .w{transition:opacity .3s ease,color .3s;}
+    .w.eaten{transform:none;filter:none;opacity:.08;}
+    #mouth{border-top-style:solid;}
+  }
+</style>
+</head>
+<body>
+<div id="mouth" aria-hidden="true"><b></b></div>
+
+<header>
+  <div class="bar">
+    <span class="brand">Picabia · 1920</span>
+    <div class="toggle" id="toggle" role="group" aria-label="Idioma / Language">
+      <button data-l="es" aria-pressed="true">ES</button>
+      <button data-l="fr" aria-pressed="false">FR</button>
+      <button data-l="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="eyebrow" id="eyebrow"></p>
+    <h1 class="dadahero" id="hero">DADÁ</h1>
+    <p class="thesis" id="thesis"></p>
+    <p class="scrollcue" id="cue"></p>
+  </section>
+
+  <section id="stage" aria-live="polite"></section>
+
+  <section class="void"><p id="voidlabel"></p></section>
+  <p class="punch" id="punch"></p>
+
+  <footer class="coda">
+    <p class="more"><a href="/manifiesto_canibal/presentacion/">Tesis y presentación &rarr;</a></p>
+    <p class="note" id="coda"></p>
+    <p class="src" id="source"></p>
+  </footer>
+</main>
+
+<script>
+const T = {
+  es:{
+    eyebrow:"Manifiesto Caníbal Dadá",
+    hero:"DADÁ", thesis:"se lo come todo y no digiere nada",
+    cue:"desplázate y míralo devorarse",
+    mouth:"digerido",
+    void:"nada · nada · nada",
+    stanzas:[
+      {k:"open", t:"Son todos ustedes acusados; levántense. El orador no puede hablarles si no están de pie."},
+      {k:"line", t:"De pie como ante La Marsellesa."},
+      {k:"line", t:"De pie como ante el himno ruso."},
+      {k:"line", t:"De pie como ante el God save the King."},
+      {k:"line last", t:"De pie como ante la bandera."},
+      {k:"", t:"En fin, de pie ante DADÁ, que representa la vida y les acusa de querer lo que sea por esnobismo, siempre y cuando cueste caro."},
+      {k:"", t:"¿Se han sentado todos de nuevo? Tanto mejor, de esta manera podrán escucharme con mayor atención."},
+      {k:"", t:"¿Qué hacen ustedes aquí, hacinados como ostras serias? Porque ustedes son serios, ¿no es así?"},
+      {k:"beat", t:"Serios, serios, serios hasta la muerte."},
+      {k:"", t:"La muerte es cosa seria, ¿eh? Uno muere como un héroe o como un idiota, que es lo mismo. La única palabra que no es efímera es la palabra muerte. Quieren ustedes la muerte para los otros."},
+      {k:"beat", t:"A muerte, a muerte, a muerte."},
+      {k:"", t:"Sólo el dinero no muere, se va sencillamente de viaje. Es el Dios, aquel al que se respeta, el personaje serio: dinero, respeto de las familias. Honor, honor al dinero: el hombre que tiene dinero es un hombre honorable."},
+      {k:"", t:"El honor se compra y se vende como el culo. El culo representa la vida como las patatas fritas, y todos ustedes que son serios olerán peor que la mierda de vaca."},
+      {k:"beat", t:"DADÁ no huele a nada, no es nada, nada, nada."},
+      {k:"litany", t:"Es como sus esperanzas: nada."},
+      {k:"litany", t:"Como sus paraísos: nada."},
+      {k:"litany", t:"Como sus ídolos: nada."},
+      {k:"litany", t:"Como sus políticos: nada."},
+      {k:"litany", t:"Como sus héroes: nada."},
+      {k:"litany", t:"Como sus artistas: nada."},
+      {k:"litany", t:"Como sus religiones: nada."}
+    ],
+    punch:'Silben, griten, rómpanme la jeta, ¿y luego? ¿luego qué? Una vez más diré que son ustedes unos tontos. <em>En tres meses, mis amigos y yo les venderemos nuestros cuadros por algunos francos.</em>',
+    coda:'Picabia consume y no digiere <b>nada</b>. Oswald de Andrade (<i>Manifesto Antropófago</i>, 1928) devora al otro para <b>transformarlo</b>. Dos canibalismos, una misma década: la antivanguardia que se vacía y la antropofagia que absorbe.',
+    source:'Francis Picabia, «Manifeste cannibale dada». Leído por André Breton en la 3.ª velada Dadá, Théâtre de l’Œuvre, París, 27 de marzo de 1920. Publicado en Dadaphone n.º 7.\nPresentación de Adri M · SPAN 550B, UBC.'
+  },
+  fr:{
+    eyebrow:"Manifeste Cannibale Dada",
+    hero:"DADA", thesis:"dévore tout et ne digère rien",
+    cue:"défile et regarde-le se dévorer",
+    mouth:"digéré",
+    void:"rien · rien · rien",
+    stanzas:[
+      {k:"open", t:"Vous êtes tous accusés; levez-vous. L’orateur ne peut vous parler que si vous êtes debout."},
+      {k:"line", t:"Debout comme pour la Marseillaise,"},
+      {k:"line", t:"debout comme pour l’hymne russe,"},
+      {k:"line", t:"debout comme pour le God save the king,"},
+      {k:"line last", t:"debout comme devant le drapeau."},
+      {k:"", t:"Enfin debout devant DADA qui représente la vie et qui vous accuse de tout aimer par snobisme du moment que cela coûte cher."},
+      {k:"", t:"Vous vous êtes tous rassis ? Tant mieux, comme cela vous allez m’écouter avec plus d’attention."},
+      {k:"", t:"Que faites-vous ici, parqués comme des huîtres sérieuses — car vous êtes sérieux n’est-ce pas ?"},
+      {k:"beat", t:"Sérieux, sérieux, sérieux jusqu’à la mort."},
+      {k:"", t:"La mort est une chose sérieuse, hein ? On meurt en héros, ou en idiot ce qui est même chose. Le seul mot qui ne soit pas éphémère c’est le mot mort. Vous aimez la mort pour les autres."},
+      {k:"beat", t:"À mort, à mort, à mort."},
+      {k:"", t:"Il n’y a que l’argent qui ne meurt pas, il part seulement en voyage. C’est le Dieu, celui que l’on respecte, le personnage sérieux : argent, respect des familles. Honneur, honneur à l’argent : l’homme qui a de l’argent est un homme honorable."},
+      {k:"", t:"L’honneur s’achète et se vend comme le cul. Le cul représente la vie comme les pommes frites, et vous tous qui êtes sérieux, vous sentirez plus mauvais que la merde de vache."},
+      {k:"beat", t:"DADA ne sent rien, il n’est rien, rien, rien."},
+      {k:"litany", t:"Il est comme vos espoirs : rien."},
+      {k:"litany", t:"comme vos paradis : rien."},
+      {k:"litany", t:"comme vos idoles : rien."},
+      {k:"litany", t:"comme vos hommes politiques : rien."},
+      {k:"litany", t:"comme vos héros : rien."},
+      {k:"litany", t:"comme vos artistes : rien."},
+      {k:"litany", t:"comme vos religions : rien."}
+    ],
+    punch:'Sifflez, criez, cassez-moi la gueule et puis, et puis ? Je vous dirai encore que vous êtes tous des poires. <em>Dans trois mois nous vous vendrons, mes amis et moi, nos tableaux pour quelques francs.</em>',
+    coda:'Picabia consomme et ne digère <b>rien</b>. Oswald de Andrade (<i>Manifeste Anthropophage</i>, 1928) dévore l’autre pour le <b>transformer</b>. Deux cannibalismes, une même décennie : l’anti-avant-garde qui se vide et l’anthropophagie qui absorbe.',
+    source:'Francis Picabia, « Manifeste cannibale dada ». Lu par André Breton lors de la 3ᵉ soirée Dada, Théâtre de l’Œuvre, Paris, 27 mars 1920. Publié dans Dadaphone n° 7.\nPrésentation d’Adri M · SPAN 550B, UBC.'
+  },
+  en:{
+    eyebrow:"Cannibal Dada Manifesto",
+    hero:"DADA", thesis:"eats everything and digests nothing",
+    cue:"scroll and watch it devour itself",
+    mouth:"digested",
+    void:"nothing · nothing · nothing",
+    stanzas:[
+      {k:"open", t:"You are all accused; stand up. The speaker cannot address you unless you are standing."},
+      {k:"line", t:"Stand, as for the Marseillaise,"},
+      {k:"line", t:"stand, as for the Russian anthem,"},
+      {k:"line", t:"stand, as for God save the King,"},
+      {k:"line last", t:"stand, as before the flag."},
+      {k:"", t:"In short, stand before DADA, which represents life and accuses you of loving anything out of snobbery, so long as it costs a great deal."},
+      {k:"", t:"Have you all sat down again? So much the better; that way you will listen to me more closely."},
+      {k:"", t:"What are you doing here, penned in like serious oysters? Because you are serious, aren’t you?"},
+      {k:"beat", t:"Serious, serious, serious unto death."},
+      {k:"", t:"Death is a serious thing, eh? One dies a hero or an idiot, which is the same thing. The only word that is not ephemeral is the word death. You want death for others."},
+      {k:"beat", t:"To death, to death, to death."},
+      {k:"", t:"Only money does not die; it merely goes travelling. It is God, the one who is respected, the serious personage: money, the respect of families. Honour, honour to money: the man who has money is an honourable man."},
+      {k:"", t:"Honour is bought and sold like the arse. The arse represents life like fried potatoes, and all of you who are serious will smell worse than cow shit."},
+      {k:"beat", t:"DADA smells of nothing, it is nothing, nothing, nothing."},
+      {k:"litany", t:"It is like your hopes: nothing."},
+      {k:"litany", t:"like your paradises: nothing."},
+      {k:"litany", t:"like your idols: nothing."},
+      {k:"litany", t:"like your politicians: nothing."},
+      {k:"litany", t:"like your heroes: nothing."},
+      {k:"litany", t:"like your artists: nothing."},
+      {k:"litany", t:"like your religions: nothing."}
+    ],
+    punch:'Whistle, shout, smash my face in, and then? and then what? Once more I will tell you that you are all fools. <em>In three months my friends and I will sell you our paintings for a few francs.</em>',
+    coda:'Picabia consumes and digests <b>nothing</b>. Oswald de Andrade (<i>Cannibalist Manifesto</i>, 1928) devours the other in order to <b>transform</b> it. Two cannibalisms, one decade: the anti-avant-garde that empties itself and the anthropophagy that absorbs.',
+    source:'Francis Picabia, “Manifeste cannibale dada.” Read by André Breton at the 3rd Dada soirée, Théâtre de l’Œuvre, Paris, 27 March 1920. Published in Dadaphone no. 7.\nPresentation by Adri M · SPAN 550B, UBC.'
+  }
+};
+
+const NIHIL = {nada:1,rien:1,nothing:1};
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+function words(t){
+  return t.split(/(\s+)/).map(tok=>{
+    if(tok===""||/^\s+$/.test(tok)) return tok;
+    const clean = tok.replace(/[.,:;—–?¡!"'»«’()]/g,"").toLowerCase();
+    let c="w";
+    if(clean==="dada"||clean==="dadá") c+=" dada";
+    else if(NIHIL[clean]) c+=" nihil";
+    return '<span class="'+c+'">'+esc(tok)+'</span>';
+  }).join("");
+}
+
+const $ = id => document.getElementById(id);
+const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+let mouth;
+
+function wire(){
+  if(mouth) mouth.disconnect();
+  mouth = new IntersectionObserver(entries=>{
+    for(const e of entries){
+      if(e.isIntersecting) continue;
+      const line = e.rootBounds ? e.rootBounds.top : innerHeight*0.2;
+      e.target.classList.toggle("eaten", e.boundingClientRect.top < line);
+    }
+  }, {rootMargin:"-20% 0px -79% 0px", threshold:0});
+  document.querySelectorAll("#stage .w").forEach(w=>mouth.observe(w));
+}
+
+function render(l){
+  const d = T[l];
+  document.documentElement.lang = l;
+  $("eyebrow").textContent = d.eyebrow;
+  $("hero").textContent = d.hero;
+  $("thesis").textContent = d.thesis;
+  $("cue").textContent = d.cue;
+  $("voidlabel").textContent = d.void;
+  document.querySelector("#mouth b").textContent = "↑ "+d.mouth;
+  $("stage").innerHTML = d.stanzas
+    .map(s=>'<p class="st '+s.k+'">'+words(s.t)+'</p>').join("");
+  $("punch").innerHTML = d.punch;
+  $("coda").innerHTML = d.coda;
+  $("source").textContent = d.source;
+  document.querySelectorAll("#toggle button")
+    .forEach(b=>b.setAttribute("aria-pressed", b.dataset.l===l ? "true":"false"));
+  wire();
+}
+
+$("toggle").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  const l = b.dataset.l;
+  try{ localStorage.setItem("mcd-lang", l); }catch(_){}
+  render(l);
+  scrollTo({top:0, behavior:"instant" in document.body.style ? "instant":"auto"});
+});
+
+let start = "es";
+try{ const s = localStorage.getItem("mcd-lang"); if(s && T[s]) start = s; }catch(_){}
+render(start);
+</script>
+
+</body>
+</html>

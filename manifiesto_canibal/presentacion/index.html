@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="/favicon.png">
+<style>
+  *{box-sizing:border-box}
+  html{color-scheme:light dark}
+  :root{padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+<title>Caníbal o Antropófago</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Spectral:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap">
+<style>
+  :root{
+    --paper:#efe7d6; --ink:#16120c; --red:#c1121f;
+    --faint:rgba(22,18,12,.26); --rule:rgba(22,18,12,.2); --hint:rgba(22,18,12,.5);
+    --disp:"Anton",Impact,"Haettenschweiler",sans-serif;
+    --body:"Spectral",Georgia,"Times New Roman",serif;
+    --mono:"Space Mono",ui-monospace,"Courier New",monospace;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#0e0c09; --ink:#efe7d6; --red:#e5493b;
+    --faint:rgba(239,231,214,.24); --rule:rgba(239,231,214,.18); --hint:rgba(239,231,214,.55);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0e0c09; --ink:#efe7d6; --red:#e5493b;
+    --faint:rgba(239,231,214,.24); --rule:rgba(239,231,214,.18); --hint:rgba(239,231,214,.55);
+  }
+
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .wrap{max-width:44rem;margin:0 auto;padding-inline:20px;}
+  a{color:var(--red);text-underline-offset:3px;text-decoration-thickness:1px;}
+  a:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+
+  header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
+    background:color-mix(in srgb,var(--paper) 88%,transparent);
+    backdrop-filter:blur(6px);border-bottom:1.5px solid var(--ink);}
+  .bar{max-width:44rem;margin:0 auto;padding:10px 20px;display:flex;align-items:baseline;
+    justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .brand{font-family:var(--mono);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px;}
+  .bar a{font-family:var(--mono);font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    font-size:11px;text-decoration:none;}
+
+  .hero{padding-block:12vh 7vh;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--red);margin:0 0 1.2rem;}
+  h1.hero-t{font-family:var(--disp);font-weight:400;text-transform:uppercase;line-height:.86;
+    font-size:clamp(3rem,15vw,8rem);margin:0;letter-spacing:-.01em;word-break:break-word;color:var(--red);}
+  h1.hero-t .o{color:var(--ink);display:block;font-size:.42em;letter-spacing:.04em;margin:.12em 0;}
+  .thesis{font-family:var(--disp);font-weight:400;text-transform:uppercase;line-height:.98;
+    font-size:clamp(1.3rem,5.4vw,2.1rem);margin:.6rem 0 0;text-wrap:balance;}
+
+  section{padding-block:2.6rem;border-top:1.5px solid var(--rule);}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--hint);margin:0 0 .5rem;}
+  h2{font-family:var(--disp);font-weight:400;text-transform:uppercase;letter-spacing:.01em;
+    font-size:clamp(1.9rem,8vw,3rem);line-height:.98;margin:0 0 1.2rem;}
+  p{font-size:clamp(1.08rem,3.4vw,1.22rem);margin:0 0 1.1rem;text-wrap:pretty;}
+  .red{color:var(--red);} b{font-weight:600;} i,em{font-style:italic;}
+
+  .arrow{font-family:var(--disp);text-transform:uppercase;color:var(--red);
+    font-size:clamp(1.4rem,6vw,2.2rem);letter-spacing:.02em;margin:.4rem 0 1.4rem;line-height:1.02;}
+
+  blockquote{margin:1.2rem 0;padding-left:1rem;border-left:3px solid var(--red);
+    font-family:var(--disp);text-transform:uppercase;font-weight:400;color:var(--red);
+    font-size:clamp(1.3rem,5.6vw,2rem);line-height:1.03;}
+
+  ol.guion{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2.2rem;}
+  ol.guion>li{display:flex;gap:1rem;align-items:baseline;}
+  ol.guion .num{font-family:var(--disp);color:var(--red);font-size:clamp(2.4rem,11vw,4rem);
+    line-height:.8;flex:0 0 auto;min-width:1.4ch;}
+  ol.guion .step{flex:1 1 auto;}
+  ol.guion .step h3{font-family:var(--disp);font-weight:400;text-transform:uppercase;
+    font-size:clamp(1.3rem,5vw,1.7rem);margin:.1rem 0 .5rem;line-height:1;}
+  .time{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--hint);margin:0 0 .3rem;}
+  ol.guion .step p{font-size:1.08rem;margin:0 0 .7rem;}
+  ol.guion .step blockquote{font-size:clamp(1.15rem,5vw,1.6rem);}
+
+  ol.preguntas{list-style:none;margin:0;padding:0;counter-reset:q;
+    display:flex;flex-direction:column;gap:1.6rem;}
+  ol.preguntas>li{display:flex;gap:1rem;align-items:baseline;
+    border-top:1px solid var(--rule);padding-top:1.4rem;}
+  ol.preguntas>li:first-child{border-top:0;padding-top:0;}
+  ol.preguntas .qn{font-family:var(--mono);font-weight:700;color:var(--red);
+    font-size:14px;letter-spacing:.1em;flex:0 0 auto;}
+  ol.preguntas p{margin:0;font-size:clamp(1.12rem,3.8vw,1.3rem);}
+
+  .coda{padding-block:2.4rem 5rem;border-top:1.5px solid var(--ink);}
+  .coda .links{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin:0 0 1.6rem;}
+  .coda .links a{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;text-decoration:none;}
+  .coda .src{font-family:var(--mono);font-size:11px;line-height:1.9;letter-spacing:.03em;
+    color:var(--hint);margin:0;white-space:pre-line;}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <span class="brand">Picabia · 1920</span>
+    <a href="/manifiesto_canibal/">El manifiesto ↗</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" style="border-top:0;">
+    <p class="eyebrow">SPAN 550B · Semana 5 · Presentación</p>
+    <h1 class="hero-t">Caníbal<span class="o">o</span>Antropófago</h1>
+    <p class="thesis">dos digestiones de una misma década</p>
+  </section>
+
+  <section>
+    <p class="kicker">La tesis</p>
+    <h2>Se lo come todo y no digiere nada</h2>
+    <p>El título dice <b class="red">caníbal</b>. Dadá se lo traga todo y no digiere <b class="red">nada</b>: la letanía («como sus esperanzas: nada / sus ídolos: nada / sus políticos: nada…») vacía toda la cultura seria. Y en la última línea Dadá <b>se come su propia crítica</b>: «en tres meses, mis amigos y yo les venderemos nuestros cuadros por algunos francos». La antivanguardia se devora a sí misma y sale al mercado.</p>
+    <p>Ahí está el eje de mi presentación: el <b>canibalismo dadá</b> de Picabia (consumir y excretar <i>nada</i>) frente a la <b>antropofagia</b> de Oswald de Andrade (<i>Manifesto Antropófago</i>, 1928: devorar al colonizador para <b>transformarlo</b>, no para anularlo). Misma década, digestión opuesta.</p>
+    <p class="arrow">Canibalismo → Antropofagia → Consumo</p>
+    <p>Ese es, exactamente, el arco del curso.</p>
+  </section>
+
+  <section>
+    <p class="kicker">La presentación · ≈8–10 min</p>
+    <h2>El guion</h2>
+    <ol class="guion">
+      <li>
+        <div class="num">1</div>
+        <div class="step">
+          <p class="time">Apertura en personaje · reenactment · ~2 min</p>
+          <h3>Hago lo que el texto ordena</h3>
+          <p>Entro sin explicar nada y leo el arranque dando la orden:</p>
+          <blockquote>«Son todos ustedes acusados; levántense. El orador no puede hablarles si no están de pie.»</blockquote>
+          <p>Hago que la clase <b>se ponga de pie</b> (de pie como ante La Marsellesa, ante la bandera, ante DADÁ…), leo a ritmo la parte de los himnos y los siento con «¿Se han sentado todos de nuevo? Tanto mejor, así me escuchan con más atención». Rompo el personaje.</p>
+        </div>
+      </li>
+      <li>
+        <div class="num">2</div>
+        <div class="step">
+          <p class="time">La lectura · canibalismo → consumo · ~4 min</p>
+          <h3>Deshago lo que acaba de pasar</h3>
+          <p>El manifiesto los trató como público-mercancía («hacinados como ostras serias»). Recorro la letanía del <b class="red">nada</b> y aterrizo en la última línea (vender los cuadros): Dadá se autocaníbaliza. Monto el contraste con <b>Andrade / antropofagia</b> (digestión que transforma vs. digestión que anula) y lo conecto con el dinero, la muerte y la seriedad del texto.</p>
+        </div>
+      </li>
+      <li>
+        <div class="num">3</div>
+        <div class="step">
+          <p class="time">Interacción + cierre · ~3 min</p>
+          <h3>Letanía en llamada y respuesta</h3>
+          <p>Yo digo el sustantivo («sus ídolos», «sus héroes», «sus artistas»…) y la clase responde <b class="red">«¡nada!»</b>. Cierro con las preguntas de discusión y enseño la <a href="/manifiesto_canibal/">pieza web</a>, donde el manifiesto se devora a sí mismo.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <p class="kicker">Para la clase</p>
+    <h2>Preguntas de discusión</h2>
+    <ol class="preguntas">
+      <li><span class="qn">01</span><p>Si Dadá «no es nada, nada, nada», ¿por qué necesita al público de pie? ¿Puede una antivanguardia negarlo todo sin volverse ritual, es decir, otro himno más?</p></li>
+      <li><span class="qn">02</span><p>La última línea vende los cuadros. ¿Es Picabia cínico, o es una crítica lúcida de que toda vanguardia termina como mercancía? ¿Dónde cae hoy esa línea: el arte-NFT, el museo, la marca?</p></li>
+      <li><span class="qn">03</span><p>Picabia consume y no digiere; Andrade digiere para transformar. ¿Cuál de los dos «canibalismos» describe mejor la relación de América Latina con la cultura europea? ¿O hacen falta los dos?</p></li>
+    </ol>
+  </section>
+
+  <footer class="coda">
+    <div class="links">
+      <a href="/manifiesto_canibal/">← El manifiesto que se come a sí mismo</a>
+    </div>
+    <p class="src">Francis Picabia, «Manifeste cannibale dada». Leído por André Breton en la 3.ª velada Dadá, Théâtre de l’Œuvre, París, 27 de marzo de 1920. Publicado en Dadaphone n.º 7.
+Oswald de Andrade, «Manifesto Antropófago», Revista de Antropofagia, São Paulo, 1928.
+Presentación de Adri M · SPAN 550B, UBC.</p>
+  </footer>
+</main>
+
+</body>
+</html>
