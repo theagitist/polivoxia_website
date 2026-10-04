@@ -36,11 +36,18 @@
     -webkit-font-smoothing:antialiased;overflow-x:hidden;}
   .wrap{max-width:44rem;margin:0 auto;padding-inline:20px;}
 
-  /* mouth line — where the text gets digested */
-  #mouth{position:fixed;left:0;right:0;top:20%;height:0;z-index:5;pointer-events:none;
-    border-top:1.5px dashed var(--red);opacity:.5;}
-  #mouth b{position:absolute;right:12px;top:6px;font-family:var(--mono);font-size:10px;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:700;}
+  /* the mouth — the jaw of DADÁ, where the text gets digested */
+  #mouth{position:fixed;left:0;right:0;top:20%;z-index:5;pointer-events:none;
+    display:flex;align-items:center;}
+  /* the lip: a red line with a row of downward fangs hanging under it */
+  #mouth .lip{flex:1;height:3px;background:var(--red);position:relative;}
+  #mouth .lip::after{content:"";position:absolute;left:0;right:0;top:3px;height:8px;
+    background:linear-gradient(-135deg,var(--red) 49%,transparent 51%) 0 0/11px 8px repeat-x;}
+  #mouth b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--paper);background:var(--red);font-weight:700;padding:4px 9px;white-space:nowrap;
+    display:inline-flex;gap:.55em;align-items:baseline;animation:gnash 1.5s ease-in-out infinite;}
+  #mouth b .n{font-variant-numeric:tabular-nums;font-size:12px;}
+  @keyframes gnash{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
 
   /* header */
   header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
@@ -50,11 +57,17 @@
     justify-content:space-between;gap:12px;flex-wrap:wrap;}
   .brand{font-family:var(--mono);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
     font-size:11px;}
+  .navr{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
   .toggle{display:flex;gap:2px;border:1.5px solid var(--ink);}
   .toggle button{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.1em;
     background:transparent;color:var(--ink);border:0;padding:8px 11px;min-height:36px;cursor:pointer;}
   .toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
   .toggle button:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+  .soundbtn{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;background:transparent;color:var(--ink);border:1.5px solid var(--ink);
+    padding:7px 10px;min-height:36px;cursor:pointer;white-space:nowrap;}
+  .soundbtn[aria-pressed="true"]{background:var(--red);color:var(--paper);border-color:var(--red);}
+  .soundbtn:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
 
   /* hero */
   .hero{padding-block:14vh 8vh;}
@@ -79,11 +92,18 @@
   .st.beat{font-family:var(--disp);text-transform:uppercase;color:var(--red);
     font-size:clamp(1.6rem,8vw,2.8rem);letter-spacing:.02em;margin:.5em 0;}
 
-  .w{display:inline-block;transition:opacity .55s ease,transform .55s ease,filter .55s ease,color .3s;}
+  .w{display:inline-block;transition:opacity .3s ease,transform .3s ease,color .3s;}
   .w.dada{font-family:var(--disp);color:var(--red);text-transform:uppercase;}
   .w.nihil{font-family:var(--disp);color:var(--red);text-transform:uppercase;}
   .litany .w.nihil{font-size:1.15em;}
-  .w.eaten{opacity:0;transform:translateY(-.55em) rotate(-6deg) scale(.55);filter:blur(2px);}
+  /* getting eaten: flare red, bite down, then get crushed and sucked up into the mouth */
+  @keyframes chomp{
+    0%{opacity:1;transform:none;}
+    22%{color:var(--red);transform:scale(1.22) rotate(-2deg);}
+    50%{color:var(--red);transform:scale(.82) rotate(3deg) skewX(-6deg);}
+    100%{opacity:0;color:var(--red);transform:translateY(-1.5em) scale(.12) rotate(-16deg);filter:blur(1.5px);}
+  }
+  .w.eaten{animation:chomp .5s cubic-bezier(.55,0,.9,.25) forwards;}
 
   /* the void + the surviving line */
   .void{min-height:62vh;display:flex;align-items:flex-end;}
@@ -104,22 +124,28 @@
   .coda a{color:var(--red);text-underline-offset:3px;text-decoration-thickness:1px;}
 
   @media (prefers-reduced-motion:reduce){
-    .w{transition:opacity .3s ease,color .3s;}
-    .w.eaten{transform:none;filter:none;opacity:.08;}
-    #mouth{border-top-style:solid;}
+    #mouth b{animation:none;}
+    .w{transition:opacity .25s ease,color .25s;}
+    .w.eaten{animation:none;opacity:.12;color:var(--red);text-decoration:line-through;
+      text-decoration-color:var(--red);text-decoration-thickness:2px;}
   }
 </style>
 </head>
 <body>
-<div id="mouth" aria-hidden="true"><b></b></div>
+<div id="mouth" aria-hidden="true"><b>&#9660;&nbsp;<span class="n">0</span>&nbsp;<span class="lbl"></span></b><span class="lip"></span></div>
+
+<audio id="bed" loop preload="none"><source src="audio/canibal-bed.mp3" type="audio/mpeg"></audio>
 
 <header>
   <div class="bar">
     <span class="brand">Picabia · 1920</span>
-    <div class="toggle" id="toggle" role="group" aria-label="Idioma / Language">
-      <button data-l="es" aria-pressed="true">ES</button>
-      <button data-l="fr" aria-pressed="false">FR</button>
-      <button data-l="en" aria-pressed="false">EN</button>
+    <div class="navr">
+      <button id="soundbtn" class="soundbtn" aria-pressed="false" hidden></button>
+      <div class="toggle" id="toggle" role="group" aria-label="Idioma / Language">
+        <button data-l="es" aria-pressed="true">ES</button>
+        <button data-l="fr" aria-pressed="false">FR</button>
+        <button data-l="en" aria-pressed="false">EN</button>
+      </div>
     </div>
   </div>
 </header>
@@ -141,6 +167,7 @@
     <p class="more"><a href="/manifiesto_canibal/presentacion/">Tesis y presentación &rarr;</a></p>
     <p class="note" id="coda"></p>
     <p class="src" id="source"></p>
+    <p class="src" id="audiocredit" hidden></p>
   </footer>
 </main>
 
@@ -150,7 +177,9 @@ const T = {
     eyebrow:"Manifiesto Caníbal Dadá",
     hero:"DADÁ", thesis:"se lo come todo y no digiere nada",
     cue:"desplázate y míralo devorarse",
-    mouth:"digerido",
+    sound:"sonido",
+    audio:"Audio: montaje propio no comercial (§29.21 CDA) a partir de lecturas de «Tous les cancers» (SoundCloud) y Acce Pointtopoint (YouTube), cortadas y tratadas.",
+    mouth:"digeridas · nada",
     void:"nada · nada · nada",
     stanzas:[
       {k:"open", t:"Son todos ustedes acusados; levántense. El orador no puede hablarles si no están de pie."},
@@ -183,7 +212,9 @@ const T = {
     eyebrow:"Manifeste Cannibale Dada",
     hero:"DADA", thesis:"dévore tout et ne digère rien",
     cue:"défile et regarde-le se dévorer",
-    mouth:"digéré",
+    sound:"son",
+    audio:"Audio : montage personnel non commercial (art. 29.21 LDA) à partir de lectures de « Tous les cancers » (SoundCloud) et Acce Pointtopoint (YouTube), coupées et retravaillées.",
+    mouth:"avalés · rien",
     void:"rien · rien · rien",
     stanzas:[
       {k:"open", t:"Vous êtes tous accusés; levez-vous. L’orateur ne peut vous parler que si vous êtes debout."},
@@ -216,7 +247,9 @@ const T = {
     eyebrow:"Cannibal Dada Manifesto",
     hero:"DADA", thesis:"eats everything and digests nothing",
     cue:"scroll and watch it devour itself",
-    mouth:"digested",
+    sound:"sound",
+    audio:"Audio: non-commercial personal remix (s. 29.21 Copyright Act) from readings by “Tous les cancers” (SoundCloud) and Acce Pointtopoint (YouTube), cut and processed.",
+    mouth:"eaten · nothing",
     void:"nothing · nothing · nothing",
     stanzas:[
       {k:"open", t:"You are all accused; stand up. The speaker cannot address you unless you are standing."},
@@ -263,15 +296,22 @@ function words(t){
 
 const $ = id => document.getElementById(id);
 const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
-let mouth;
+let mouth, eaten = 0;
+const counter = document.querySelector("#mouth .n");
 
 function wire(){
   if(mouth) mouth.disconnect();
+  eaten = 0; if(counter) counter.textContent = "0";
   mouth = new IntersectionObserver(entries=>{
     for(const e of entries){
       if(e.isIntersecting) continue;
       const line = e.rootBounds ? e.rootBounds.top : innerHeight*0.2;
-      e.target.classList.toggle("eaten", e.boundingClientRect.top < line);
+      const el = e.target;
+      const bite = e.boundingClientRect.top < line;
+      if(bite === el.classList.contains("eaten")) continue; // no state change
+      el.classList.toggle("eaten", bite);
+      eaten += bite ? 1 : -1;
+      if(counter) counter.textContent = eaten;
     }
   }, {rootMargin:"-20% 0px -79% 0px", threshold:0});
   document.querySelectorAll("#stage .w").forEach(w=>mouth.observe(w));
@@ -279,22 +319,48 @@ function wire(){
 
 function render(l){
   const d = T[l];
+  curLang = l;
   document.documentElement.lang = l;
   $("eyebrow").textContent = d.eyebrow;
   $("hero").textContent = d.hero;
   $("thesis").textContent = d.thesis;
   $("cue").textContent = d.cue;
   $("voidlabel").textContent = d.void;
-  document.querySelector("#mouth b").textContent = "↑ "+d.mouth;
+  document.querySelector("#mouth .lbl").textContent = d.mouth;
   $("stage").innerHTML = d.stanzas
     .map(s=>'<p class="st '+s.k+'">'+words(s.t)+'</p>').join("");
   $("punch").innerHTML = d.punch;
   $("coda").innerHTML = d.coda;
   $("source").textContent = d.source;
+  $("audiocredit").textContent = d.audio;
+  soundLabel();
   document.querySelectorAll("#toggle button")
     .forEach(b=>b.setAttribute("aria-pressed", b.dataset.l===l ? "true":"false"));
   wire();
 }
+
+/* ---- background audio (opt-in; swells as you descend into the void) ---- */
+const bed = $("bed"), sbtn = $("soundbtn");
+let soundOn = false, curLang = "es";
+function soundLabel(){ sbtn.textContent = (soundOn?"● ":"○ ") + T[curLang].sound; }
+// volume tracks scroll depth: a murmur up top, fuller in the emptied-out void
+function bedVol(){
+  const h = document.documentElement.scrollHeight - innerHeight;
+  const p = h > 0 ? Math.min(1, Math.max(0, scrollY / h)) : 0;
+  return 0.18 + 0.62 * p;
+}
+sbtn.addEventListener("click", ()=>{
+  soundOn = !soundOn;
+  sbtn.setAttribute("aria-pressed", soundOn);
+  soundLabel();
+  if(soundOn){ bed.volume = bedVol(); bed.play().catch(()=>{}); }
+  else bed.pause();
+});
+addEventListener("scroll", ()=>{ if(soundOn) bed.volume = bedVol(); }, {passive:true});
+// only reveal the control (and the credit) once the audio file actually exists
+fetch("audio/canibal-bed.mp3", {method:"HEAD"}).then(r=>{
+  if(r.ok){ sbtn.hidden = false; $("audiocredit").hidden = false; }
+}).catch(()=>{});
 
 $("toggle").addEventListener("click", e=>{
   const b = e.target.closest("button"); if(!b) return;

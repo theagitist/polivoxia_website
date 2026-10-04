@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="/favicon.png">
+<style>
+  *{box-sizing:border-box}
+  html{color-scheme:light dark}
+  :root{padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+<title>Guion · Manifeste Cannibale Dada</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Spectral:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap">
+<style>
+  :root{
+    --paper:#efe7d6; --ink:#16120c; --red:#c1121f;
+    --faint:rgba(22,18,12,.26); --rule:rgba(22,18,12,.2); --hint:rgba(22,18,12,.5);
+    --disp:"Anton",Impact,"Haettenschweiler",sans-serif;
+    --body:"Spectral",Georgia,"Times New Roman",serif;
+    --mono:"Space Mono",ui-monospace,"Courier New",monospace;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#0e0c09; --ink:#efe7d6; --red:#e5493b;
+    --faint:rgba(239,231,214,.24); --rule:rgba(239,231,214,.18); --hint:rgba(239,231,214,.55);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0e0c09; --ink:#efe7d6; --red:#e5493b;
+    --faint:rgba(239,231,214,.24); --rule:rgba(239,231,214,.18); --hint:rgba(239,231,214,.55);
+  }
+
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .wrap{max-width:46rem;margin:0 auto;padding-inline:20px;}
+  a{color:var(--red);text-underline-offset:3px;text-decoration-thickness:1px;}
+  a:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+
+  header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
+    background:color-mix(in srgb,var(--paper) 88%,transparent);
+    backdrop-filter:blur(6px);border-bottom:1.5px solid var(--ink);}
+  .bar{max-width:46rem;margin:0 auto;padding:10px 20px;display:flex;align-items:center;
+    justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .brand{font-family:var(--mono);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px;}
+  .navr{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
+  .navr a{font-family:var(--mono);font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    font-size:11px;text-decoration:none;}
+  .printbtn{font-family:var(--mono);font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    font-size:11px;background:var(--red);color:var(--paper);border:1.5px solid var(--red);
+    padding:8px 11px;min-height:36px;cursor:pointer;}
+  .printbtn:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+  .toggle{display:flex;gap:2px;border:1.5px solid var(--ink);}
+  .toggle button{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.1em;
+    background:transparent;color:var(--ink);border:0;padding:8px 11px;min-height:36px;cursor:pointer;}
+  .toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+  .toggle button:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+
+  .head{padding-block:9vh 2.6rem;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--red);margin:0 0 1rem;}
+  h1{font-family:var(--disp);font-weight:400;text-transform:uppercase;line-height:.9;
+    font-size:clamp(2.6rem,12vw,5.5rem);margin:0;letter-spacing:-.01em;color:var(--red);}
+  .sub{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--hint);margin:1rem 0 0;}
+  .note{font-size:1.02rem;margin:1.4rem 0 0;color:var(--ink);text-wrap:pretty;}
+
+  ol.guion{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2.6rem;
+    border-top:1.5px solid var(--ink);padding-top:2.6rem;}
+  ol.guion>li{display:flex;gap:1rem;align-items:baseline;break-inside:avoid;}
+  ol.guion .num{font-family:var(--disp);color:var(--red);font-size:clamp(2.4rem,11vw,4rem);
+    line-height:.8;flex:0 0 auto;min-width:1.4ch;}
+  ol.guion .step{flex:1 1 auto;}
+  ol.guion .step h3{font-family:var(--disp);font-weight:400;text-transform:uppercase;
+    font-size:clamp(1.3rem,5vw,1.8rem);margin:.1rem 0 .5rem;line-height:1;}
+  .time{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--hint);margin:0 0 .3rem;}
+  ol.guion .step p{font-size:1.08rem;margin:0 0 .7rem;text-wrap:pretty;}
+  .red{color:var(--red);} b{font-weight:600;} i,em{font-style:italic;}
+
+  blockquote{margin:1rem 0;padding:.7rem 1rem;border-left:4px solid var(--red);
+    background:color-mix(in srgb,var(--red) 7%,transparent);
+    font-family:var(--disp);text-transform:uppercase;font-weight:400;color:var(--red);
+    font-size:clamp(1.15rem,5vw,1.6rem);line-height:1.08;}
+
+  .preg{margin-top:2.6rem;border-top:1.5px solid var(--ink);padding-top:2.2rem;break-inside:avoid;}
+  .preg h2{font-family:var(--disp);font-weight:400;text-transform:uppercase;
+    font-size:clamp(1.6rem,7vw,2.4rem);line-height:1;margin:0 0 1.2rem;}
+  ol.preguntas{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.2rem;}
+  ol.preguntas>li{display:flex;gap:1rem;align-items:baseline;}
+  ol.preguntas .qn{font-family:var(--mono);font-weight:700;color:var(--red);
+    font-size:14px;letter-spacing:.1em;flex:0 0 auto;}
+  ol.preguntas p{margin:0;font-size:1.08rem;text-wrap:pretty;}
+
+  .coda{padding-block:2.4rem 5rem;margin-top:2.6rem;border-top:1.5px solid var(--rule);}
+  .coda .dl{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    margin:0 0 1.4rem;}
+  .coda .dl a{font-weight:700;text-decoration:none;}
+  .coda .src{font-family:var(--mono);font-size:11px;line-height:1.9;letter-spacing:.03em;
+    color:var(--hint);margin:0;white-space:pre-line;}
+
+  @media print{
+    :root{--paper:#fff;--ink:#000;--red:#000;--hint:#000;--rule:#999;--faint:#999;}
+    html{color-scheme:light;}
+    header,.printbtn,.toggle,.navr,.dl{display:none!important;}
+    body{background:#fff;color:#000;font-size:11pt;line-height:1.4;}
+    .wrap{max-width:none;padding:0;}
+    .head{padding:0 0 1rem;}
+    h1{font-size:30pt;color:#000;}
+    blockquote{background:none;border-left:3px solid #000;color:#000;font-size:15pt;}
+    .eyebrow,.sub,.time{color:#000;}
+    ol.guion{gap:1.4rem;padding-top:1rem;}
+    a{color:#000;text-decoration:none;}
+    @page{margin:1.6cm;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <span class="brand">Picabia · 1920</span>
+    <div class="navr">
+      <button class="printbtn" id="printbtn" type="button" onclick="window.print()"></button>
+      <a id="preslink" href="/manifiesto_canibal/presentacion/"></a>
+      <a id="manilink" href="/manifiesto_canibal/"></a>
+      <div class="toggle" id="toggle" role="group" aria-label="Idioma / Language">
+        <button data-l="es" aria-pressed="true">ES</button>
+        <button data-l="fr" aria-pressed="false">FR</button>
+        <button data-l="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="head">
+    <p class="eyebrow" id="eyebrow"></p>
+    <h1 id="title"></h1>
+    <p class="sub" id="sub"></p>
+    <p class="note" id="note"></p>
+  </section>
+
+  <ol class="guion" id="guion"></ol>
+
+  <section class="preg">
+    <h2 id="pregH"></h2>
+    <ol class="preguntas" id="preg"></ol>
+  </section>
+
+  <footer class="coda">
+    <p class="dl" id="dl"></p>
+    <p class="src" id="src"></p>
+  </footer>
+</main>
+
+<script>
+const T = {
+  es:{
+    lang:"es", printbtn:"Imprimir / PDF", dl:"Descargar PDF:",
+    preslink:"La presentación ↗", manilink:"El manifiesto ↗",
+    eyebrow:"SPAN 550B · Semana 5 · Guion",
+    title:"El guion",
+    sub:"≈ 8–10 min · tres tiempos · para leer en escena",
+    note:`Mi hoja de ruta para presentar el <i>Manifeste cannibale dada</i> de Picabia. No lo resumo: lo <b>reactivo como acontecimiento</b>, haciendo lo que el texto ordena. En <b class="red">negrita roja</b>, lo que leo en voz alta.`,
+    steps:[
+      {time:"1 · Apertura en personaje · reenactment · ~2 min", h:"Hago lo que el texto ordena",
+       body:`<p>Entro sin explicar nada y leo el arranque dando la orden:</p>
+       <blockquote>«Son todos ustedes acusados; levántense. El orador no puede hablarles si no están de pie.»</blockquote>
+       <p>Hago que la clase <b>se ponga de pie</b> (de pie como ante La Marsellesa, ante la bandera, ante DADÁ…), leo a ritmo la parte de los himnos y los siento con «¿Se han sentado todos de nuevo? Tanto mejor, así me escuchan con más atención». Rompo el personaje.</p>`},
+      {time:"2 · La lectura · canibalismo → consumo · ~4 min", h:"Deshago lo que acaba de pasar",
+       body:`<p>El manifiesto los trató como público-mercancía («hacinados como ostras serias»). Recorro la letanía del <b class="red">nada</b> y aterrizo en la última línea (vender los cuadros): Dadá se autocaníbaliza. Monto el contraste con <b>Andrade / antropofagia</b> (digestión que transforma vs. digestión que anula) y lo conecto con el dinero, la muerte y la seriedad del texto.</p>`},
+      {time:"3 · Interacción + cierre · ~3 min", h:"Letanía en llamada y respuesta",
+       body:`<p>Yo digo el sustantivo («sus ídolos», «sus héroes», «sus artistas»…) y la clase responde <b class="red">«¡nada!»</b>. Cierro con las preguntas de discusión (abajo) y enseño la <a href="/manifiesto_canibal/">pieza web</a>, donde el manifiesto se devora a sí mismo.</p>`}
+    ],
+    pregH:"Preguntas de discusión (cierre)",
+    preg:[
+      `Si Dadá «no es nada, nada, nada», ¿por qué necesita al público de pie? ¿Puede una antivanguardia negarlo todo sin volverse ritual, es decir, otro himno más?`,
+      `La última línea vende los cuadros. ¿Es Picabia cínico, o es una crítica lúcida de que toda vanguardia termina como mercancía? ¿Dónde cae hoy esa línea: el arte-NFT, el museo, la marca?`,
+      `Picabia consume y no digiere; Andrade digiere para transformar. ¿Cuál de los dos «canibalismos» describe mejor la relación de América Latina con la cultura europea? ¿O hacen falta los dos?`
+    ],
+    src:`Francis Picabia, «Manifeste cannibale dada». Leído por André Breton en la 3.ª velada Dadá, Théâtre de l’Œuvre, París, 27 de marzo de 1920. Publicado en Dadaphone n.º 7.
+Oswald de Andrade, «Manifesto Antropófago», Revista de Antropofagia, São Paulo, 1928.
+Presentación de Adri M · SPAN 550B, UBC.`
+  },
+
+  fr:{
+    lang:"fr", printbtn:"Imprimer / PDF", dl:"Télécharger le PDF :",
+    preslink:"La présentation ↗", manilink:"Le manifeste ↗",
+    eyebrow:"SPAN 550B · Semaine 5 · Déroulé",
+    title:"Le déroulé",
+    sub:"≈ 8–10 min · trois temps · à lire en scène",
+    note:`Ma feuille de route pour présenter le <i>Manifeste cannibale dada</i> de Picabia. Je ne le résume pas : je le <b>réactive comme événement</b>, en faisant ce que le texte ordonne. En <b class="red">gras rouge</b>, ce que je lis à voix haute.`,
+    steps:[
+      {time:"1 · Ouverture en personnage · reenactment · ~2 min", h:"Je fais ce que le texte ordonne",
+       body:`<p>J’entre sans rien expliquer et je lis l’ouverture en donnant l’ordre :</p>
+       <blockquote>« Vous êtes tous accusés ; levez-vous. L’orateur ne peut vous parler que si vous êtes debout. »</blockquote>
+       <p>Je fais <b>lever la classe</b> (debout comme pour la Marseillaise, devant le drapeau, devant DADA…), je lis au rythme le passage des hymnes et je les rassois avec « Vous vous êtes tous rassis ? Tant mieux, comme cela vous allez m’écouter avec plus d’attention ». Je romps le personnage.</p>`},
+      {time:"2 · La lecture · cannibalisme → consommation · ~4 min", h:"Je défais ce qui vient de se passer",
+       body:`<p>Le manifeste les a traités comme un public-marchandise (« parqués comme des huîtres sérieuses »). Je parcours la litanie du <b class="red">rien</b> et j’atterris sur la dernière ligne (vendre les tableaux) : Dada s’autocannibalise. Je monte le contraste avec <b>Andrade / anthropophagie</b> (digestion qui transforme vs. digestion qui annule) et je le relie à l’argent, à la mort et au sérieux du texte.</p>`},
+      {time:"3 · Interaction + clôture · ~3 min", h:"Litanie en appel et réponse",
+       body:`<p>Je dis le substantif (« vos idoles », « vos héros », « vos artistes »…) et la classe répond <b class="red">« rien ! »</b>. Je clos avec les questions de discussion (ci-dessous) et je montre la <a href="/manifiesto_canibal/">pièce web</a>, où le manifeste se dévore lui-même.</p>`}
+    ],
+    pregH:"Questions de discussion (clôture)",
+    preg:[
+      `Si Dada « n’est rien, rien, rien », pourquoi a-t-il besoin d’un public debout ? Une anti-avant-garde peut-elle tout nier sans devenir un rituel, c’est-à-dire un hymne de plus ?`,
+      `La dernière ligne vend les tableaux. Picabia est-il cynique, ou est-ce une critique lucide : toute avant-garde finit en marchandise ? Où tombe cette ligne aujourd’hui : l’art-NFT, le musée, la marque ?`,
+      `Picabia consomme et ne digère pas ; Andrade digère pour transformer. Lequel des deux « cannibalismes » décrit le mieux le rapport de l’Amérique latine à la culture européenne ? Ou faut-il les deux ?`
+    ],
+    src:`Francis Picabia, « Manifeste cannibale dada ». Lu par André Breton lors de la 3ᵉ soirée Dada, Théâtre de l’Œuvre, Paris, 27 mars 1920. Publié dans Dadaphone n° 7.
+Oswald de Andrade, « Manifeste Anthropophage », Revista de Antropofagia, São Paulo, 1928.
+Présentation d’Adri M · SPAN 550B, UBC.`
+  },
+
+  en:{
+    lang:"en", printbtn:"Print / PDF", dl:"Download PDF:",
+    preslink:"The presentation ↗", manilink:"The manifesto ↗",
+    eyebrow:"SPAN 550B · Week 5 · Run of show",
+    title:"The run of show",
+    sub:"≈ 8–10 min · three beats · to read on stage",
+    note:`My roadmap for presenting Picabia’s <i>Manifeste cannibale dada</i>. I don’t summarize it: I <b>reactivate it as an event</b>, doing what the text orders. In <b class="red">red bold</b>, what I read aloud.`,
+    steps:[
+      {time:"1 · Opening in character · reenactment · ~2 min", h:"I do what the text orders",
+       body:`<p>I walk in without explaining anything and read the opening as a command:</p>
+       <blockquote>“You are all accused; stand up. The speaker cannot address you unless you are standing.”</blockquote>
+       <p>I get the class to <b>stand</b> (as for the Marseillaise, before the flag, before DADA…), read the anthems passage in rhythm, then sit them back down with “Have you all sat down again? So much the better; that way you will listen to me more closely.” I break character.</p>`},
+      {time:"2 · The reading · cannibalism → consumption · ~4 min", h:"I undo what just happened",
+       body:`<p>The manifesto treated them as an audience-commodity (“penned in like serious oysters”). I run through the litany of <b class="red">nothing</b> and land on the last line (selling the paintings): Dada cannibalizes itself. I set up the contrast with <b>Andrade / anthropophagy</b> (digestion that transforms vs. digestion that annuls) and tie it to the money, death and seriousness in the text.</p>`},
+      {time:"3 · Interaction + closing · ~3 min", h:"Call-and-response litany",
+       body:`<p>I say the noun (“your idols,” “your heroes,” “your artists”…) and the class answers <b class="red">“nothing!”</b>. I close with the discussion questions (below) and show the <a href="/manifiesto_canibal/">web piece</a>, where the manifesto devours itself.</p>`}
+    ],
+    pregH:"Discussion questions (closing)",
+    preg:[
+      `If Dada “is nothing, nothing, nothing,” why does it need the audience on its feet? Can an anti-avant-garde negate everything without turning into a ritual, that is, just one more anthem?`,
+      `The last line sells the paintings. Is Picabia cynical, or is it a lucid critique that every avant-garde ends up as merchandise? Where does that line fall today: NFT-art, the museum, the brand?`,
+      `Picabia consumes and does not digest; Andrade digests in order to transform. Which of the two “cannibalisms” better describes Latin America’s relationship to European culture? Or do we need both?`
+    ],
+    src:`Francis Picabia, “Manifeste cannibale dada.” Read by André Breton at the 3rd Dada soirée, Théâtre de l’Œuvre, Paris, 27 March 1920. Published in Dadaphone no. 7.
+Oswald de Andrade, “Cannibalist Manifesto,” Revista de Antropofagia, São Paulo, 1928.
+Presentation by Adri M · SPAN 550B, UBC.`
+  }
+};
+
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2,"0");
+
+function render(l){
+  const d = T[l];
+  document.documentElement.lang = d.lang;
+  $("printbtn").textContent = d.printbtn;
+  $("preslink").textContent = d.preslink;
+  $("manilink").textContent = d.manilink;
+  $("eyebrow").textContent = d.eyebrow;
+  $("title").textContent = d.title;
+  $("sub").textContent = d.sub;
+  $("note").innerHTML = d.note;
+  $("guion").innerHTML = d.steps.map((s,i)=>
+    '<li><div class="num">'+(i+1)+'</div><div class="step">'
+    +'<p class="time">'+s.time+'</p><h3>'+s.h+'</h3>'+s.body+'</div></li>').join("");
+  $("pregH").textContent = d.pregH;
+  $("preg").innerHTML = d.preg.map((q,i)=>
+    '<li><span class="qn">'+pad(i+1)+'</span><p>'+q+'</p></li>').join("");
+  $("dl").innerHTML = d.dl
+    + ' <a href="guion-es.pdf">ES</a> · <a href="guion-fr.pdf">FR</a> · <a href="guion-en.pdf">EN</a>';
+  $("src").textContent = d.src;
+  document.querySelectorAll("#toggle button")
+    .forEach(b=>b.setAttribute("aria-pressed", b.dataset.l===l ? "true":"false"));
+}
+
+$("toggle").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  const l = b.dataset.l;
+  try{ localStorage.setItem("mcd-lang", l); }catch(_){}
+  render(l);
+});
+
+let start = "es";
+try{ const s = localStorage.getItem("mcd-lang"); if(s && T[s]) start = s; }catch(_){}
+const qp = new URLSearchParams(location.search).get("lang"); if(qp && T[qp]) start = qp; // for the per-language PDF render
+render(start);
+</script>
+
+</body>
+</html>

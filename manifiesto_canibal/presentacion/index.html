@@ -41,11 +41,17 @@
   header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
     background:color-mix(in srgb,var(--paper) 88%,transparent);
     backdrop-filter:blur(6px);border-bottom:1.5px solid var(--ink);}
-  .bar{max-width:44rem;margin:0 auto;padding:10px 20px;display:flex;align-items:baseline;
+  .bar{max-width:44rem;margin:0 auto;padding:10px 20px;display:flex;align-items:center;
     justify-content:space-between;gap:12px;flex-wrap:wrap;}
   .brand{font-family:var(--mono);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px;}
-  .bar a{font-family:var(--mono);font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  .navr{display:flex;align-items:center;gap:14px;}
+  .navr a{font-family:var(--mono);font-weight:700;letter-spacing:.1em;text-transform:uppercase;
     font-size:11px;text-decoration:none;}
+  .toggle{display:flex;gap:2px;border:1.5px solid var(--ink);}
+  .toggle button{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.1em;
+    background:transparent;color:var(--ink);border:0;padding:8px 11px;min-height:36px;cursor:pointer;}
+  .toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+  .toggle button:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
 
   .hero{padding-block:12vh 7vh;}
   .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
@@ -104,78 +110,163 @@
 <header>
   <div class="bar">
     <span class="brand">Picabia · 1920</span>
-    <a href="/manifiesto_canibal/">El manifiesto ↗</a>
+    <div class="navr">
+      <a id="manilink" href="/manifiesto_canibal/">El manifiesto ↗</a>
+      <div class="toggle" id="toggle" role="group" aria-label="Idioma / Language">
+        <button data-l="es" aria-pressed="true">ES</button>
+        <button data-l="fr" aria-pressed="false">FR</button>
+        <button data-l="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
   </div>
 </header>
 
 <main class="wrap">
   <section class="hero" style="border-top:0;">
-    <p class="eyebrow">SPAN 550B · Semana 5 · Presentación</p>
-    <h1 class="hero-t">Caníbal<span class="o">o</span>Antropófago</h1>
-    <p class="thesis">dos digestiones de una misma década</p>
+    <p class="eyebrow" id="eyebrow"></p>
+    <h1 class="hero-t"><span id="heroA"></span><span class="o" id="heroO"></span><span id="heroB"></span></h1>
+    <p class="thesis" id="thesis"></p>
   </section>
 
   <section>
-    <p class="kicker">La tesis</p>
-    <h2>Se lo come todo y no digiere nada</h2>
-    <p>El título dice <b class="red">caníbal</b>. Dadá se lo traga todo y no digiere <b class="red">nada</b>: la letanía («como sus esperanzas: nada / sus ídolos: nada / sus políticos: nada…») vacía toda la cultura seria. Y en la última línea Dadá <b>se come su propia crítica</b>: «en tres meses, mis amigos y yo les venderemos nuestros cuadros por algunos francos». La antivanguardia se devora a sí misma y sale al mercado.</p>
-    <p>Ahí está el eje de mi presentación: el <b>canibalismo dadá</b> de Picabia (consumir y excretar <i>nada</i>) frente a la <b>antropofagia</b> de Oswald de Andrade (<i>Manifesto Antropófago</i>, 1928: devorar al colonizador para <b>transformarlo</b>, no para anularlo). Misma década, digestión opuesta.</p>
-    <p class="arrow">Canibalismo → Antropofagia → Consumo</p>
-    <p>Ese es, exactamente, el arco del curso.</p>
+    <p class="kicker" id="tesisK"></p>
+    <h2 id="tesisH"></h2>
+    <div id="tesisBody"></div>
   </section>
 
   <section>
-    <p class="kicker">La presentación · ≈8–10 min</p>
-    <h2>El guion</h2>
-    <ol class="guion">
-      <li>
-        <div class="num">1</div>
-        <div class="step">
-          <p class="time">Apertura en personaje · reenactment · ~2 min</p>
-          <h3>Hago lo que el texto ordena</h3>
-          <p>Entro sin explicar nada y leo el arranque dando la orden:</p>
-          <blockquote>«Son todos ustedes acusados; levántense. El orador no puede hablarles si no están de pie.»</blockquote>
-          <p>Hago que la clase <b>se ponga de pie</b> (de pie como ante La Marsellesa, ante la bandera, ante DADÁ…), leo a ritmo la parte de los himnos y los siento con «¿Se han sentado todos de nuevo? Tanto mejor, así me escuchan con más atención». Rompo el personaje.</p>
-        </div>
-      </li>
-      <li>
-        <div class="num">2</div>
-        <div class="step">
-          <p class="time">La lectura · canibalismo → consumo · ~4 min</p>
-          <h3>Deshago lo que acaba de pasar</h3>
-          <p>El manifiesto los trató como público-mercancía («hacinados como ostras serias»). Recorro la letanía del <b class="red">nada</b> y aterrizo en la última línea (vender los cuadros): Dadá se autocaníbaliza. Monto el contraste con <b>Andrade / antropofagia</b> (digestión que transforma vs. digestión que anula) y lo conecto con el dinero, la muerte y la seriedad del texto.</p>
-        </div>
-      </li>
-      <li>
-        <div class="num">3</div>
-        <div class="step">
-          <p class="time">Interacción + cierre · ~3 min</p>
-          <h3>Letanía en llamada y respuesta</h3>
-          <p>Yo digo el sustantivo («sus ídolos», «sus héroes», «sus artistas»…) y la clase responde <b class="red">«¡nada!»</b>. Cierro con las preguntas de discusión y enseño la <a href="/manifiesto_canibal/">pieza web</a>, donde el manifiesto se devora a sí mismo.</p>
-        </div>
-      </li>
-    </ol>
-  </section>
-
-  <section>
-    <p class="kicker">Para la clase</p>
-    <h2>Preguntas de discusión</h2>
-    <ol class="preguntas">
-      <li><span class="qn">01</span><p>Si Dadá «no es nada, nada, nada», ¿por qué necesita al público de pie? ¿Puede una antivanguardia negarlo todo sin volverse ritual, es decir, otro himno más?</p></li>
-      <li><span class="qn">02</span><p>La última línea vende los cuadros. ¿Es Picabia cínico, o es una crítica lúcida de que toda vanguardia termina como mercancía? ¿Dónde cae hoy esa línea: el arte-NFT, el museo, la marca?</p></li>
-      <li><span class="qn">03</span><p>Picabia consume y no digiere; Andrade digiere para transformar. ¿Cuál de los dos «canibalismos» describe mejor la relación de América Latina con la cultura europea? ¿O hacen falta los dos?</p></li>
-    </ol>
+    <p class="kicker" id="pregK"></p>
+    <h2 id="pregH"></h2>
+    <ol class="preguntas" id="preg"></ol>
   </section>
 
   <footer class="coda">
-    <div class="links">
-      <a href="/manifiesto_canibal/">← El manifiesto que se come a sí mismo</a>
-    </div>
-    <p class="src">Francis Picabia, «Manifeste cannibale dada». Leído por André Breton en la 3.ª velada Dadá, Théâtre de l’Œuvre, París, 27 de marzo de 1920. Publicado en Dadaphone n.º 7.
-Oswald de Andrade, «Manifesto Antropófago», Revista de Antropofagia, São Paulo, 1928.
-Presentación de Adri M · SPAN 550B, UBC.</p>
+    <div class="links"><a id="guionlink" href="/manifiesto_canibal/guion/"></a><a id="backlink" href="/manifiesto_canibal/"></a></div>
+    <p class="src" id="src"></p>
   </footer>
 </main>
+
+<script>
+const T = {
+  es:{
+    manilink:"El manifiesto ↗",
+    guionlink:"El guion (para imprimir) ↗",
+    eyebrow:"SPAN 550B · Semana 5 · Presentación",
+    heroA:"Caníbal", heroO:"o", heroB:"Antropófago",
+    thesis:"dos digestiones de una misma década",
+    tesis:{
+      k:"La tesis", h:"Se lo come todo y no digiere nada",
+      body:`<p>El título dice <b class="red">caníbal</b>. Dadá se lo traga todo y no digiere <b class="red">nada</b>: la letanía («como sus esperanzas: nada / sus ídolos: nada / sus políticos: nada…») vacía toda la cultura seria. Y en la última línea Dadá <b>se come su propia crítica</b>: «en tres meses, mis amigos y yo les venderemos nuestros cuadros por algunos francos». La antivanguardia se devora a sí misma y sale al mercado.</p>
+      <p>Ahí está el eje de mi presentación: el <b>canibalismo dadá</b> de Picabia (consumir y excretar <i>nada</i>) frente a la <b>antropofagia</b> de Oswald de Andrade (<i>Manifesto Antropófago</i>, 1928: devorar al colonizador para <b>transformarlo</b>, no para anularlo). Misma década, digestión opuesta.</p>
+      <p class="arrow">Canibalismo → Antropofagia → Consumo</p>
+      <p>Ese es, exactamente, el arco del curso.</p>`
+    },
+    preg:{
+      k:"Para la clase", h:"Preguntas de discusión",
+      items:[
+        `Si Dadá «no es nada, nada, nada», ¿por qué necesita al público de pie? ¿Puede una antivanguardia negarlo todo sin volverse ritual, es decir, otro himno más?`,
+        `La última línea vende los cuadros. ¿Es Picabia cínico, o es una crítica lúcida de que toda vanguardia termina como mercancía? ¿Dónde cae hoy esa línea: el arte-NFT, el museo, la marca?`,
+        `Picabia consume y no digiere; Andrade digiere para transformar. ¿Cuál de los dos «canibalismos» describe mejor la relación de América Latina con la cultura europea? ¿O hacen falta los dos?`
+      ]
+    },
+    backlink:"← El manifiesto que se come a sí mismo",
+    src:`Francis Picabia, «Manifeste cannibale dada». Leído por André Breton en la 3.ª velada Dadá, Théâtre de l’Œuvre, París, 27 de marzo de 1920. Publicado en Dadaphone n.º 7.
+Oswald de Andrade, «Manifesto Antropófago», Revista de Antropofagia, São Paulo, 1928.
+Presentación de Adri M · SPAN 550B, UBC.`
+  },
+
+  fr:{
+    manilink:"Le manifeste ↗",
+    guionlink:"Le déroulé (à imprimer) ↗",
+    eyebrow:"SPAN 550B · Semaine 5 · Présentation",
+    heroA:"Cannibale", heroO:"ou", heroB:"Anthropophage",
+    thesis:"deux digestions d’une même décennie",
+    tesis:{
+      k:"La thèse", h:"Il dévore tout et ne digère rien",
+      body:`<p>Le titre dit <b class="red">cannibale</b>. Dada avale tout et ne digère <b class="red">rien</b> : la litanie (« comme vos espoirs : rien / vos idoles : rien / vos hommes politiques : rien… ») vide toute la culture sérieuse. Et dans sa dernière ligne, Dada <b>dévore sa propre critique</b> : « dans trois mois, mes amis et moi vous vendrons nos tableaux pour quelques francs ». L’anti-avant-garde se dévore elle-même et sort sur le marché.</p>
+      <p>Voilà l’axe de ma présentation : le <b>cannibalisme dada</b> de Picabia (consommer et excréter <i>rien</i>) face à l’<b>anthropophagie</b> d’Oswald de Andrade (<i>Manifeste Anthropophage</i>, 1928 : dévorer le colonisateur pour le <b>transformer</b>, non pour l’annuler). Même décennie, digestion opposée.</p>
+      <p class="arrow">Cannibalisme → Anthropophagie → Consommation</p>
+      <p>C’est, exactement, l’arc du cours.</p>`
+    },
+    preg:{
+      k:"Pour la classe", h:"Questions de discussion",
+      items:[
+        `Si Dada « n’est rien, rien, rien », pourquoi a-t-il besoin d’un public debout ? Une anti-avant-garde peut-elle tout nier sans devenir un rituel, c’est-à-dire un hymne de plus ?`,
+        `La dernière ligne vend les tableaux. Picabia est-il cynique, ou est-ce une critique lucide : toute avant-garde finit en marchandise ? Où tombe cette ligne aujourd’hui : l’art-NFT, le musée, la marque ?`,
+        `Picabia consomme et ne digère pas ; Andrade digère pour transformer. Lequel des deux « cannibalismes » décrit le mieux le rapport de l’Amérique latine à la culture européenne ? Ou faut-il les deux ?`
+      ]
+    },
+    backlink:"← Le manifeste qui se dévore lui-même",
+    src:`Francis Picabia, « Manifeste cannibale dada ». Lu par André Breton lors de la 3ᵉ soirée Dada, Théâtre de l’Œuvre, Paris, 27 mars 1920. Publié dans Dadaphone n° 7.
+Oswald de Andrade, « Manifeste Anthropophage », Revista de Antropofagia, São Paulo, 1928.
+Présentation d’Adri M · SPAN 550B, UBC.`
+  },
+
+  en:{
+    manilink:"The manifesto ↗",
+    guionlink:"The run of show (to print) ↗",
+    eyebrow:"SPAN 550B · Week 5 · Presentation",
+    heroA:"Cannibal", heroO:"or", heroB:"Anthropophage",
+    thesis:"two digestions of one decade",
+    tesis:{
+      k:"The thesis", h:"It eats everything and digests nothing",
+      body:`<p>The title says <b class="red">cannibal</b>. Dada swallows everything and digests <b class="red">nothing</b>: the litany (“like your hopes: nothing / your idols: nothing / your politicians: nothing…”) empties out all of serious culture. And in its last line Dada <b>eats its own critique</b>: “in three months my friends and I will sell you our paintings for a few francs.” The anti-avant-garde devours itself and walks out onto the market.</p>
+      <p>That is the axis of my presentation: Picabia’s <b>Dada cannibalism</b> (consume and excrete <i>nothing</i>) against Oswald de Andrade’s <b>anthropophagy</b> (<i>Cannibalist Manifesto</i>, 1928: devour the colonizer in order to <b>transform</b> him, not to annul him). Same decade, opposite digestion.</p>
+      <p class="arrow">Cannibalism → Anthropophagy → Consumption</p>
+      <p>That is, exactly, the arc of the course.</p>`
+    },
+    preg:{
+      k:"For the class", h:"Discussion questions",
+      items:[
+        `If Dada “is nothing, nothing, nothing,” why does it need the audience on its feet? Can an anti-avant-garde negate everything without turning into a ritual, that is, just one more anthem?`,
+        `The last line sells the paintings. Is Picabia cynical, or is it a lucid critique that every avant-garde ends up as merchandise? Where does that line fall today: NFT-art, the museum, the brand?`,
+        `Picabia consumes and does not digest; Andrade digests in order to transform. Which of the two “cannibalisms” better describes Latin America’s relationship to European culture? Or do we need both?`
+      ]
+    },
+    backlink:"← The manifesto that eats itself",
+    src:`Francis Picabia, “Manifeste cannibale dada.” Read by André Breton at the 3rd Dada soirée, Théâtre de l’Œuvre, Paris, 27 March 1920. Published in Dadaphone no. 7.
+Oswald de Andrade, “Cannibalist Manifesto,” Revista de Antropofagia, São Paulo, 1928.
+Presentation by Adri M · SPAN 550B, UBC.`
+  }
+};
+
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2,"0");
+
+function render(l){
+  const d = T[l];
+  document.documentElement.lang = l;
+  $("manilink").textContent = d.manilink;
+  $("eyebrow").textContent = d.eyebrow;
+  $("heroA").textContent = d.heroA;
+  $("heroO").textContent = d.heroO;
+  $("heroB").textContent = d.heroB;
+  $("thesis").textContent = d.thesis;
+  $("tesisK").textContent = d.tesis.k;
+  $("tesisH").textContent = d.tesis.h;
+  $("tesisBody").innerHTML = d.tesis.body;
+  $("pregK").textContent = d.preg.k;
+  $("pregH").textContent = d.preg.h;
+  $("preg").innerHTML = d.preg.items.map((q,i)=>
+    '<li><span class="qn">'+pad(i+1)+'</span><p>'+q+'</p></li>').join("");
+  $("guionlink").textContent = d.guionlink;
+  $("backlink").textContent = d.backlink;
+  $("src").textContent = d.src;
+  document.querySelectorAll("#toggle button")
+    .forEach(b=>b.setAttribute("aria-pressed", b.dataset.l===l ? "true":"false"));
+}
+
+$("toggle").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  const l = b.dataset.l;
+  try{ localStorage.setItem("mcd-lang", l); }catch(_){}
+  render(l);
+});
+
+let start = "es";
+try{ const s = localStorage.getItem("mcd-lang"); if(s && T[s]) start = s; }catch(_){}
+render(start);
+</script>
 
 </body>
 </html>
