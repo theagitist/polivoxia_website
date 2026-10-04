@@ -94,11 +94,6 @@
   .handout-head{margin:0 0 1.8rem;}
   .hoTitle{font-family:var(--disp);text-transform:uppercase;line-height:.95;
     font-size:clamp(1.7rem,7.5vw,2.6rem);margin:.15rem 0 0;}
-  .hoCtx{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--hint);margin:.5rem 0 0;}
-  .hoFields{display:flex;flex-wrap:wrap;gap:1rem 1.6rem;margin:1.4rem 0 .4rem;}
-  .hoFields .field{display:flex;align-items:baseline;gap:.6em;flex:1 1 42%;min-width:12ch;
-    font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
-  .hoFields .blank{flex:1 1 auto;border-bottom:1.5px solid var(--ink);min-width:5ch;height:1.15em;}
   .preg h2{font-family:var(--disp);font-weight:400;text-transform:uppercase;
     font-size:clamp(1.6rem,7vw,2.4rem);line-height:1;margin:0 0 1.2rem;}
   ol.preguntas{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.2rem;}
@@ -140,10 +135,6 @@
     .preg{break-before:page;page-break-before:always;border-top:0;margin-top:0;padding-top:0;}
     .handout-head{margin:0 0 1.6rem;padding-bottom:1.2rem;border-bottom:2px solid #000;}
     .hoTitle{font-size:27pt;}
-    .hoCtx{font-size:9.5pt;color:#000;}
-    .hoFields{gap:1rem 1.6rem;margin:1.3rem 0 0;}
-    .hoFields .field{font-size:10pt;}
-    .hoFields .blank{border-bottom:1px solid #000;height:1.4em;}
     .preg h2{font-size:24pt;margin:0 0 1.6rem;}
     ol.preguntas{gap:2.3rem;}
     ol.preguntas>li{padding-top:0;}
@@ -185,10 +176,7 @@
 
   <section class="preg">
     <div class="handout-head">
-      <p class="eyebrow" id="hoEyebrow"></p>
       <p class="hoTitle" id="hoTitle"></p>
-      <p class="hoCtx" id="hoCtx"></p>
-      <div class="hoFields" id="hoFields"></div>
     </div>
     <h2 id="pregH"></h2>
     <ol class="preguntas" id="preg"></ol>
@@ -227,10 +215,7 @@ const T = {
        <p><b>Aterrizaje en el presente.</b> Cerrar volviendo a la venta de los cuadros: ¿dónde cae hoy esa línea? El arte-NFT, la marca, el museo. La vanguardia que se vendió «por algunos francos» es ya nuestro mercado del arte.</p>
        <p>Lanzar las <b>preguntas de discusión</b> (página siguiente) y mostrar la <a href="/manifiesto_canibal/">pieza web</a>, donde el manifiesto se devora a sí mismo al hacer scroll.</p>`}
     ],
-    hoEyebrow:"Hoja de discusión · para repartir",
     hoTitle:"Manifeste cannibale dada",
-    hoCtx:"Francis Picabia, 1920 · pieza performática dadá · SPAN 550B",
-    fields:["Nombre","Fecha","Curso"],
     pregH:"Preguntas de discusión (cierre)",
     preg:[
       `Si Dadá «no es nada, nada, nada», ¿por qué necesita al público de pie? ¿Puede una antivanguardia negarlo todo sin volverse ritual, es decir, otro himno más?`,
@@ -268,10 +253,7 @@ Licencia CC BY-NC-SA 4.0 (atribución · no comercial · compartir igual): creat
        <p><b>Atterrissage dans le présent.</b> Clore en revenant à la vente des tableaux : où tombe cette ligne aujourd’hui ? L’art-NFT, la marque, le musée. L’avant-garde qui s’est vendue « pour quelques francs », c’est déjà notre marché de l’art.</p>
        <p>Lancer les <b>questions de discussion</b> (page suivante) et montrer la <a href="/manifiesto_canibal/">pièce web</a>, où le manifeste se dévore lui-même au défilement.</p>`}
     ],
-    hoEyebrow:"Feuille de discussion · à distribuer",
     hoTitle:"Manifeste cannibale dada",
-    hoCtx:"Francis Picabia, 1920 · pièce performative dada · SPAN 550B",
-    fields:["Nom","Date","Cours"],
     pregH:"Questions de discussion (clôture)",
     preg:[
       `Si Dada « n’est rien, rien, rien », pourquoi a-t-il besoin d’un public debout ? Une anti-avant-garde peut-elle tout nier sans devenir un rituel, c’est-à-dire un hymne de plus ?`,
@@ -309,10 +291,7 @@ Licence CC BY-NC-SA 4.0 (attribution · non commercial · partage à l’identiq
        <p><b>Landing in the present.</b> Close by returning to the sale of the paintings: where does that line fall today? NFT-art, the brand, the museum. The avant-garde that sold itself “for a few francs” is already our art market.</p>
        <p>Pose the <b>discussion questions</b> (next page) and show the <a href="/manifiesto_canibal/">web piece</a>, where the manifesto devours itself as you scroll.</p>`}
     ],
-    hoEyebrow:"Discussion handout · to hand out",
     hoTitle:"Manifeste cannibale dada",
-    hoCtx:"Francis Picabia, 1920 · Dada performance piece · SPAN 550B",
-    fields:["Name","Date","Course"],
     pregH:"Discussion questions (closing)",
     preg:[
       `If Dada “is nothing, nothing, nothing,” why does it need the audience on its feet? Can an anti-avant-garde negate everything without turning into a ritual, that is, just one more anthem?`,
@@ -342,15 +321,11 @@ function render(l){
   $("guion").innerHTML = d.steps.map((s,i)=>
     '<li><div class="num">'+(i+1)+'</div><div class="step">'
     +'<p class="time">'+s.time+'</p><h3>'+s.h+'</h3>'+s.body+'</div></li>').join("");
-  $("hoEyebrow").textContent = d.hoEyebrow;
   $("hoTitle").textContent = d.hoTitle;
-  $("hoCtx").textContent = d.hoCtx;
-  $("hoFields").innerHTML = d.fields.map(f=>
-    '<span class="field">'+f+' <span class="blank"></span></span>').join("");
   $("pregH").textContent = d.pregH;
   $("preg").innerHTML = d.preg.map((q,i)=>
     '<li><span class="qn">'+pad(i+1)+'</span><p>'+q+'</p></li>').join("");
-  const v = "?v=20261004d"; // bump when the PDFs are regenerated (Cloudflare caches them 30d; can't purge from here)
+  const v = "?v=20261004e"; // bump when the PDFs are regenerated (Cloudflare caches them 30d; can't purge from here)
   $("dl").innerHTML = d.dl
     + ' <a href="guion-es.pdf'+v+'" target="_blank" rel="noopener">ES</a>'
     + ' · <a href="guion-fr.pdf'+v+'" target="_blank" rel="noopener">FR</a>'
