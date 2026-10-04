@@ -38,7 +38,9 @@
 
   /* the mouth — the jaw of DADÁ, where the text gets digested */
   #mouth{position:fixed;left:0;right:0;top:20%;z-index:5;pointer-events:none;
-    display:flex;align-items:center;}
+    display:flex;align-items:center;transition:opacity .4s ease;}
+  /* once the whole manifesto is eaten, the jaw is spent and leaves the void alone */
+  #mouth.spent{opacity:0;}
   /* the lip: a red line with a row of downward fangs hanging under it */
   #mouth .lip{flex:1;height:3px;background:var(--red);position:relative;}
   #mouth .lip::after{content:"";position:absolute;left:0;right:0;top:3px;height:8px;
@@ -342,6 +344,7 @@ function clap(){
 function wire(){
   if(mouth) mouth.disconnect();
   eaten = 0; if(counter) counter.textContent = "0";
+  if(mouthEl) mouthEl.classList.remove("spent");
   mouth = new IntersectionObserver(entries=>{
     for(const e of entries){
       if(e.isIntersecting) continue;
@@ -383,6 +386,7 @@ function render(l){
   document.querySelectorAll("#toggle button")
     .forEach(b=>b.setAttribute("aria-pressed", b.dataset.l===l ? "true":"false"));
   wire();
+  updateSpent();
 }
 
 /* ---- background audio (opt-in; swells as you descend into the void) ---- */
@@ -393,21 +397,35 @@ function soundLabel(){ sbtn.textContent = (soundOn?"● ":"○ ") + T[curLang].s
 function bedVol(){
   const h = document.documentElement.scrollHeight - innerHeight;
   const p = h > 0 ? Math.min(1, Math.max(0, scrollY / h)) : 0;
-  return 0.18 + 0.62 * p;
+  return 0.15 + 0.45 * p; // leave headroom so the bite SFX cuts through the bed
 }
 
 /* ---- synthesized bite SFX (no audio file): a short descending blip + a dry
    "swallow", pitched lower the emptier the page gets. Rides the sound toggle. ---- */
-let actx, master, noiseBuf, lastBite = 0;
+let actx, master, shaper, noiseBuf, lastBite = 0;
+// crunch: a waveshaper the bites are driven into for grit
+function distCurve(k){
+  const n = 256, c = new Float32Array(n);
+  for(let i=0;i<n;i++){ const x = i*2/n - 1; c[i] = (3+k)*x*20*Math.PI/180 / (Math.PI + k*Math.abs(x)); }
+  return c;
+}
 function ensureAudio(){
-  if(actx){ if(actx.state === "suspended") actx.resume(); return; }
-  const AC = window.AudioContext || window.webkitAudioContext;
-  if(!AC) return;
-  actx = new AC();
-  master = actx.createGain(); master.gain.value = 0.55; master.connect(actx.destination);
-  noiseBuf = actx.createBuffer(1, Math.ceil(actx.sampleRate * 0.12), actx.sampleRate);
-  const d = noiseBuf.getChannelData(0);
-  for(let i=0;i<d.length;i++) d[i] = Math.random()*2 - 1;
+  if(!actx){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return;
+    actx = new AC();
+    master = actx.createGain(); master.gain.value = 0.5; master.connect(actx.destination);
+    shaper = actx.createWaveShaper(); shaper.curve = distCurve(50); shaper.oversample = "4x";
+    shaper.connect(master);
+    noiseBuf = actx.createBuffer(1, Math.ceil(actx.sampleRate * 0.12), actx.sampleRate);
+    const d = noiseBuf.getChannelData(0);
+    let v = 0, hold = 0;                 // sample-and-hold + random gaps = gravel, not hiss
+    for(let i=0;i<d.length;i++){
+      if(hold<=0){ v = Math.random()<0.6 ? Math.random()*2-1 : 0; hold = 2 + (Math.random()*14|0); }
+      d[i] = v; hold--;
+    }
+  }
+  if(actx.state === "suspended") actx.resume(); // always resume in the gesture, incl. first create
 }
 function playBite(){
   if(!soundOn || !actx) return;
@@ -415,23 +433,26 @@ function playBite(){
   if(now - lastBite < 0.05) return; // don't stack into mush on a fast scroll
   lastBite = now;
   const depth = total ? eaten/total : 0;       // page empties -> pitch sinks toward the void
-  const base = 200 - 110*depth;
-  const osc = actx.createOscillator(); osc.type = "triangle";
-  osc.frequency.setValueAtTime(base*1.6, now);
-  osc.frequency.exponentialRampToValueAtTime(base*0.5, now+0.14);
-  const og = actx.createGain();
-  og.gain.setValueAtTime(0.0001, now);
-  og.gain.exponentialRampToValueAtTime(0.085, now+0.008);
-  og.gain.exponentialRampToValueAtTime(0.0001, now+0.16);
-  osc.connect(og).connect(master);
-  osc.start(now); osc.stop(now+0.18);
+  // CRUNCH: a noise burst through a resonant bandpass sweeping high->low (the chew),
+  // slammed into the shaper. The sweep + distortion is what reads as gritty, not tonal.
   const nz = actx.createBufferSource(); nz.buffer = noiseBuf;
-  const lp = actx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 820 - 360*depth;
+  nz.playbackRate.value = 1 + Math.random()*0.4;
+  const bp = actx.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = 1.5;
+  bp.frequency.setValueAtTime(4200 - 1600*depth, now);
+  bp.frequency.exponentialRampToValueAtTime(1100 - 400*depth, now+0.09);
   const ng = actx.createGain();
-  ng.gain.setValueAtTime(0.055, now);
-  ng.gain.exponentialRampToValueAtTime(0.0001, now+0.09);
-  nz.connect(lp).connect(ng).connect(master);
-  nz.start(now); nz.stop(now+0.1);
+  ng.gain.setValueAtTime(1.0, now);
+  ng.gain.exponentialRampToValueAtTime(0.0001, now+0.1);
+  nz.connect(bp).connect(ng).connect(shaper);
+  nz.start(now); nz.stop(now+0.11);
+  // a short low thud for body (not a sustained boop); pitch sinks toward the void
+  const osc = actx.createOscillator(); osc.type = "square";
+  osc.frequency.setValueAtTime(75 - 30*depth, now);
+  const og = actx.createGain();
+  og.gain.setValueAtTime(0.3, now);
+  og.gain.exponentialRampToValueAtTime(0.0001, now+0.04);
+  osc.connect(og).connect(shaper);
+  osc.start(now); osc.stop(now+0.05);
 }
 
 sbtn.addEventListener("click", ()=>{
@@ -441,7 +462,15 @@ sbtn.addEventListener("click", ()=>{
   if(soundOn){ ensureAudio(); bed.volume = bedVol(); bed.play().catch(()=>{}); }
   else bed.pause();
 });
-addEventListener("scroll", ()=>{ if(soundOn) bed.volume = bedVol(); }, {passive:true});
+// the jaw is spent once the whole manifesto has scrolled above the mouth line
+// (geometry, not the eaten count: fast scrolls make the IntersectionObserver skip a few words)
+function updateSpent(){
+  if(!mouthEl) return;
+  const line = innerHeight * 0.20; // matches #mouth top:20%
+  mouthEl.classList.toggle("spent", $("stage").getBoundingClientRect().bottom < line);
+}
+addEventListener("scroll", ()=>{ if(soundOn) bed.volume = bedVol(); updateSpent(); }, {passive:true});
+addEventListener("resize", updateSpent, {passive:true});
 // only reveal the control (and the credit) once the audio file actually exists
 fetch("audio/canibal-bed.mp3", {method:"HEAD"}).then(r=>{
   if(r.ok){ sbtn.hidden = false; $("audiocredit").hidden = false; }
