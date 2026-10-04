@@ -274,7 +274,9 @@ function render(l){
   $("preg").innerHTML = d.preg.map((q,i)=>
     '<li><span class="qn">'+pad(i+1)+'</span><p>'+q+'</p></li>').join("");
   $("dl").innerHTML = d.dl
-    + ' <a href="guion-es.pdf">ES</a> · <a href="guion-fr.pdf">FR</a> · <a href="guion-en.pdf">EN</a>';
+    + ' <a href="guion-es.pdf" target="_blank" rel="noopener">ES</a>'
+    + ' · <a href="guion-fr.pdf" target="_blank" rel="noopener">FR</a>'
+    + ' · <a href="guion-en.pdf" target="_blank" rel="noopener">EN</a>';
   $("src").textContent = d.src;
   document.querySelectorAll("#toggle button")
     .forEach(b=>b.setAttribute("aria-pressed", b.dataset.l===l ? "true":"false"));
