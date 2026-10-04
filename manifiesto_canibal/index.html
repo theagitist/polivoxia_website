@@ -324,7 +324,7 @@ function words(t){
 
 const $ = id => document.getElementById(id);
 const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
-let mouth, eaten = 0;
+let mouth, eaten = 0, total = 0;
 const counter = document.querySelector("#mouth .n");
 const mouthEl = document.getElementById("mouth");
 // the jaw claps shut on each bite; time-gated so a fast scroll reads as rapid chomping, not a blur
@@ -351,7 +351,7 @@ function wire(){
       if(bite === el.classList.contains("eaten")) continue; // no state change
       el.classList.toggle("eaten", bite);
       eaten += bite ? 1 : -1;
-      if(bite) clap();
+      if(bite){ clap(); playBite(); }
       if(counter) counter.textContent = eaten;
     }
   }, {rootMargin:"-20% 0px -79% 0px", threshold:0});
@@ -372,6 +372,7 @@ function render(l){
   $("stage").innerHTML = d.stanzas
     .map(s=>'<p class="st '+s.k+'">'+words(s.t)+'</p>').join("");
   const nWords = document.querySelectorAll("#stage .w").length;
+  total = nWords;
   $("tally").innerHTML = d.tally.replace("{n}", '<b class="tnum">'+nWords+'</b>');
   $("punchlabel").textContent = d.punchlabel;
   $("punch").innerHTML = d.punch;
@@ -394,11 +395,50 @@ function bedVol(){
   const p = h > 0 ? Math.min(1, Math.max(0, scrollY / h)) : 0;
   return 0.18 + 0.62 * p;
 }
+
+/* ---- synthesized bite SFX (no audio file): a short descending blip + a dry
+   "swallow", pitched lower the emptier the page gets. Rides the sound toggle. ---- */
+let actx, master, noiseBuf, lastBite = 0;
+function ensureAudio(){
+  if(actx){ if(actx.state === "suspended") actx.resume(); return; }
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if(!AC) return;
+  actx = new AC();
+  master = actx.createGain(); master.gain.value = 0.55; master.connect(actx.destination);
+  noiseBuf = actx.createBuffer(1, Math.ceil(actx.sampleRate * 0.12), actx.sampleRate);
+  const d = noiseBuf.getChannelData(0);
+  for(let i=0;i<d.length;i++) d[i] = Math.random()*2 - 1;
+}
+function playBite(){
+  if(!soundOn || !actx) return;
+  const now = actx.currentTime;
+  if(now - lastBite < 0.05) return; // don't stack into mush on a fast scroll
+  lastBite = now;
+  const depth = total ? eaten/total : 0;       // page empties -> pitch sinks toward the void
+  const base = 200 - 110*depth;
+  const osc = actx.createOscillator(); osc.type = "triangle";
+  osc.frequency.setValueAtTime(base*1.6, now);
+  osc.frequency.exponentialRampToValueAtTime(base*0.5, now+0.14);
+  const og = actx.createGain();
+  og.gain.setValueAtTime(0.0001, now);
+  og.gain.exponentialRampToValueAtTime(0.085, now+0.008);
+  og.gain.exponentialRampToValueAtTime(0.0001, now+0.16);
+  osc.connect(og).connect(master);
+  osc.start(now); osc.stop(now+0.18);
+  const nz = actx.createBufferSource(); nz.buffer = noiseBuf;
+  const lp = actx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 820 - 360*depth;
+  const ng = actx.createGain();
+  ng.gain.setValueAtTime(0.055, now);
+  ng.gain.exponentialRampToValueAtTime(0.0001, now+0.09);
+  nz.connect(lp).connect(ng).connect(master);
+  nz.start(now); nz.stop(now+0.1);
+}
+
 sbtn.addEventListener("click", ()=>{
   soundOn = !soundOn;
   sbtn.setAttribute("aria-pressed", soundOn);
   soundLabel();
-  if(soundOn){ bed.volume = bedVol(); bed.play().catch(()=>{}); }
+  if(soundOn){ ensureAudio(); bed.volume = bedVol(); bed.play().catch(()=>{}); }
   else bed.pause();
 });
 addEventListener("scroll", ()=>{ if(soundOn) bed.volume = bedVol(); }, {passive:true});
