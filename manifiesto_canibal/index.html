@@ -68,6 +68,10 @@
     padding:7px 10px;min-height:36px;cursor:pointer;white-space:nowrap;}
   .soundbtn[aria-pressed="true"]{background:var(--red);color:var(--paper);border-color:var(--red);}
   .soundbtn:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+  .fsbtn{font-family:var(--mono);font-size:15px;line-height:1;background:transparent;color:var(--ink);
+    border:1.5px solid var(--ink);padding:0 9px;min-height:36px;min-width:36px;cursor:pointer;}
+  .fsbtn[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+  .fsbtn:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
 
   /* hero */
   .hero{padding-block:14vh 8vh;}
@@ -140,6 +144,7 @@
   <div class="bar">
     <span class="brand">Picabia · 1920</span>
     <div class="navr">
+      <button id="fsbtn" class="fsbtn" aria-pressed="false" aria-label="Pantalla completa / Fullscreen" title="Pantalla completa / Fullscreen" hidden>⤢</button>
       <button id="soundbtn" class="soundbtn" aria-pressed="false" hidden></button>
       <div class="toggle" id="toggle" role="group" aria-label="Idioma / Language">
         <button data-l="es" aria-pressed="true">ES</button>
@@ -373,6 +378,20 @@ $("toggle").addEventListener("click", e=>{
 let start = "es";
 try{ const s = localStorage.getItem("mcd-lang"); if(s && T[s]) start = s; }catch(_){}
 render(start);
+
+const fsbtn = document.getElementById("fsbtn");
+if(fsbtn && document.documentElement.requestFullscreen){
+  fsbtn.hidden = false;
+  fsbtn.addEventListener("click", ()=>{
+    if(document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen().catch(()=>{});
+  });
+  document.addEventListener("fullscreenchange", ()=>{
+    const on = !!document.fullscreenElement;
+    fsbtn.setAttribute("aria-pressed", on);
+    fsbtn.textContent = on ? "⤡" : "⤢";
+  });
+}
 </script>
 
 </body>

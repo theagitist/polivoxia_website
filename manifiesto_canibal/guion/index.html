@@ -56,6 +56,10 @@
     background:transparent;color:var(--ink);border:0;padding:8px 11px;min-height:36px;cursor:pointer;}
   .toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
   .toggle button:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+  .fsbtn{font-family:var(--mono);font-size:15px;line-height:1;background:transparent;color:var(--ink);
+    border:1.5px solid var(--ink);padding:0 9px;min-height:36px;min-width:36px;cursor:pointer;}
+  .fsbtn[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+  .fsbtn:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
 
   .head{padding-block:9vh 2.6rem;}
   .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
@@ -137,6 +141,7 @@
       <button class="printbtn" id="printbtn" type="button" onclick="window.print()"></button>
       <a id="preslink" href="/manifiesto_canibal/presentacion/"></a>
       <a id="manilink" href="/manifiesto_canibal/"></a>
+      <button id="fsbtn" class="fsbtn" aria-pressed="false" aria-label="Pantalla completa / Fullscreen" title="Pantalla completa / Fullscreen" hidden>⤢</button>
       <div class="toggle" id="toggle" role="group" aria-label="Idioma / Language">
         <button data-l="es" aria-pressed="true">ES</button>
         <button data-l="fr" aria-pressed="false">FR</button>
@@ -273,10 +278,11 @@ function render(l){
   $("pregH").textContent = d.pregH;
   $("preg").innerHTML = d.preg.map((q,i)=>
     '<li><span class="qn">'+pad(i+1)+'</span><p>'+q+'</p></li>').join("");
+  const v = "?v=20261004b"; // bump when the PDFs are regenerated (Cloudflare caches them 30d; can't purge from here)
   $("dl").innerHTML = d.dl
-    + ' <a href="guion-es.pdf" target="_blank" rel="noopener">ES</a>'
-    + ' · <a href="guion-fr.pdf" target="_blank" rel="noopener">FR</a>'
-    + ' · <a href="guion-en.pdf" target="_blank" rel="noopener">EN</a>';
+    + ' <a href="guion-es.pdf'+v+'" target="_blank" rel="noopener">ES</a>'
+    + ' · <a href="guion-fr.pdf'+v+'" target="_blank" rel="noopener">FR</a>'
+    + ' · <a href="guion-en.pdf'+v+'" target="_blank" rel="noopener">EN</a>';
   $("src").textContent = d.src;
   document.querySelectorAll("#toggle button")
     .forEach(b=>b.setAttribute("aria-pressed", b.dataset.l===l ? "true":"false"));
@@ -293,6 +299,20 @@ let start = "es";
 try{ const s = localStorage.getItem("mcd-lang"); if(s && T[s]) start = s; }catch(_){}
 const qp = new URLSearchParams(location.search).get("lang"); if(qp && T[qp]) start = qp; // for the per-language PDF render
 render(start);
+
+const fsbtn = document.getElementById("fsbtn");
+if(fsbtn && document.documentElement.requestFullscreen){
+  fsbtn.hidden = false;
+  fsbtn.addEventListener("click", ()=>{
+    if(document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen().catch(()=>{});
+  });
+  document.addEventListener("fullscreenchange", ()=>{
+    const on = !!document.fullscreenElement;
+    fsbtn.setAttribute("aria-pressed", on);
+    fsbtn.textContent = on ? "⤡" : "⤢";
+  });
+}
 </script>
 
 </body>
