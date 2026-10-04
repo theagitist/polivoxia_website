@@ -96,7 +96,8 @@
   .st.beat{font-family:var(--disp);text-transform:uppercase;color:var(--red);
     font-size:clamp(1.6rem,8vw,2.8rem);letter-spacing:.02em;margin:.5em 0;}
 
-  .w{display:inline-block;transition:opacity .3s ease,transform .3s ease,color .3s;}
+  .w{display:inline-block;
+    transition:opacity .3s ease,transform .3s ease,color .3s,font-size .4s ease .32s;}
   .w.dada{font-family:var(--disp);color:var(--red);text-transform:uppercase;}
   .w.nihil{font-family:var(--disp);color:var(--red);text-transform:uppercase;}
   .litany .w.nihil{font-size:1.15em;}
@@ -107,12 +108,20 @@
     50%{color:var(--red);transform:scale(.82) rotate(3deg) skewX(-6deg);}
     100%{opacity:0;color:var(--red);transform:translateY(-1.5em) scale(.12) rotate(-16deg);filter:blur(1.5px);}
   }
-  .w.eaten{animation:chomp .5s cubic-bezier(.55,0,.9,.25) forwards;}
+  /* eaten: bite down, fly into the jaw, then the gap closes so the text visibly empties */
+  .w.eaten{animation:chomp .5s cubic-bezier(.55,0,.9,.25) forwards;font-size:0!important;}
 
   /* the void + the surviving line */
   .void{min-height:62vh;display:flex;align-items:flex-end;}
   .void p{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
     color:var(--faint);margin:0;}
+  /* the payoff: input tally vs. output (nada) */
+  .tally{font-family:var(--body);font-size:clamp(1.2rem,4.8vw,1.7rem);line-height:1.35;
+    margin:1.2rem 0 2.6rem;text-wrap:pretty;}
+  .tally b{color:var(--red);font-weight:600;}
+  .tally .tnum{font-variant-numeric:tabular-nums;}
+  .punchlabel{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--red);margin:0 0 .7rem;}
   .punch{font-family:var(--body);font-size:clamp(1.4rem,6vw,2.1rem);line-height:1.32;
     border-top:2px solid var(--red);padding-top:1.4rem;margin:0 0 8vh;}
   .punch em{font-style:normal;color:var(--red);}
@@ -130,13 +139,13 @@
   @media (prefers-reduced-motion:reduce){
     #mouth b{animation:none;}
     .w{transition:opacity .25s ease,color .25s;}
-    .w.eaten{animation:none;opacity:.12;color:var(--red);text-decoration:line-through;
-      text-decoration-color:var(--red);text-decoration-thickness:2px;}
+    .w.eaten{animation:none;opacity:.18;color:var(--red);font-size:inherit!important;
+      text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px;}
   }
 </style>
 </head>
 <body>
-<div id="mouth" aria-hidden="true"><b>&#9660;&nbsp;<span class="n">0</span>&nbsp;<span class="lbl"></span></b><span class="lip"></span></div>
+<div id="mouth" aria-hidden="true"><b><span class="inlbl"></span>&nbsp;<span class="n">0</span>&nbsp;&#8594;&nbsp;<span class="out"></span></b><span class="lip"></span></div>
 
 <audio id="bed" loop preload="none"><source src="audio/canibal-bed.mp3" type="audio/mpeg"></audio>
 
@@ -166,6 +175,8 @@
   <section id="stage" aria-live="polite"></section>
 
   <section class="void"><p id="voidlabel"></p></section>
+  <p class="tally" id="tally"></p>
+  <p class="punchlabel" id="punchlabel"></p>
   <p class="punch" id="punch"></p>
 
   <footer class="coda">
@@ -184,8 +195,10 @@ const T = {
     cue:"desplázate y míralo devorarse",
     sound:"sonido",
     audio:"Audio: montaje propio no comercial (§29.21 CDA) a partir de lecturas de «Tous les cancers» (SoundCloud) y Acce Pointtopoint (YouTube), cortadas y tratadas.",
-    mouth:"digeridas · nada",
+    in:"comido", out:"nada",
     void:"nada · nada · nada",
+    tally:'Se comió {n} palabras del manifiesto. Produjo: <b>nada</b>.',
+    punchlabel:"Lo único que sale:",
     stanzas:[
       {k:"open", t:"Son todos ustedes acusados; levántense. El orador no puede hablarles si no están de pie."},
       {k:"line", t:"De pie como ante La Marsellesa."},
@@ -219,8 +232,10 @@ const T = {
     cue:"défile et regarde-le se dévorer",
     sound:"son",
     audio:"Audio : montage personnel non commercial (art. 29.21 LDA) à partir de lectures de « Tous les cancers » (SoundCloud) et Acce Pointtopoint (YouTube), coupées et retravaillées.",
-    mouth:"avalés · rien",
+    in:"avalé", out:"rien",
     void:"rien · rien · rien",
+    tally:'Il a avalé {n} mots du manifeste. Il a produit : <b>rien</b>.',
+    punchlabel:"La seule chose qui sort :",
     stanzas:[
       {k:"open", t:"Vous êtes tous accusés; levez-vous. L’orateur ne peut vous parler que si vous êtes debout."},
       {k:"line", t:"Debout comme pour la Marseillaise,"},
@@ -254,8 +269,10 @@ const T = {
     cue:"scroll and watch it devour itself",
     sound:"sound",
     audio:"Audio: non-commercial personal remix (s. 29.21 Copyright Act) from readings by “Tous les cancers” (SoundCloud) and Acce Pointtopoint (YouTube), cut and processed.",
-    mouth:"eaten · nothing",
+    in:"eaten", out:"nothing",
     void:"nothing · nothing · nothing",
+    tally:'It ate {n} words of the manifesto. It produced: <b>nothing</b>.',
+    punchlabel:"The only thing that comes out:",
     stanzas:[
       {k:"open", t:"You are all accused; stand up. The speaker cannot address you unless you are standing."},
       {k:"line", t:"Stand, as for the Marseillaise,"},
@@ -331,9 +348,13 @@ function render(l){
   $("thesis").textContent = d.thesis;
   $("cue").textContent = d.cue;
   $("voidlabel").textContent = d.void;
-  document.querySelector("#mouth .lbl").textContent = d.mouth;
+  document.querySelector("#mouth .inlbl").textContent = d.in;
+  document.querySelector("#mouth .out").textContent = d.out;
   $("stage").innerHTML = d.stanzas
     .map(s=>'<p class="st '+s.k+'">'+words(s.t)+'</p>').join("");
+  const nWords = document.querySelectorAll("#stage .w").length;
+  $("tally").innerHTML = d.tally.replace("{n}", '<b class="tnum">'+nWords+'</b>');
+  $("punchlabel").textContent = d.punchlabel;
   $("punch").innerHTML = d.punch;
   $("coda").innerHTML = d.coda;
   $("source").textContent = d.source;
