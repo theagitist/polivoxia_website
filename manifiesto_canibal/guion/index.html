@@ -82,6 +82,8 @@
     color:var(--hint);margin:0 0 .3rem;}
   ol.guion .step p{font-size:1.08rem;margin:0 0 .7rem;text-wrap:pretty;}
   .red{color:var(--red);} b{font-weight:600;} i,em{font-style:italic;}
+  .arrow{font-family:var(--disp);text-transform:uppercase;color:var(--red);letter-spacing:.02em;
+    font-size:clamp(1.1rem,4.6vw,1.6rem);line-height:1.04;margin:.9rem 0 .7rem;}
 
   blockquote{margin:1rem 0;padding:.7rem 1rem;border-left:4px solid var(--red);
     background:color-mix(in srgb,var(--red) 7%,transparent);
@@ -89,6 +91,14 @@
     font-size:clamp(1.15rem,5vw,1.6rem);line-height:1.08;}
 
   .preg{margin-top:2.6rem;border-top:1.5px solid var(--ink);padding-top:2.2rem;break-inside:avoid;}
+  .handout-head{margin:0 0 1.8rem;}
+  .hoTitle{font-family:var(--disp);text-transform:uppercase;line-height:.95;
+    font-size:clamp(1.7rem,7.5vw,2.6rem);margin:.15rem 0 0;}
+  .hoCtx{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--hint);margin:.5rem 0 0;}
+  .hoFields{display:flex;flex-wrap:wrap;gap:1rem 1.6rem;margin:1.4rem 0 .4rem;}
+  .hoFields .field{display:flex;align-items:baseline;gap:.6em;flex:1 1 42%;min-width:12ch;
+    font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
+  .hoFields .blank{flex:1 1 auto;border-bottom:1.5px solid var(--ink);min-width:5ch;height:1.15em;}
   .preg h2{font-family:var(--disp);font-weight:400;text-transform:uppercase;
     font-size:clamp(1.6rem,7vw,2.4rem);line-height:1;margin:0 0 1.2rem;}
   ol.preguntas{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.2rem;}
@@ -108,7 +118,7 @@
     :root{--paper:#fff;--ink:#000;--red:#000;--hint:#000;--rule:#999;--faint:#999;}
     html{color-scheme:light;}
     header,.printbtn,.toggle,.navr,.dl{display:none!important;}
-    body{background:#fff;color:#000;font-size:12pt;line-height:1.42;}
+    body{background:#fff;color:#000;font-size:12.5pt;line-height:1.5;}
     .wrap{max-width:none;padding:0;}
     .head{padding:0 0 1rem;}
     .eyebrow{font-size:10.5pt;margin:0 0 .6rem;}
@@ -123,17 +133,24 @@
     ol.guion .num{font-size:37pt;}
     ol.guion .step h3{font-size:17.5pt;margin:0 0 .55rem;}
     .time{font-size:10.5pt;margin:0 0 .38rem;}
-    ol.guion .step p{font-size:12pt;margin:0 0 .65rem;}
+    ol.guion .step p{font-size:12.5pt;margin:0 0 .7rem;}
+    .arrow{font-size:16pt;margin:.8rem 0 .6rem;}
     a{color:#000;text-decoration:none;}
-    /* script on page 1, questions start page 2 */
+    /* last page = a printable discussion handout */
     .preg{break-before:page;page-break-before:always;border-top:0;margin-top:0;padding-top:0;}
-    .preg h2{font-size:34pt;margin:0 0 2.8rem;}
-    ol.preguntas{gap:3.4rem;}
+    .handout-head{margin:0 0 1.6rem;padding-bottom:1.2rem;border-bottom:2px solid #000;}
+    .hoTitle{font-size:27pt;}
+    .hoCtx{font-size:9.5pt;color:#000;}
+    .hoFields{gap:1rem 1.6rem;margin:1.3rem 0 0;}
+    .hoFields .field{font-size:10pt;}
+    .hoFields .blank{border-bottom:1px solid #000;height:1.4em;}
+    .preg h2{font-size:24pt;margin:0 0 1.6rem;}
+    ol.preguntas{gap:2.3rem;}
     ol.preguntas>li{padding-top:0;}
-    ol.preguntas .qn{font-size:19.5pt;}
-    ol.preguntas p{font-size:19.5pt;line-height:1.55;}
-    .coda{margin-top:3.4rem;padding:0;border-top:1px solid #000;padding-top:1.1rem;break-inside:avoid;}
-    .coda .src{font-size:10pt;line-height:1.6;color:#000;}
+    ol.preguntas .qn{font-size:15pt;}
+    ol.preguntas p{font-size:15pt;line-height:1.5;}
+    .coda{margin-top:2.2rem;padding:0;border-top:1px solid #000;padding-top:1rem;break-inside:avoid;}
+    .coda .src{font-size:9.5pt;line-height:1.55;color:#000;}
     @page{margin:1.1cm;}
   }
 </style>
@@ -167,6 +184,12 @@
   <ol class="guion" id="guion"></ol>
 
   <section class="preg">
+    <div class="handout-head">
+      <p class="eyebrow" id="hoEyebrow"></p>
+      <p class="hoTitle" id="hoTitle"></p>
+      <p class="hoCtx" id="hoCtx"></p>
+      <div class="hoFields" id="hoFields"></div>
+    </div>
     <h2 id="pregH"></h2>
     <ol class="preguntas" id="preg"></ol>
   </section>
@@ -184,18 +207,30 @@ const T = {
     preslink:"La presentación ↗", manilink:"El manifiesto ↗",
     eyebrow:"SPAN 550B · Semana 5 · Guion",
     title:"El guion",
-    sub:"≈ 8–10 min · tres tiempos · para leer en escena",
-    note:`Mi hoja de ruta para presentar el <i>Manifeste cannibale dada</i> de Picabia. No lo resumo: lo <b>reactivo como acontecimiento</b>, haciendo lo que el texto ordena. En <b class="red">negrita roja</b>, lo que leo en voz alta.`,
+    sub:"≈ 8–10 min · tres tiempos · actividad reproducible",
+    note:`Protocolo reproducible para reactivar el <i>Manifeste cannibale dada</i> de Picabia como acontecimiento en un seminario. En vez de resumir el texto, quien facilita <b>hace lo que el texto ordena</b>. Cualquiera puede ejecutarlo. En <b class="red">rojo y negrita</b>, lo que se lee en voz alta.`,
     steps:[
-      {time:"1 · Apertura en personaje · reenactment · ~2 min", h:"Hago lo que el texto ordena",
-       body:`<p>Entro sin explicar nada y leo el arranque dando la orden:</p>
+      {time:"1 · Apertura en personaje · reenactment · ~2 min", h:"Hacer lo que el texto ordena",
+       body:`<p>Entrar sin explicar nada y leer el arranque como una orden:</p>
        <blockquote>«Son todos ustedes acusados; levántense. El orador no puede hablarles si no están de pie.»</blockquote>
-       <p>Hago que la clase <b>se ponga de pie</b> (de pie como ante La Marsellesa, ante la bandera, ante DADÁ…), leo a ritmo la parte de los himnos y los siento con «¿Se han sentado todos de nuevo? Tanto mejor, así me escuchan con más atención». Rompo el personaje.</p>`},
-      {time:"2 · La lectura · canibalismo → consumo · ~4 min", h:"Deshago lo que acaba de pasar",
-       body:`<p>El manifiesto los trató como público-mercancía («hacinados como ostras serias»). Recorro la letanía del <b class="red">nada</b> y aterrizo en la última línea (vender los cuadros): Dadá se autocaníbaliza. Monto el contraste con <b>Andrade / antropofagia</b> (digestión que transforma vs. digestión que anula) y lo conecto con el dinero, la muerte y la seriedad del texto.</p>`},
+       <p>Hacer que la clase <b>se ponga de pie</b> y leer la letanía del ponerse de pie: «de pie como ante La Marsellesa… ante el himno ruso… ante el <i>God save the King</i>… ante la bandera… en fin, de pie ante DADÁ». El texto equipara a Dadá con el himno y la bandera y, de paso, <b>acusa</b> al público: querer lo que sea «por esnobismo, siempre y cuando cueste caro».</p>
+       <p>Sentar a la clase con «¿Se han sentado todos de nuevo? Tanto mejor, así me escuchan con más atención» y <b>romper el personaje</b>. En dos minutos el público ya fue convertido en mercancía: eso es justo lo que se va a leer.</p>`},
+      {time:"2 · La lectura · canibalismo → consumo · ~5 min", h:"Deshago lo que acaba de pasar",
+       body:`<p><b>a) La cadena de equivalencias.</b> El manifiesto no argumenta: <b>encadena</b>. «Hacinados como ostras serias», y de la seriedad salta a la muerte («serios hasta la muerte»; «uno muere como un héroe o como un idiota, que es lo mismo»), de la muerte al dinero («sólo el dinero no muere, se va de viaje»), del dinero a Dios y al honor («el hombre que tiene dinero es un hombre honorable»), y del honor al cuerpo obsceno («el honor se compra y se vende como el culo… olerán peor que la mierda de vaca»). Seriedad = muerte = dinero = Dios = honor = mierda: toda la cultura burguesa reducida a una sola digestión.</p>
+       <p><b>b) La letanía del <span class="red">nada</span>.</b> Entonces Dadá se lo traga todo y no excreta nutriente: «no huele a nada, no es nada, nada, nada». Recorrer la lista (esperanzas, paraísos, ídolos, políticos, héroes, artistas, religiones) respondiendo <b class="red">nada</b> a cada una. Es canibalismo puro: consumir para <b>anular</b>, no para transformar.</p>
+       <p><b>c) El giro autocaníbal.</b> Y en la última línea Dadá se come su propia crítica: «silben, gríten, rómpanme la jeta… en tres meses, mis amigos y yo les venderemos nuestros cuadros por algunos francos». La antivanguardia que negó el dinero y la seriedad <b>vuelve al mercado</b>. La negación se hace mercancía: aquí el <b>canibalismo</b> se vuelve <b>consumo</b>.</p>
+       <p><b>d) El contraste: Andrade.</b> Comparar con el <i>Manifesto Antropófago</i> de Oswald de Andrade (1928): la antropofagia devora al colonizador para <b>metabolizarlo</b> y crear algo nuevo (el modernismo brasileño). Misma década, digestión opuesta: Picabia consume y no digiere; Andrade digiere para <b>transformar</b>.</p>
+       <p class="arrow">Canibalismo → Calibanismo → Antropofagia → Consumo</p>
+       <p>Ese es el arco del curso, y la última línea de Picabia es la bisagra hacia el <b>consumo</b>.</p>`},
       {time:"3 · Interacción + cierre · ~3 min", h:"Letanía en llamada y respuesta",
-       body:`<p>Yo digo el sustantivo («sus ídolos», «sus héroes», «sus artistas»…) y la clase responde <b class="red">«¡nada!»</b>. Cierro con las preguntas de discusión (abajo) y enseño la <a href="/manifiesto_canibal/">pieza web</a>, donde el manifiesto se devora a sí mismo.</p>`}
+       body:`<p><b>Llamada y respuesta.</b> Repetir la letanía, ahora con la clase: quien facilita dice el sustantivo («sus ídolos», «sus héroes», «sus artistas», «sus religiones») y todos responden <b class="red">«¡nada!»</b>. El aula <b>ejecuta</b> el vaciamiento en vez de escucharlo.</p>
+       <p><b>Aterrizaje en el presente.</b> Cerrar volviendo a la venta de los cuadros: ¿dónde cae hoy esa línea? El arte-NFT, la marca, el museo. La vanguardia que se vendió «por algunos francos» es ya nuestro mercado del arte.</p>
+       <p>Lanzar las <b>preguntas de discusión</b> (página siguiente) y mostrar la <a href="/manifiesto_canibal/">pieza web</a>, donde el manifiesto se devora a sí mismo al hacer scroll.</p>`}
     ],
+    hoEyebrow:"Hoja de discusión · para repartir",
+    hoTitle:"Manifeste cannibale dada",
+    hoCtx:"Francis Picabia, 1920 · pieza performática dadá · SPAN 550B",
+    fields:["Nombre","Fecha","Curso"],
     pregH:"Preguntas de discusión (cierre)",
     preg:[
       `Si Dadá «no es nada, nada, nada», ¿por qué necesita al público de pie? ¿Puede una antivanguardia negarlo todo sin volverse ritual, es decir, otro himno más?`,
@@ -204,7 +239,8 @@ const T = {
     ],
     src:`Francis Picabia, «Manifeste cannibale dada». Leído por André Breton en la 3.ª velada Dadá, Théâtre de l’Œuvre, París, 27 de marzo de 1920. Publicado en Dadaphone n.º 7.
 Oswald de Andrade, «Manifesto Antropófago», Revista de Antropofagia, São Paulo, 1928.
-Presentación de Adri M · SPAN 550B, UBC.`
+Actividad diseñada por Adri M · SPAN 550B, UBC.
+Licencia CC BY-NC-SA 4.0 (atribución · no comercial · compartir igual): creativecommons.org/licenses/by-nc-sa/4.0`
   },
 
   fr:{
@@ -212,18 +248,30 @@ Presentación de Adri M · SPAN 550B, UBC.`
     preslink:"La présentation ↗", manilink:"Le manifeste ↗",
     eyebrow:"SPAN 550B · Semaine 5 · Déroulé",
     title:"Le déroulé",
-    sub:"≈ 8–10 min · trois temps · à lire en scène",
-    note:`Ma feuille de route pour présenter le <i>Manifeste cannibale dada</i> de Picabia. Je ne le résume pas : je le <b>réactive comme événement</b>, en faisant ce que le texte ordonne. En <b class="red">gras rouge</b>, ce que je lis à voix haute.`,
+    sub:"≈ 8–10 min · trois temps · activité reproductible",
+    note:`Protocole reproductible pour réactiver le <i>Manifeste cannibale dada</i> de Picabia comme événement dans un séminaire. Au lieu de le résumer, la personne qui anime <b>fait ce que le texte ordonne</b>. N’importe qui peut l’exécuter. En <b class="red">rouge gras</b>, ce qui se lit à voix haute.`,
     steps:[
-      {time:"1 · Ouverture en personnage · reenactment · ~2 min", h:"Je fais ce que le texte ordonne",
-       body:`<p>J’entre sans rien expliquer et je lis l’ouverture en donnant l’ordre :</p>
+      {time:"1 · Ouverture en personnage · reenactment · ~2 min", h:"Faire ce que le texte ordonne",
+       body:`<p>Entrer sans rien expliquer et lire l’ouverture comme un ordre :</p>
        <blockquote>« Vous êtes tous accusés ; levez-vous. L’orateur ne peut vous parler que si vous êtes debout. »</blockquote>
-       <p>Je fais <b>lever la classe</b> (debout comme pour la Marseillaise, devant le drapeau, devant DADA…), je lis au rythme le passage des hymnes et je les rassois avec « Vous vous êtes tous rassis ? Tant mieux, comme cela vous allez m’écouter avec plus d’attention ». Je romps le personnage.</p>`},
-      {time:"2 · La lecture · cannibalisme → consommation · ~4 min", h:"Je défais ce qui vient de se passer",
-       body:`<p>Le manifeste les a traités comme un public-marchandise (« parqués comme des huîtres sérieuses »). Je parcours la litanie du <b class="red">rien</b> et j’atterris sur la dernière ligne (vendre les tableaux) : Dada s’autocannibalise. Je monte le contraste avec <b>Andrade / anthropophagie</b> (digestion qui transforme vs. digestion qui annule) et je le relie à l’argent, à la mort et au sérieux du texte.</p>`},
+       <p>Faire <b>lever la classe</b> et lire la litanie du debout : « debout comme pour la Marseillaise… pour l’hymne russe… pour le <i>God save the King</i>… devant le drapeau… enfin debout devant DADA ». Le texte met Dada au rang de l’hymne et du drapeau et, au passage, <b>accuse</b> le public : « tout aimer par snobisme, du moment que cela coûte cher ».</p>
+       <p>Rasseoir la classe avec « Vous vous êtes tous rassis ? Tant mieux, comme cela vous allez m’écouter avec plus d’attention » et <b>rompre le personnage</b>. En deux minutes le public a déjà été transformé en public-marchandise : c’est exactement cela que l’on va lire.</p>`},
+      {time:"2 · La lecture · cannibalisme → consommation · ~5 min", h:"Je défais ce qui vient de se passer",
+       body:`<p><b>a) La chaîne d’équivalences.</b> Le manifeste n’argumente pas : il <b>enchaîne</b>. « Parqués comme des huîtres sérieuses », puis du sérieux à la mort (« sérieux jusqu’à la mort » ; « on meurt en héros ou en idiot, c’est la même chose »), de la mort à l’argent (« il n’y a que l’argent qui ne meurt pas »), de l’argent à Dieu et à l’honneur (« l’homme qui a de l’argent est un homme honorable »), et de l’honneur au corps obscène (« l’honneur s’achète et se vend comme le cul… vous sentirez plus mauvais que la merde de vache »). Sérieux = mort = argent = Dieu = honneur = merde : toute la culture bourgeoise réduite à une seule digestion.</p>
+       <p><b>b) La litanie du <span class="red">rien</span>.</b> Alors Dada avale tout et n’excrète aucun nutriment : « il ne sent rien, il n’est rien, rien, rien ». Parcourir la liste (espoirs, paradis, idoles, hommes politiques, héros, artistes, religions) en répondant <b class="red">rien</b> à chacune. Cannibalisme pur : consommer pour <b>annuler</b>, non pour transformer.</p>
+       <p><b>c) Le retournement autocannibale.</b> Et dans la dernière ligne Dada dévore sa propre critique : « sifflez, criez, cassez-moi la gueule… dans trois mois, mes amis et moi vous vendrons nos tableaux pour quelques francs ». L’anti-avant-garde qui niait l’argent et le sérieux <b>revient sur le marché</b>. La négation se fait marchandise : ici le <b>cannibalisme</b> devient <b>consommation</b>.</p>
+       <p><b>d) Le contraste : Andrade.</b> Comparer au <i>Manifeste Anthropophage</i> d’Oswald de Andrade (1928) : l’anthropophagie dévore le colonisateur pour le <b>métaboliser</b> et créer du neuf (le modernisme brésilien). Même décennie, digestion opposée : Picabia consomme et ne digère pas ; Andrade digère pour <b>transformer</b>.</p>
+       <p class="arrow">Cannibalisme → Calibanisme → Anthropophagie → Consommation</p>
+       <p>C’est l’arc du cours, et la dernière ligne de Picabia en est la charnière vers la <b>consommation</b>.</p>`},
       {time:"3 · Interaction + clôture · ~3 min", h:"Litanie en appel et réponse",
-       body:`<p>Je dis le substantif (« vos idoles », « vos héros », « vos artistes »…) et la classe répond <b class="red">« rien ! »</b>. Je clos avec les questions de discussion (ci-dessous) et je montre la <a href="/manifiesto_canibal/">pièce web</a>, où le manifeste se dévore lui-même.</p>`}
+       body:`<p><b>Appel et réponse.</b> Reprendre la litanie, mais avec la classe : la personne qui anime dit le substantif (« vos idoles », « vos héros », « vos artistes », « vos religions ») et tous répondent <b class="red">« rien ! »</b>. La salle <b>exécute</b> le vidage au lieu de l’écouter.</p>
+       <p><b>Atterrissage dans le présent.</b> Clore en revenant à la vente des tableaux : où tombe cette ligne aujourd’hui ? L’art-NFT, la marque, le musée. L’avant-garde qui s’est vendue « pour quelques francs », c’est déjà notre marché de l’art.</p>
+       <p>Lancer les <b>questions de discussion</b> (page suivante) et montrer la <a href="/manifiesto_canibal/">pièce web</a>, où le manifeste se dévore lui-même au défilement.</p>`}
     ],
+    hoEyebrow:"Feuille de discussion · à distribuer",
+    hoTitle:"Manifeste cannibale dada",
+    hoCtx:"Francis Picabia, 1920 · pièce performative dada · SPAN 550B",
+    fields:["Nom","Date","Cours"],
     pregH:"Questions de discussion (clôture)",
     preg:[
       `Si Dada « n’est rien, rien, rien », pourquoi a-t-il besoin d’un public debout ? Une anti-avant-garde peut-elle tout nier sans devenir un rituel, c’est-à-dire un hymne de plus ?`,
@@ -232,7 +280,8 @@ Presentación de Adri M · SPAN 550B, UBC.`
     ],
     src:`Francis Picabia, « Manifeste cannibale dada ». Lu par André Breton lors de la 3ᵉ soirée Dada, Théâtre de l’Œuvre, Paris, 27 mars 1920. Publié dans Dadaphone n° 7.
 Oswald de Andrade, « Manifeste Anthropophage », Revista de Antropofagia, São Paulo, 1928.
-Présentation d’Adri M · SPAN 550B, UBC.`
+Activité conçue par Adri M · SPAN 550B, UBC.
+Licence CC BY-NC-SA 4.0 (attribution · non commercial · partage à l’identique) : creativecommons.org/licenses/by-nc-sa/4.0`
   },
 
   en:{
@@ -240,18 +289,30 @@ Présentation d’Adri M · SPAN 550B, UBC.`
     preslink:"The presentation ↗", manilink:"The manifesto ↗",
     eyebrow:"SPAN 550B · Week 5 · Run of show",
     title:"The run of show",
-    sub:"≈ 8–10 min · three beats · to read on stage",
-    note:`My roadmap for presenting Picabia’s <i>Manifeste cannibale dada</i>. I don’t summarize it: I <b>reactivate it as an event</b>, doing what the text orders. In <b class="red">red bold</b>, what I read aloud.`,
+    sub:"≈ 8–10 min · three beats · reproducible activity",
+    note:`A reproducible protocol for reactivating Picabia’s <i>Manifeste cannibale dada</i> as an event in a seminar. Instead of summarizing the text, the facilitator <b>does what the text orders</b>. Anyone can run it. In <b class="red">red bold</b>, the lines read aloud.`,
     steps:[
-      {time:"1 · Opening in character · reenactment · ~2 min", h:"I do what the text orders",
-       body:`<p>I walk in without explaining anything and read the opening as a command:</p>
+      {time:"1 · Opening in character · reenactment · ~2 min", h:"Do what the text orders",
+       body:`<p>Enter without explaining anything and read the opening as a command:</p>
        <blockquote>“You are all accused; stand up. The speaker cannot address you unless you are standing.”</blockquote>
-       <p>I get the class to <b>stand</b> (as for the Marseillaise, before the flag, before DADA…), read the anthems passage in rhythm, then sit them back down with “Have you all sat down again? So much the better; that way you will listen to me more closely.” I break character.</p>`},
-      {time:"2 · The reading · cannibalism → consumption · ~4 min", h:"I undo what just happened",
-       body:`<p>The manifesto treated them as an audience-commodity (“penned in like serious oysters”). I run through the litany of <b class="red">nothing</b> and land on the last line (selling the paintings): Dada cannibalizes itself. I set up the contrast with <b>Andrade / anthropophagy</b> (digestion that transforms vs. digestion that annuls) and tie it to the money, death and seriousness in the text.</p>`},
+       <p>Get the class to <b>stand</b> and read the standing litany: “stand as for the Marseillaise… the Russian anthem… <i>God save the King</i>… the flag… and finally stand before DADA.” The text ranks Dada with the anthem and the flag and, in passing, <b>accuses</b> the audience: “loving anything out of snobbery, as long as it costs a lot.”</p>
+       <p>Sit the class with “Have you all sat down again? So much the better; now you will listen more closely,” and <b>break character</b>. In two minutes the audience has already been turned into a commodity: that is exactly what is about to be read.</p>`},
+      {time:"2 · The reading · cannibalism → consumption · ~5 min", h:"Undo what just happened",
+       body:`<p><b>a) The chain of equivalences.</b> The manifesto doesn’t argue, it <b>chains</b>. “Penned in like serious oysters,” then from seriousness to death (“serious unto death”; “you die a hero or an idiot, which is the same”), from death to money (“only money doesn’t die, it just goes travelling”), from money to God and honour (“the man who has money is an honourable man”), and from honour to the obscene body (“honour is bought and sold like the arse… you will stink worse than cow dung”). Serious = death = money = God = honour = shit: all of bourgeois culture reduced to a single digestion.</p>
+       <p><b>b) The litany of <span class="red">nothing</span>.</b> Then Dada swallows it all and excretes no nutrient: “it smells of nothing, it is nothing, nothing, nothing.” Run the list (hopes, paradises, idols, politicians, heroes, artists, religions), answering <b class="red">nothing</b> to each. Pure cannibalism: consuming to <b>annul</b>, not to transform.</p>
+       <p><b>c) The self-cannibal turn.</b> In the last line Dada eats its own critique: “whistle, shout, smash my face in… in three months my friends and I will sell you our paintings for a few francs.” The anti-avant-garde that denied money and seriousness <b>walks back onto the market</b>. Negation becomes a commodity: here <b>cannibalism</b> turns into <b>consumption</b>.</p>
+       <p><b>d) The contrast: Andrade.</b> Compare with Oswald de Andrade’s <i>Cannibalist Manifesto</i> (1928): anthropophagy devours the colonizer in order to <b>metabolize</b> him and make something new (Brazilian modernism). Same decade, opposite digestion: Picabia consumes and does not digest; Andrade digests to <b>transform</b>.</p>
+       <p class="arrow">Cannibalism → Calibanism → Anthropophagy → Consumption</p>
+       <p>That is the arc of the course, and Picabia’s last line is the hinge toward <b>consumption</b>.</p>`},
       {time:"3 · Interaction + closing · ~3 min", h:"Call-and-response litany",
-       body:`<p>I say the noun (“your idols,” “your heroes,” “your artists”…) and the class answers <b class="red">“nothing!”</b>. I close with the discussion questions (below) and show the <a href="/manifiesto_canibal/">web piece</a>, where the manifesto devours itself.</p>`}
+       body:`<p><b>Call and response.</b> Run the litany again, now with the class: the facilitator says the noun (“your idols,” “your heroes,” “your artists,” “your religions”) and everyone answers <b class="red">“nothing!”</b>. The room <b>enacts</b> the emptying instead of hearing it.</p>
+       <p><b>Landing in the present.</b> Close by returning to the sale of the paintings: where does that line fall today? NFT-art, the brand, the museum. The avant-garde that sold itself “for a few francs” is already our art market.</p>
+       <p>Pose the <b>discussion questions</b> (next page) and show the <a href="/manifiesto_canibal/">web piece</a>, where the manifesto devours itself as you scroll.</p>`}
     ],
+    hoEyebrow:"Discussion handout · to hand out",
+    hoTitle:"Manifeste cannibale dada",
+    hoCtx:"Francis Picabia, 1920 · Dada performance piece · SPAN 550B",
+    fields:["Name","Date","Course"],
     pregH:"Discussion questions (closing)",
     preg:[
       `If Dada “is nothing, nothing, nothing,” why does it need the audience on its feet? Can an anti-avant-garde negate everything without turning into a ritual, that is, just one more anthem?`,
@@ -260,7 +321,8 @@ Présentation d’Adri M · SPAN 550B, UBC.`
     ],
     src:`Francis Picabia, “Manifeste cannibale dada.” Read by André Breton at the 3rd Dada soirée, Théâtre de l’Œuvre, Paris, 27 March 1920. Published in Dadaphone no. 7.
 Oswald de Andrade, “Cannibalist Manifesto,” Revista de Antropofagia, São Paulo, 1928.
-Presentation by Adri M · SPAN 550B, UBC.`
+Activity designed by Adri M · SPAN 550B, UBC.
+Licensed CC BY-NC-SA 4.0 (attribution · non-commercial · share-alike): creativecommons.org/licenses/by-nc-sa/4.0`
   }
 };
 
@@ -280,10 +342,15 @@ function render(l){
   $("guion").innerHTML = d.steps.map((s,i)=>
     '<li><div class="num">'+(i+1)+'</div><div class="step">'
     +'<p class="time">'+s.time+'</p><h3>'+s.h+'</h3>'+s.body+'</div></li>').join("");
+  $("hoEyebrow").textContent = d.hoEyebrow;
+  $("hoTitle").textContent = d.hoTitle;
+  $("hoCtx").textContent = d.hoCtx;
+  $("hoFields").innerHTML = d.fields.map(f=>
+    '<span class="field">'+f+' <span class="blank"></span></span>').join("");
   $("pregH").textContent = d.pregH;
   $("preg").innerHTML = d.preg.map((q,i)=>
     '<li><span class="qn">'+pad(i+1)+'</span><p>'+q+'</p></li>').join("");
-  const v = "?v=20261004c"; // bump when the PDFs are regenerated (Cloudflare caches them 30d; can't purge from here)
+  const v = "?v=20261004d"; // bump when the PDFs are regenerated (Cloudflare caches them 30d; can't purge from here)
   $("dl").innerHTML = d.dl
     + ' <a href="guion-es.pdf'+v+'" target="_blank" rel="noopener">ES</a>'
     + ' · <a href="guion-fr.pdf'+v+'" target="_blank" rel="noopener">FR</a>'
