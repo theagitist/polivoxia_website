@@ -357,3 +357,13 @@ footer .back-link:hover {
         print-color-adjust: exact;
     }
 }
+
+/* Online reader (folio) */
+.folio {
+    --folio-page-bg: var(--paper-white);
+}
+
+.folio-bar {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: 0.85rem;
+}

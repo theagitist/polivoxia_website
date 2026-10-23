@@ -1,0 +1,64 @@
+/*! folio v1.0.0 | MIT License | https://github.com/theagitist/folio */
+.folio {
+  --folio-ratio: 2 / 3;
+  --folio-page-bg: rgba(0, 0, 0, 0.06);
+  position: relative;
+  outline-offset: 4px;
+}
+
+.folio-stage {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.folio-stage img {
+  display: block;
+  width: 50%;
+  max-width: none;
+  height: auto;
+  aspect-ratio: var(--folio-ratio);
+  background: var(--folio-page-bg);
+  object-fit: contain;
+}
+
+.folio-single .folio-stage img { width: 100%; }
+
+.folio-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  padding: 0.75em 0;
+}
+
+.folio-bar button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 1px solid currentColor;
+  padding: 0.2em 0.8em;
+  cursor: pointer;
+}
+
+.folio-bar button:disabled { opacity: 0.3; cursor: default; }
+.folio-count { min-width: 10em; text-align: center; font-variant-numeric: tabular-nums; }
+
+.folio:fullscreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #111;
+  color: #eee;
+}
+
+.folio:fullscreen .folio-stage img {
+  width: auto;
+  height: calc(100vh - 4em);
+  max-width: 50%;
+}
+
+.folio-single:fullscreen .folio-stage img { max-width: 100%; }

@@ -31,7 +31,8 @@
 
     <link rel="preload" href="../fonts/SpecialElite/SpecialElite-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../fonts/fonts.css?v=2">
-    <link rel="stylesheet" href="styles.css?v=6">
+    <link rel="stylesheet" href="../folio/folio.css?v=1.0.0">
+    <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
     <header>
@@ -61,6 +62,17 @@
 
         <section class="section">
             <div class="container">
+                <h2>Read Online</h2>
+                <div class="content">
+                    <div class="folio" id="read" data-src="read/{n}.webp" data-count="24" data-title="The Somatic Ghost" style="--folio-ratio: 612 / 945.36">
+                        <noscript><p>The online reader needs JavaScript. Download the PDF below instead.</p></noscript>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
                 <h2>Downloads</h2>
                 <div class="content">
                     <ul class="download-list">
@@ -81,9 +93,11 @@
     <footer>
         <div class="container">
             <p><em>The Somatic Ghost</em>: A Counter-archive of the 28th Cycle<br>by Adri M.</p>
+            <p>Read online with <a href="https://github.com/theagitist/folio" target="_blank" rel="noopener noreferrer">Folio</a>.</p>
             <p class="license">Licensed under <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank" rel="license noopener noreferrer">CC BY-ND 4.0</a>. Share freely with attribution. No modifications permitted.</p>
             <a class="back-link" href="https://polivoxia.ca/">polivoxia.ca</a>
         </div>
     </footer>
+    <script src="../folio/folio.js?v=1.0.0" defer></script>
 </body>
 </html>

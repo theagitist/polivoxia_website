@@ -389,3 +389,15 @@ footer .back-link:hover {
         padding: 1.1rem 1.2rem;
     }
 }
+
+/* Online reader (folio) */
+.folio {
+    --folio-page-bg: var(--paper);
+    margin-bottom: 1rem;
+}
+
+.folio-bar {
+    font-family: "Courier Prime", monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
