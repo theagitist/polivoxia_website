@@ -1,4 +1,4 @@
-/*! folio v1.0.0 | MIT License | https://github.com/theagitist/folio */
+/*! folio v1.1.0 | MIT License | https://github.com/theagitist/folio */
 (function () {
   'use strict';
 
@@ -21,25 +21,39 @@
     var title = el.getAttribute('data-title') || 'Zine';
     var page = 1, list = [], spread = null;
 
-    el.tabIndex = 0;
-    el.setAttribute('role', 'region');
-    el.setAttribute('aria-label', title + ', online reader');
+    function url(n) { return src.replace('{n}', n); }
+
+    // Inline launcher: the cover, opening the reader in a modal dialog.
     el.innerHTML =
+      '<button type="button" class="folio-open">' +
+      '<img alt="">' +
+      '<span class="folio-label"></span>' +
+      '</button>' +
+      '<dialog class="folio-modal">' +
       '<div class="folio-stage"></div>' +
       '<div class="folio-bar">' +
       '<button type="button" class="folio-prev" aria-label="Previous page">&larr;</button>' +
       '<span class="folio-count" aria-live="polite"></span>' +
       '<button type="button" class="folio-next" aria-label="Next page">&rarr;</button>' +
       '<button type="button" class="folio-full" aria-label="Full screen">&#x26F6;</button>' +
-      '</div>';
+      '<button type="button" class="folio-close" aria-label="Close reader">&times;</button>' +
+      '</div>' +
+      '</dialog>';
 
+    var open = el.querySelector('.folio-open');
+    var dialog = el.querySelector('dialog');
     var stage = el.querySelector('.folio-stage');
     var prev = el.querySelector('.folio-prev');
     var next = el.querySelector('.folio-next');
     var full = el.querySelector('.folio-full');
     var label = el.querySelector('.folio-count');
 
-    function url(n) { return src.replace('{n}', n); }
+    open.querySelector('img').src = url(1);
+    open.querySelector('.folio-label').textContent = el.getAttribute('data-label') || 'Read online';
+    open.setAttribute('aria-label', 'Read ' + title + ' online');
+    dialog.setAttribute('aria-label', title);
+    dialog.tabIndex = -1;
+
     function at() {
       for (var i = 0; i < list.length; i++) if (list[i].indexOf(page) >= 0) return i;
       return 0;
@@ -72,26 +86,41 @@
       if (el.id) history.replaceState(null, '', '#' + el.id + '-' + page);
     }
 
+    // Spreads when the screen is wide enough for two pages side by side.
     function layout() {
-      var s = el.clientWidth >= 600;
+      var s = dialog.clientWidth >= 600 && dialog.clientWidth > dialog.clientHeight;
       if (s === spread) return;
       spread = s;
-      el.classList.toggle('folio-single', !s);
+      dialog.classList.toggle('folio-single', !s);
       list = views(count, s);
       render();
     }
 
-    prev.onclick = function () { go(-1); };
-    next.onclick = function () { go(1); };
-    if (el.requestFullscreen) {
-      full.onclick = function () {
-        document.fullscreenElement ? document.exitFullscreen() : el.requestFullscreen();
-      };
-    } else {
-      full.hidden = true; // ponytail: iPhone Safari has no element fullscreen; inline reader still works
+    function show() {
+      dialog.showModal();
+      dialog.focus(); // so arrow keys work right away
+      spread = null;
+      layout();
+      if (el.id) history.replaceState(null, '', '#' + el.id + '-' + page);
     }
 
-    el.addEventListener('keydown', function (e) {
+    open.onclick = show;
+    prev.onclick = function () { go(-1); };
+    next.onclick = function () { go(1); };
+    el.querySelector('.folio-close').onclick = function () { dialog.close(); };
+    dialog.addEventListener('close', function () {
+      if (document.fullscreenElement) document.exitFullscreen();
+      if (el.id) history.replaceState(null, '', location.pathname + location.search);
+    });
+    if (dialog.requestFullscreen) {
+      full.onclick = function () {
+        document.fullscreenElement ? document.exitFullscreen() : dialog.requestFullscreen();
+      };
+    } else {
+      full.hidden = true; // ponytail: iPhone Safari has no element fullscreen; the modal already fills the screen
+    }
+
+    dialog.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft') go(-1);
       else if (e.key === 'ArrowRight') go(1);
       else return;
@@ -109,11 +138,13 @@
       else go(e.clientX < r.left + r.width / 2 ? -1 : 1);
     });
 
-    var m = el.id && location.hash.match(new RegExp('^#' + el.id + '-(\\d+)$'));
-    if (m) page = Math.min(Math.max(+m[1], 1), count);
+    if (window.ResizeObserver) new ResizeObserver(function () { if (dialog.open) layout(); }).observe(dialog);
 
-    layout();
-    if (window.ResizeObserver) new ResizeObserver(layout).observe(el);
+    var m = el.id && location.hash.match(new RegExp('^#' + el.id + '-(\\d+)$'));
+    if (m) {
+      page = Math.min(Math.max(+m[1], 1), count);
+      show();
+    }
   }
 
   window.Folio = { views: views, mount: mount };

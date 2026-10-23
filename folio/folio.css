@@ -1,14 +1,73 @@
-/*! folio v1.0.0 | MIT License | https://github.com/theagitist/folio */
+/*! folio v1.1.0 | MIT License | https://github.com/theagitist/folio */
 .folio {
   --folio-ratio: 2 / 3;
-  --folio-page-bg: rgba(0, 0, 0, 0.06);
-  position: relative;
-  outline-offset: 4px;
+  --folio-cover-width: 240px;
 }
 
+/* Launcher: the cover on the page */
+.folio-open {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75em;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.folio-open img {
+  display: block;
+  width: var(--folio-cover-width);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: var(--folio-ratio);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.folio-open:hover img,
+.folio-open:focus-visible img {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.folio-label {
+  border-bottom: 1px solid currentColor;
+}
+
+/* The reader: a dialog filling the viewport */
+.folio-modal {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #111;
+  color: #eee;
+  font-family: inherit;
+}
+
+.folio-modal[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.folio-modal::backdrop { background: #111; }
+html:has(.folio-modal[open]) { overflow: hidden; }
+
 .folio-stage {
+  flex: 1;
+  min-height: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 1rem 1rem 0;
   cursor: pointer;
   touch-action: pan-y;
   user-select: none;
@@ -17,22 +76,20 @@
 
 .folio-stage img {
   display: block;
-  width: 50%;
-  max-width: none;
+  width: auto;
   height: auto;
-  aspect-ratio: var(--folio-ratio);
-  background: var(--folio-page-bg);
-  object-fit: contain;
+  max-width: 50%;
+  max-height: 100%;
 }
 
-.folio-single .folio-stage img { width: 100%; }
+.folio-single .folio-stage img { max-width: 100%; }
 
 .folio-bar {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1em;
-  padding: 0.75em 0;
+  padding: 0.75em;
 }
 
 .folio-bar button {
@@ -46,19 +103,4 @@
 
 .folio-bar button:disabled { opacity: 0.3; cursor: default; }
 .folio-count { min-width: 10em; text-align: center; font-variant-numeric: tabular-nums; }
-
-.folio:fullscreen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: #111;
-  color: #eee;
-}
-
-.folio:fullscreen .folio-stage img {
-  width: auto;
-  height: calc(100vh - 4em);
-  max-width: 50%;
-}
-
-.folio-single:fullscreen .folio-stage img { max-width: 100%; }
+.folio-modal:focus { outline: none; }

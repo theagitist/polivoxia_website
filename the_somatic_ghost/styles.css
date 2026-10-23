@@ -359,8 +359,13 @@ footer .back-link:hover {
 }
 
 /* Online reader (folio) */
-.folio {
-    --folio-page-bg: var(--paper-white);
+.read-shelf {
+    text-align: center;
+    margin: 1rem 0 0.5rem;
+}
+
+.folio-label {
+    font-size: 1rem;
 }
 
 .folio-bar {

@@ -391,13 +391,27 @@ footer .back-link:hover {
 }
 
 /* Online reader (folio) */
+.read-shelf {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin: 1rem 0 0.5rem;
+}
+
 .folio {
-    --folio-page-bg: var(--paper);
-    margin-bottom: 1rem;
+    --folio-cover-width: 220px;
+}
+
+.folio-label {
+    font-family: "Courier Prime", monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust-dark);
 }
 
 .folio-bar {
     font-family: "Courier Prime", monospace;
     font-size: 0.85rem;
-    color: var(--muted);
 }
