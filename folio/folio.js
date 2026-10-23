@@ -1,4 +1,4 @@
-/*! folio v1.2.0 | MIT License | https://github.com/theagitist/folio */
+/*! folio v1.2.1 | MIT License | https://github.com/theagitist/folio */
 (function () {
   'use strict';
 
@@ -125,12 +125,19 @@
     next.onclick = function () { go(1); };
     el.querySelector('.folio-close').onclick = function () { dialog.close(); };
     dialog.addEventListener('close', function () {
+      if (dialog.open) return; // reopened on fullscreen, see below
       if (document.fullscreenElement) document.exitFullscreen();
       if (el.id) history.replaceState(null, '', location.pathname + location.search);
     });
-    // A modal dialog cannot itself go fullscreen, so fullscreen the page;
-    // the dialog stays on top of it.
+    // A modal dialog cannot itself go fullscreen, so fullscreen the page,
+    // then reopen the dialog so it sits above the fullscreen page again.
     var root = document.documentElement;
+    document.addEventListener('fullscreenchange', function () {
+      if (!dialog.open || !document.fullscreenElement) return;
+      dialog.close();
+      dialog.showModal();
+      dialog.focus();
+    });
     if (root.requestFullscreen) {
       full.onclick = function () {
         document.fullscreenElement ? document.exitFullscreen() : root.requestFullscreen();
