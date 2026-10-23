@@ -1,4 +1,4 @@
-/*! folio v1.1.0 | MIT License | https://github.com/theagitist/folio */
+/*! folio v1.2.0 | MIT License | https://github.com/theagitist/folio */
 (function () {
   'use strict';
 
@@ -32,8 +32,11 @@
       '<dialog class="folio-modal">' +
       '<div class="folio-stage"></div>' +
       '<div class="folio-bar">' +
+      '<button type="button" class="folio-first" aria-label="First page">&#x21E4;</button>' +
       '<button type="button" class="folio-prev" aria-label="Previous page">&larr;</button>' +
-      '<span class="folio-count" aria-live="polite"></span>' +
+      '<span class="folio-count" aria-live="polite"><span></span> ' +
+      '<input class="folio-page" type="number" min="1" inputmode="numeric" aria-label="Go to page">' +
+      '<span></span></span>' +
       '<button type="button" class="folio-next" aria-label="Next page">&rarr;</button>' +
       '<button type="button" class="folio-full" aria-label="Full screen">&#x26F6;</button>' +
       '<button type="button" class="folio-close" aria-label="Close reader">&times;</button>' +
@@ -46,7 +49,10 @@
     var prev = el.querySelector('.folio-prev');
     var next = el.querySelector('.folio-next');
     var full = el.querySelector('.folio-full');
-    var label = el.querySelector('.folio-count');
+    var first = el.querySelector('.folio-first');
+    var input = el.querySelector('.folio-page');
+    var parts = el.querySelectorAll('.folio-count > span');
+    input.max = count;
 
     open.querySelector('img').src = url(1);
     open.querySelector('.folio-label').textContent = el.getAttribute('data-label') || 'Read online';
@@ -69,8 +75,10 @@
         img.draggable = false;
         stage.appendChild(img);
       });
-      label.textContent = (v.length > 1 ? 'Pages ' + v[0] + '–' + v[1] : 'Page ' + v[0]) + ' of ' + count;
-      prev.disabled = i === 0;
+      parts[0].textContent = v.length > 1 ? 'Pages' : 'Page';
+      input.value = v[0];
+      parts[1].textContent = (v.length > 1 ? '–' + v[1] : '') + ' of ' + count;
+      prev.disabled = first.disabled = i === 0;
       next.disabled = i === list.length - 1;
       // Warm the cache for the neighbouring views.
       [list[i - 1], list[i + 1]].forEach(function (w) {
@@ -78,12 +86,15 @@
       });
     }
 
-    function go(d) {
-      var i = at() + d;
-      if (i < 0 || i >= list.length) return;
-      page = list[i][0];
+    function jump(n) {
+      page = Math.min(Math.max(n, 1), count);
       render();
       if (el.id) history.replaceState(null, '', '#' + el.id + '-' + page);
+    }
+
+    function go(d) {
+      var i = at() + d;
+      if (i >= 0 && i < list.length) jump(list[i][0]);
     }
 
     // Spreads when the screen is wide enough for two pages side by side.
@@ -105,23 +116,34 @@
     }
 
     open.onclick = show;
+    first.onclick = function () { jump(1); };
     prev.onclick = function () { go(-1); };
+    input.onchange = function () {
+      var n = parseInt(input.value, 10);
+      n ? jump(n) : render();
+    };
     next.onclick = function () { go(1); };
     el.querySelector('.folio-close').onclick = function () { dialog.close(); };
     dialog.addEventListener('close', function () {
       if (document.fullscreenElement) document.exitFullscreen();
       if (el.id) history.replaceState(null, '', location.pathname + location.search);
     });
-    if (dialog.requestFullscreen) {
+    // A modal dialog cannot itself go fullscreen, so fullscreen the page;
+    // the dialog stays on top of it.
+    var root = document.documentElement;
+    if (root.requestFullscreen) {
       full.onclick = function () {
-        document.fullscreenElement ? document.exitFullscreen() : dialog.requestFullscreen();
+        document.fullscreenElement ? document.exitFullscreen() : root.requestFullscreen();
       };
     } else {
-      full.hidden = true; // ponytail: iPhone Safari has no element fullscreen; the modal already fills the screen
+      full.hidden = true; // iPhone Safari has no element fullscreen; the modal already fills the screen
     }
 
     dialog.addEventListener('keydown', function (e) {
+      if (e.target === input) return;
       if (e.key === 'ArrowLeft') go(-1);
+      else if (e.key === 'Home') jump(1);
+      else if (e.key === 'End') jump(count);
       else if (e.key === 'ArrowRight') go(1);
       else return;
       e.preventDefault();

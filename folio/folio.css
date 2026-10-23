@@ -1,4 +1,4 @@
-/*! folio v1.1.0 | MIT License | https://github.com/theagitist/folio */
+/*! folio v1.2.0 | MIT License | https://github.com/theagitist/folio */
 .folio {
   --folio-ratio: 2 / 3;
   --folio-cover-width: 240px;
@@ -102,5 +102,26 @@ html:has(.folio-modal[open]) { overflow: hidden; }
 }
 
 .folio-bar button:disabled { opacity: 0.3; cursor: default; }
-.folio-count { min-width: 10em; text-align: center; font-variant-numeric: tabular-nums; }
+.folio-count { min-width: 12em; text-align: center; font-variant-numeric: tabular-nums; }
+
+.folio-bar .folio-page {
+  width: 2.5em;
+  margin: 0 0.15em;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: center;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  border-radius: 0;
+  box-shadow: none;
+  -moz-appearance: textfield;
+}
+
+.folio-single .folio-bar { gap: 0.5em; }
+.folio-single .folio-count { min-width: 0; }
+
+.folio-page::-webkit-inner-spin-button,
+.folio-page::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .folio-modal:focus { outline: none; }
