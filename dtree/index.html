@@ -1,0 +1,816 @@
+<title>The Colour of Coordinates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap">
+<style>
+  :root{
+    --void:#06070c; --deep:#0a0c14; --panel:#0e121d;
+    --ink:#ece3d4; --soft:#b4ac9d; --faint:#7c7567; --line:#232a3b;
+    --space:#5fc9d6; --height:#9ed36a; --time:#e6b45a;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; color:var(--ink);
+    background:
+      radial-gradient(120% 80% at 42% 34%, #12172a 0%, var(--deep) 42%, var(--void) 100%);
+    background-attachment:fixed;
+    font:400 16px/1.75 'Atkinson Hyperlegible', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:62rem; margin:0 auto; padding:clamp(1.75rem,5vw,4rem) 1.4rem 5rem; }
+
+  .epigraph{ font:400 italic 1.05rem/1.6 'Atkinson Hyperlegible',serif; color:var(--soft); max-width:34rem; margin:0 0 1.6rem; }
+  .epigraph b{ display:block; font-style:normal; font-family:'Courier Prime',monospace; font-size:.75rem;
+    letter-spacing:.22em; text-transform:uppercase; color:var(--faint); margin-top:.5rem; }
+  h1{
+    font:400 clamp(2.1rem,6vw,3.5rem)/1.06 'Special Elite','Courier New',monospace;
+    letter-spacing:-.015em; text-wrap:balance; margin:0 0 1.1rem;
+    background:linear-gradient(180deg, #fff 0%, var(--ink) 70%); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .lede{ font-size:1.1rem; color:var(--soft); max-width:40rem; margin:0 0 2.4rem; }
+  .lede b{ color:var(--ink); font-weight:700; }
+
+  .stage-sky{ position:relative; width:100%; height:clamp(380px,58vh,600px);
+    border:1px solid var(--line); border-radius:3px; overflow:hidden;
+    background:radial-gradient(80% 80% at 40% 45%, #0c1120 0%, #07080e 100%);
+    box-shadow:0 30px 80px -40px #000, inset 0 0 120px -40px rgba(70,120,170,.25); }
+  #sky{ position:absolute; inset:0; width:100%; height:100%; display:block; touch-action:none; }
+  .sky-hint{ position:absolute; z-index:2; left:14px; bottom:12px; margin:0;
+    font:400 11px/1.4 'Courier Prime',monospace; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); pointer-events:none; }
+
+  .bar{ display:flex; align-items:center; gap:1.1rem; flex-wrap:wrap; margin:1.1rem 0 0; }
+  .btn{ font:400 14px/1 'Special Elite','Courier New',monospace; letter-spacing:.05em;
+    padding:.7rem 1.15rem; background:transparent; color:var(--ink); border:1.5px solid var(--ink);
+    cursor:pointer; transition:background .15s, color .15s, box-shadow .2s; }
+  .btn:hover:not(:disabled){ background:var(--ink); color:var(--void); box-shadow:0 0 26px -6px rgba(236,227,212,.5); }
+  .btn:disabled{ opacity:.4; cursor:default; }
+  .btn:focus-visible{ outline:2px solid var(--space); outline-offset:3px; }
+  .status{ flex:1 1 12rem; min-width:0; min-height:1.4em; margin:0; font:400 13px/1.5 'Courier Prime',monospace;
+    color:var(--soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+  h2.sec{ font:400 1.15rem/1.2 'Special Elite','Courier New',monospace; letter-spacing:.02em;
+    margin:3rem 0 .3rem; color:var(--ink); }
+  .hint{ color:var(--faint); font-size:.95rem; margin:.1rem 0 1rem; max-width:40rem; }
+
+  .register{ display:grid; grid-template-columns:repeat(auto-fill,minmax(17rem,1fr)); gap:.8rem; }
+  .card{ border:1px solid var(--line); border-left:2px solid var(--ax); background:var(--panel);
+    padding:.9rem 1rem; opacity:.45; transform:translateY(6px); cursor:pointer;
+    transition:opacity .5s, transform .5s, box-shadow .2s, border-color .2s; }
+  .card.shown{ opacity:1; transform:none; }
+  .card.active{ box-shadow:0 0 0 1px var(--ax), 0 0 32px -8px color-mix(in srgb, var(--ax) 70%, transparent); border-left-color:var(--ax); }
+  .card-top{ display:flex; align-items:center; gap:.55rem; }
+  .card-label{ font-weight:700; }
+  .card-what{ margin-left:auto; font:400 10px/1 'Courier Prime',monospace; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); }
+  .pill{ font:700 10px/1 'Courier Prime',monospace; letter-spacing:.1em; text-transform:uppercase;
+    padding:.3rem .45rem; white-space:nowrap; color:var(--ax);
+    border:1px solid color-mix(in srgb, var(--ax) 45%, transparent); background:color-mix(in srgb, var(--ax) 12%, transparent); }
+  .pill--space{ --ax:var(--space); } .pill--height{ --ax:var(--height); } .pill--time{ --ax:var(--time); }
+  .card-val{ font:400 1.02rem/1.4 'Courier Prime',monospace; margin:.55rem 0 .5rem; min-height:1.5em;
+    font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; overflow-x:auto; }
+  .caret{ display:inline-block; width:.5ch; height:1.05em; vertical-align:-.16em; margin-left:2px;
+    background:var(--ax); opacity:0; }
+  .card.shown .caret{ opacity:1; animation:blink 1s steps(1) infinite; }
+  @media (prefers-reduced-motion:reduce){ .card.shown .caret{ animation:none; opacity:.6; } }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .swline{ display:flex; align-items:center; gap:6px; }
+  .sw{ width:16px; height:16px; flex:none; background:var(--c);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.14); opacity:calc(.4 + .6*var(--a)); }
+  .hex{ font:400 11px/1.4 'Courier Prime',monospace; color:var(--faint); letter-spacing:.04em; overflow-x:auto; }
+
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin:1rem 0 0; }
+  .step .n{ display:block; font:400 1.7rem/1 'Special Elite','Courier New',monospace; color:var(--ink);
+    border-bottom:1px solid var(--line); padding-bottom:.35rem; margin-bottom:.55rem; }
+  .step h3{ font:700 1rem/1.3 'Atkinson Hyperlegible',sans-serif; margin:0 0 .3rem; }
+  .step p{ margin:0; color:var(--soft); font-size:.94rem; }
+
+  .carrier{ display:flex; gap:1.4rem; flex-wrap:wrap; align-items:flex-start; margin-top:1rem; }
+  .frame{ position:relative; width:min(340px,100%); aspect-ratio:36/14; overflow:hidden;
+    border:1px solid var(--line); background:#111; }
+  .frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  #underlay{ z-index:1; image-rendering:pixelated; object-fit:fill; }  /* stretch: show all pixel bars */
+  #primary{ z-index:2; transition:opacity .55s ease; }
+  .frame.peeking #primary{ opacity:.08; }
+  /* playhead: marks the two pixels currently sounding, dot rises to the note's pitch */
+  .playhead{ position:absolute; inset:0; z-index:4; pointer-events:none; opacity:0; transition:opacity .3s; }
+  .frame.playing .playhead{ opacity:1; }
+  .frame.playing #primary{ opacity:.1; }
+  .ph-band{ position:absolute; top:0; bottom:0; left:var(--col,0%); width:var(--w,11%);
+    background:linear-gradient(180deg, rgba(255,255,255,.06), color-mix(in srgb, var(--phc,#5fc9d6) 34%, transparent));
+    border-left:1px solid var(--phc,#5fc9d6); border-right:1px solid var(--phc,#5fc9d6);
+    box-shadow:0 0 24px -3px var(--phc,#5fc9d6); transition:left .16s ease, width .16s ease, box-shadow .2s; }
+  .ph-dot{ position:absolute; left:calc(var(--col,0%) + var(--w,11%)/2); bottom:var(--pitch,50%);
+    width:10px; height:10px; margin:0 0 -5px -5px; border-radius:50%; background:var(--phc,#5fc9d6);
+    box-shadow:0 0 16px 3px var(--phc,#5fc9d6); transition:left .16s ease, bottom .18s ease, background .2s; }
+  @media (prefers-reduced-motion:reduce){ #primary, .ph-band, .ph-dot{ transition:none; } }
+  .frame .tag{ position:absolute; z-index:3; left:0; bottom:0; padding:.4rem .6rem;
+    font:400 10px/1 'Courier Prime',monospace; letter-spacing:.2em; text-transform:uppercase; color:var(--void); background:var(--ink); }
+  .peekbox{ display:inline-flex; align-items:center; gap:.5rem; cursor:pointer; color:var(--soft); font:400 13px/1.4 'Courier Prime',monospace; }
+  .peekbox input{ accent-color:var(--space); width:1rem; height:1rem; }
+  .carrier p{ flex:1; min-width:15rem; margin:0; color:var(--soft); font-size:.95rem; }
+  .carrier-play{ flex-basis:100%; display:flex; gap:1rem 1.2rem; align-items:center; flex-wrap:wrap; margin-top:.4rem; }
+  .carrier-play .play-cap{ flex:1; min-width:15rem; margin:0; color:var(--faint);
+    font:400 12.5px/1.6 'Atkinson Hyperlegible',sans-serif; }
+  .scopewrap{ flex-basis:100%; position:relative; height:92px; margin-top:.2rem;
+    border:1px solid var(--line); background:linear-gradient(180deg, #0b0f1b, #080a12); overflow:hidden; }
+  #scope{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .scope-lbl{ position:absolute; right:9px; top:7px; font:400 9px/1 'Courier Prime',monospace;
+    letter-spacing:.2em; text-transform:uppercase; color:var(--faint); pointer-events:none; }
+
+  /* jargon tooltips */
+  .term{ position:relative; cursor:help; color:var(--ink);
+    border-bottom:1px solid color-mix(in srgb, var(--space) 75%, transparent);
+    text-shadow:0 0 10px color-mix(in srgb, var(--space) 28%, transparent);
+    transition:color .18s, text-shadow .18s, border-color .18s; }
+  .term:hover, .term:focus-visible{ color:#fff; border-bottom-color:var(--space);
+    text-shadow:0 0 18px color-mix(in srgb, var(--space) 70%, transparent); }
+  .term:focus-visible{ outline:2px solid var(--space); outline-offset:2px; }
+  .term::after{ content:attr(data-tip); position:absolute; left:0; bottom:calc(100% + 9px);
+    width:max-content; max-width:17rem; padding:.6rem .75rem; background:#0f1626; color:var(--ink);
+    border:1px solid var(--line); box-shadow:0 16px 34px -14px #000;
+    font:400 12.5px/1.55 'Atkinson Hyperlegible', sans-serif; letter-spacing:0; text-transform:none;
+    opacity:0; pointer-events:none; transform:translateY(4px); transition:opacity .16s, transform .16s; z-index:30; }
+  .term:hover::after, .term:focus-visible::after{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion:reduce){ .term::after{ transition:none; } }
+
+  /* live vPixel anatomy readout */
+  .anatomy{ margin-top:1.2rem; padding:1rem 1.1rem; background:var(--panel);
+    border:1px solid var(--line); border-top:2px solid var(--ax); }
+  .an-head{ display:flex; align-items:center; gap:.6rem; margin-bottom:.85rem; }
+  .an-label{ font-weight:700; }
+  .an-what{ margin-left:auto; font:400 11px/1 'Courier Prime',monospace; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); }
+  .an-flow{ display:flex; align-items:center; gap:.9rem 1.1rem; flex-wrap:wrap; }
+  .an-bytes{ display:flex; gap:3px; }
+  .an-bytes .gap{ width:8px; }
+  .byte{ width:34px; padding:.25rem 0; text-align:center; background:var(--deep); border:1px solid var(--line); }
+  .bch{ display:block; font:700 9px/1 'Courier Prime',monospace; color:var(--faint); letter-spacing:.08em; }
+  .bval{ display:block; font:400 13px/1.25 'Courier Prime',monospace; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .an-pix{ display:flex; gap:4px; }
+  .an-pix i{ width:40px; height:40px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.18); }
+  .an-arrow{ color:var(--faint); font:400 1.2rem/1 'Courier Prime',monospace; }
+  .an-mean{ font:400 1.05rem/1.3 'Courier Prime',monospace; color:var(--ink); font-variant-numeric:tabular-nums;
+    white-space:nowrap; overflow-x:auto; max-width:100%; }
+  .an-note{ margin:.85rem 0 0; font:400 12.5px/1.6 'Atkinson Hyperlegible',sans-serif; color:var(--faint); max-width:46rem; }
+
+  /* reach chart */
+  .reach{ display:flex; flex-direction:column; gap:1.15rem; margin-top:1rem; max-width:46rem; }
+  .rrow{ display:flex; flex-direction:column; gap:.35rem; }
+  .rtop{ display:flex; justify-content:space-between; align-items:baseline; }
+  .rname{ font:700 12px/1 'Courier Prime',monospace; letter-spacing:.06em; text-transform:uppercase; color:var(--rc); }
+  .rmag{ font:400 11px/1 'Courier Prime',monospace; color:var(--faint); letter-spacing:.04em; }
+  .rtrack{ position:relative; height:12px; background:var(--deep); border:1px solid var(--line); overflow:hidden; }
+  .rfill{ position:absolute; left:0; top:0; bottom:0;
+    background:linear-gradient(90deg, color-mix(in srgb, var(--rc) 20%, transparent), var(--rc));
+    box-shadow:0 0 20px -4px var(--rc); }
+  .rends{ display:flex; justify-content:space-between; font:400 11px/1.3 'Courier Prime',monospace; color:var(--soft); }
+  .rrow--space{ --rc:var(--space); } .rrow--height{ --rc:var(--height); } .rrow--time{ --rc:var(--time); }
+  .reach-cap{ margin:.4rem 0 0; font:400 12.5px/1.6 'Atkinson Hyperlegible',sans-serif; color:var(--faint); max-width:44rem; }
+
+  .foot{ margin-top:2.8rem; padding-top:1.2rem; border-top:1px solid var(--line);
+    font:400 13px/1.75 'Courier Prime',monospace; color:var(--faint); max-width:46rem; }
+  .foot strong{ color:var(--soft); } .foot a{ color:var(--space); text-decoration:none; border-bottom:1px solid color-mix(in srgb,var(--space) 40%, transparent); }
+  .foot a:hover{ color:var(--ink); border-color:var(--ink); }
+
+  /* intro modal */
+  .intro{ position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:1.4rem;
+    background:radial-gradient(120% 90% at 50% 38%, rgba(12,17,34,.9), rgba(4,5,10,.97));
+    -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px); transition:opacity .6s ease; }
+  .intro.gone{ opacity:0; pointer-events:none; }
+  .intro-card{ max-width:34rem; border:1px solid var(--line); border-top:2px solid var(--space);
+    background:var(--panel); padding:clamp(1.6rem,4vw,2.6rem); box-shadow:0 40px 130px -50px #000, 0 0 60px -30px rgba(95,201,214,.35); }
+  .intro-k{ font:400 11px/1 'Courier Prime',monospace; letter-spacing:.28em; text-transform:uppercase; color:var(--faint); margin:0 0 1rem; }
+  .intro-card h2{ font:400 clamp(1.7rem,4.6vw,2.5rem)/1.08 'Special Elite','Courier New',monospace; margin:0 0 1.1rem;
+    color:var(--ink); text-wrap:balance; }
+  .intro-card p{ margin:0 0 1rem; color:var(--soft); font-size:1.02rem; }
+  .intro-card p b{ color:var(--ink); font-weight:700; }
+  .intro-mini{ display:flex; gap:1.4rem; flex-wrap:wrap; margin:1.3rem 0 1.5rem; }
+  .intro-mini span{ font:400 12px/1.4 'Courier Prime',monospace; color:var(--faint); }
+  .intro-mini b{ display:block; font-weight:400; font-size:1.15rem; margin-bottom:.15rem; }
+  .intro-card .btn{ margin-bottom:.7rem; }
+  .intro-note{ font:400 12px/1.5 'Courier Prime',monospace; color:var(--faint); margin:.9rem 0 0; }
+
+  /* under-the-hood dossiers */
+  .dossier{ border:1px solid var(--line); border-left:2px solid var(--space); background:var(--panel); margin:.7rem 0; }
+  .dossier[open]{ box-shadow:0 0 34px -16px rgba(95,201,214,.45); }
+  .dossier > summary{ cursor:pointer; list-style:none; padding:.85rem 1rem; display:flex; align-items:center; gap:.6rem;
+    font:700 .98rem/1.35 'Atkinson Hyperlegible',sans-serif; color:var(--ink); }
+  .dossier > summary::-webkit-details-marker{ display:none; }
+  .dossier > summary::before{ content:'+'; font:400 1.25rem/1 'Courier Prime',monospace; color:var(--space); width:1rem; text-align:center; }
+  .dossier[open] > summary::before{ content:'2'; }
+  .dossier > summary:hover{ color:#fff; }
+  .dossier > summary .tagx{ margin-left:auto; font:400 10px/1 'Courier Prime',monospace; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); }
+  .dossier .body{ padding:0 1rem 1.1rem; }
+  .dossier .body p{ margin:0 0 .85rem; color:var(--soft); font-size:.95rem; max-width:44rem; }
+  .dossier pre{ margin:.2rem 0 0; padding:.9rem 1rem; background:#080a12; border:1px solid var(--line);
+    overflow-x:auto; font:400 12.5px/1.65 'Courier Prime',monospace; color:#cdd6e6; }
+  .dossier pre .c{ color:var(--faint); font-style:italic; }
+  .dossier pre .k{ color:var(--space); } .dossier pre .s{ color:var(--height); }
+
+  @media (max-width:640px){ .steps{ grid-template-columns:1fr; gap:1.1rem; } .card-what{ display:none; } }
+</style>
+<div class="intro" id="intro">
+  <div class="intro-card">
+    <p class="intro-k">a research prototype</p>
+    <h2>The colour of coordinates</h2>
+    <p>Every digital file is homeless. It knows the address of the machine it came from but nothing about
+    the world: no place, no height, no moment. <b>ColourSpace</b> hides all three inside the colours of
+    ordinary pixels, so an image can carry an exact position the way it already carries a picture.</p>
+    <p>What follows reads nine such vectors back from colour alone: four places on a turning globe,
+    three heights above the Earth, two instants in time. Nothing is sent to any server; every value is decoded
+    here, in your browser, from the pixels themselves.</p>
+    <div class="intro-mini">
+      <span><b style="color:var(--space)">place</b>vSpace</span>
+      <span><b style="color:var(--height)">height</b>vHeight</span>
+      <span><b style="color:var(--time)">moment</b>dTime</span>
+    </div>
+    <button class="btn" id="enterbtn" type="button">&#9654;&nbsp; Enter the void</button>
+    <p class="intro-note">Best experienced with sound. Pressing Enter turns it on; the sound toggle silences it any time.</p>
+  </div>
+</div>
+<div class="wrap">
+  <p class="epigraph">&ldquo;I see it, but I don't believe it.&rdquo;<b>Georg Cantor, 1878, on mapping a plane into a line</b></p>
+  <h1>The colour of coordinates.</h1>
+  <p class="lede">Digital data lives in a black spatial void: it has no place, no height, no moment.
+  <span class="term" data-tip="A digital-first coordinate system: it hides a real place, height, and time inside the colours of pixels, so ordinary media can carry precise position and meaning.">ColourSpace</span>
+  gives it all three. Each ordinary image below hides a layer of pixels the eye never sees, and every
+  <b>pair of coloured pixels</b> is one 8-byte vector, a real place, height, or instant. Watch the void read
+  them back. Nothing leaves this page.</p>
+
+  <div class="stage-sky">
+    <canvas id="sky"></canvas>
+    <p class="sky-hint">drag to turn the planet · hover a light</p>
+  </div>
+  <div class="bar">
+    <button class="btn" id="scanbtn" type="button">&#9654;&nbsp; Read the void</button>
+    <p class="status" id="status" aria-live="polite">Waking the void…</p>
+    <label class="peekbox" style="margin-left:auto"><input type="checkbox" id="sound" checked> sound</label>
+  </div>
+
+  <h2 class="sec">Anatomy of one vector</h2>
+  <p class="hint">Hover a light on the globe, or a card below, to break that vector open: eight
+  <span class="term" data-tip="A byte is a number from 0 to 255, exactly what one colour channel of a pixel holds.">bytes</span>,
+  carried as two <span class="term" data-tip="A vPixel is one 8-byte ColourSpace vector written as colour. Eight bits per channel means one vector needs two pixels, four bytes each.">vPixels</span>, becoming one real-world value.</p>
+  <div class="anatomy" id="anatomy"></div>
+
+  <h2 class="sec">Read from colour alone</h2>
+  <p class="hint">Each light on the globe is a place; each bead on the thread is a height above Earth.
+  Hover any light or any card to link them; click a place to fly there.</p>
+  <div class="register" id="register"></div>
+
+  <h2 class="sec">What eight bytes can hold</h2>
+  <p class="hint">The nested, logarithmic design gives one vector <em>both</em> vast range and fine precision.
+  Each bar is the span a single 8-byte vector addresses, in orders of magnitude.</p>
+  <div class="reach">
+    <div class="rrow rrow--space">
+      <div class="rtop"><span class="rname">vSpace</span><span class="rmag">~10 orders of magnitude</span></div>
+      <div class="rtrack"><div class="rfill" style="width:58%"></div></div>
+      <div class="rends"><span>6&nbsp;mm</span><span>40,000&nbsp;km (whole Earth)</span></div>
+    </div>
+    <div class="rrow rrow--height">
+      <div class="rtop"><span class="rname">vHeight</span><span class="rmag">~17 orders of magnitude</span></div>
+      <div class="rtrack"><div class="rfill" style="width:100%"></div></div>
+      <div class="rends"><span>2&nbsp;&micro;m</span><span>1&nbsp;AU (150&nbsp;million&nbsp;km)</span></div>
+    </div>
+    <div class="rrow rrow--time">
+      <div class="rtop"><span class="rname">dTime</span><span class="rmag">~14 orders of magnitude</span></div>
+      <div class="rtrack"><div class="rfill" style="width:80%"></div></div>
+      <div class="rends"><span>0.23&nbsp;s</span><span>256,000&nbsp;years</span></div>
+    </div>
+  </div>
+  <p class="reach-cap">vHeight alone spans about seventeen orders of magnitude, from microns to the distance
+  of the Sun, and stays exact across all of it. That is what a nested, self-similar address buys.</p>
+
+  <h2 class="sec">How eight bytes hold the world</h2>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><h3>Turn it into numbers</h3>
+      <p>Any place, height, or instant becomes eight numbers, each from 0 to 255. The Earth's whole surface fits, to about six millimetres.</p></div>
+    <div class="step"><span class="n">2</span><h3>Paint the numbers</h3>
+      <p>Those eight numbers become two coloured pixels, laid on an invisible layer beneath a normal picture.</p></div>
+    <div class="step"><span class="n">3</span><h3>Read the colours back</h3>
+      <p>Any device can look at those two pixels and recover the exact place, height, and time. No GPS, no database, no network.</p></div>
+  </div>
+
+  <h2 class="sec">Under the hood</h2>
+  <p class="hint">The piece hides its machinery, but none of it is magic. Open any panel for the real code that
+  runs, and the reason it is shaped that way.</p>
+  <p class="hint" style="max-width:44rem">The motive is simple. A photograph cannot say where it was taken; a
+  message cannot say when it means; a record cannot point at a place. Location today belongs to the network,
+  not the data. ColourSpace tries to give data a body in space and time, carried by the data itself, so a
+  vector still means something outside the system that made it.</p>
+
+  <details class="dossier">
+    <summary>Why read the colour, not the canvas<span class="tagx">decode</span></summary>
+    <div class="body">
+      <p>The obvious way to read pixels back is a 2D <code>&lt;canvas&gt;</code>. It is also wrong here: a
+      canvas <em>premultiplies alpha</em>, so it quietly corrupts any pixel whose alpha channel is real data
+      rather than transparency &mdash; and in every vector, bytes 3 and 7 <em>are</em> data. So the underlay
+      PNG is inflated byte-for-byte instead, straight from its compressed stream.</p>
+      <pre><code><span class="c">// A 2D canvas premultiplies alpha, corrupting bytes 3 and 7.</span>
+<span class="c">// Inflate the PNG's own bytes instead &mdash; lossless.</span>
+<span class="k">const</span> ds  = <span class="k">new</span> DecompressionStream(<span class="s">'deflate'</span>);
+<span class="k">const</span> raw = <span class="k">new</span> Uint8Array(<span class="k">await</span> <span class="k">new</span> Response(
+    <span class="k">new</span> Blob([idat]).stream().pipeThrough(ds)).arrayBuffer());
+<span class="c">// every channel survives exactly, alpha included.</span></code></pre>
+    </div>
+  </details>
+
+  <details class="dossier">
+    <summary>Why a byte prefix is already a region<span class="tagx">vSpace</span></summary>
+    <div class="body">
+      <p>vSpace tiles the sphere with <span class="term" data-tip="An equal-area pixelisation of the sphere used in astronomy. Every tile covers the same area, so there is no distortion at the poles.">HEALPix</span>,
+      nested: each byte chooses one of 256 equal-area tiles, coarse to fine. That nesting is the whole trick.
+      The first N bytes of a vector <em>are</em> a coarser tile containing it, so searching &ldquo;everything
+      near here&rdquo; is a prefix match on a sorted list &mdash; no spatial index, no distance loop.</p>
+      <pre><code><span class="k">pix</span>    = ang2pix(theta, phi, order=<span class="s">30</span>)  <span class="c"># 64-bit tile index</span>
+<span class="k">region</span> = pix &gt;&gt; (<span class="s">8</span> * (<span class="s">8</span> - n))          <span class="c"># drop fine bytes -&gt; coarser tile</span>
+<span class="c"># same prefix  ==  same region. "near" is a range scan.</span></code></pre>
+    </div>
+  </details>
+
+  <details class="dossier">
+    <summary>Why the vectors are just integers<span class="tagx">vector math</span></summary>
+    <div class="body">
+      <p>A vector has to be <em>operable</em>, not just readable. Because a uniform 8-byte vector is simply a
+      big-endian 64-bit integer, subtracting two places gives a real spatial offset, and adding an offset gives
+      a new real address &mdash; commutative, with carry and borrow crossing byte boundaries for free. No vector
+      library; the CPU already has one.</p>
+      <pre><code>a    = int.from_bytes(v1, <span class="s">'big'</span>)
+b    = int.from_bytes(v2, <span class="s">'big'</span>)
+diff = (a - b).to_bytes(<span class="s">8</span>, <span class="s">'big'</span>)   <span class="c"># place - place = an offset</span>
+<span class="c"># add that offset to a third place to land somewhere real.</span></code></pre>
+    </div>
+  </details>
+
+  <h2 class="sec">The carrier</h2>
+  <div class="carrier">
+    <div class="frame">
+      <img id="underlay" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAABCAYAAADTjP5iAAAAVElEQVR42gFJALb/ACbn0z9Q52jmE9WZnNkE2PW85+7g3fC/O0ww4lP56GFLAALLff6r9CAAAsu7wA0bgAAC+EGnNusHAAEFAQEAAAABCUUHFBQRAIMlHnrQDKlLAAAAAElFTkSuQmCC" alt="">
+      <img id="primary" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAACMCAYAAABRRzP1AAALCElEQVR42u3d/XYb1RmF8XMJpYUE/IHjxImDiZPYSUhioG3oBy0tFGhpG9r7vw23ljLSjHRGOhrNzBlJvz/2Ley113ne9Zzwi1sPr+vzyTS35/Nebc4W58O6fJqUX5bz0U0eNcx5NXuL86tRHqdlfzZPmuXg6fX7jXIxn8OUXE7ywaJ8XM6zhnk+zlE1t5bmRX3uLMpnC3N7NsdFXjbMq2nu1ufDSl4vz71YrlbORzc5+bxhvqjmfmq+vN5blgez+XXD/OZ673Sa/eT8Np6Hy/ImmoNYPinnq9qEhcV8u8ViXrOU38tUyisV835bxfy0YTFfNCzmy+zFfGudYt74Un7VsJRf5y3lkxZLuaNiXruUT/sv5ZqC3ua1vAmlbC1v7lp+Nfy1fNL3Wv4y21rez7SWD5YW81crJzRby2fWcotr+f1Mazm9lNcsZk8YLazlK2s5VsoPNvsJY3F+9/+CHuJa3vpS7nstX1rLc8XcbSnfzvqEceUJo7ViftPbWi5KeZKzmYLePeB33i/w29+EJ4xLTxi7DvxOAL9+13K1lMsJ7QI/a7m9tXxhLQN+gN9QgV+ba/ksnsP5gt7x8zjAz1oG/AYF/PYGC/zaX8tFKZcTnMdtx3ncB30VsycMwG8T1vIAgd+ytXwYL+g+gJ/zOMBv4MDveHjAL9da3nMe1wnwSy3lw7PfTxK2YS0DfoAf4Ldh53Gn1nJdKVcLGvAD/AYI/G7tJPBzHrct53FN1vJcPo0WNB8G4Gct82E4j8tSyu+KuUgA/Pgw+DCcx/FhdA/8Ukt5pqD5MKxl53HO4wC/3Gu5mj+MEqxlPgzncYAfH0b3wC+1lMsJzuOcx/FhAH6AX/61XFvQfBjO4wA/PgzAL+9ajha08zjncXwYgB8fRvfAb5Vi/vhdAh8G4Af4bcJ5HB/GJp3HrVPKozy6yR9XLWjncXwYgJ+17DyurVI+jJRyOQHw84TBh8GH4Twu01p+FC/mhIIG/AA/a5kPw3lcX2s5oaABP2uZD8MThvO4LoBfailHCpoPA/BzHseHwYfRJfBrkgD48WE4j7OWAb88TxjxfD1JAPysZT4MPgzAL/da/rqa83ECHwYfBuDHhwH45V/L5WKOFrTzOOdxfBiAHx/G+udx65RypaCdxzmPA/z4MKzl7oHfKsV8k6NxQTuP48MA/AA/PowcTxh1xXx0/qdRAuAH+PFh8GHwYeRfy0UplxP4MAA/wM9adh6Xfy3HCxrwA/z4MPgwnMcNppQneVwp6CfO4wA/a5kPw3lcZ08Y6cVcJAB+fBh8GM7j+DDyr+X5/HnFgj5wHuc8jg/DWgb8Winl83gplxP4MPgwnMcBfoBf/rUcS3Ae5zyODwPws5aHU8oLCpoPA/AD/PgwAL/cxVwtaOdxfBiAH+DHhzGIUq4UNOAH+PFhAH58GO2ex61TykePv7m+82Sc4DyODwPws5b5MPKv5aMn02JOLGjAD/BzHseH4Tyuz1JeUtB8GICftew8znlcd8X8zdJijhS0Jww+DD4M53HO43Kt5ZqC5sOwlvkwAD8+jK6B32r5yyjBWh7ueRwfBuDHh7E7a7ko5XKCtew8znkcHwYfRq5SjhfznafjBD4M53GAH+AH+OVfy+ViriloTxh8GHwYgB/gl2MtxxL4MAA/PgzAz1ruHvitUszj/HVc0NYyHwbgx4fBh5F3LRelXE4A/AA/wM9a5sPocC0/Xa2Yj0sJfBiAn7XMh+EJo3vgt2wtH0cSAD8+DD4MPgw+jPxreS4Xk4IG/Kxl53HO4/gw+ljLxwnFXCQAfnwYfBiAn/O47oFfaikfX3w7SfCE4TyOD8N5HOCXYS1f1BdzYkE7j+PDAPz4MAC/PtZyYkFby87jnMd5wuDDaBv4rVLMkYLmwwD8dhD4PQT8rOVhrOWagnYex4cB+FnLzuO6WcvfNsx3owRPGIAfHwbgx4eR5wkjWsyX0wQ+DMAP8OPDcB6X5wmjvJbLxXyTu/UFDfgBfs7j+DD4MLpby/WlXE7gwwD8rGU+DMAv/1q+Gy9owI8Pgw8D8AP8hlLK0/wtUtDO46xlPgzncXwYrQO/1FIuJ+zMWubDcB7HhwH4DXgtxxKcx1nLgJ/zOD6M7oFfaimP8myc4DzOeZzzOMAP8BtWMc8UtPM453G74cM4APz4MAa6lmMJgB/gx4fhCcNa7rmYny3K95MEPozd8WHsAX7WsvO4wa7lcjFXChrw48PYfuBnLTuP6+88bp1SrhS076IAP2uZD8N53HeDKuZ77xIAP8DPeZzvovgwhlPKkzwfFTTgZy3zYXjCAPy6KebvVyvm50V+GCXwYfBh+C4K8AP88q/lcjGvUNDWsvM4wA/w2+C1vGGlnFDQfBi+i3Ie5wkD8MtVzDUF7TyODwPw48PYju+iNrWUZwqaDwPw48OwlgG/7or5h4b58V1BO48D/Pgw+DCcx2Vdy+ViLhIAP8CPD8Na5sMYTinfezFN4MPgwwD8nMc5j8tRzD/WFvOkoAE/Pgxr2XkcH0b+tTybk2lB82E4j+PDcB4H+HUJ/FYp5pNpQVvLzuOcx/FhAH651/I0f58kAH7O45zHAX58GLlLuVrM8wXNh2EtA36AH+DX6xNGrJSrBW0t82EAfnwYgF/2tVzJZ+ME53GAHx8G4Gct51/LRSmXE6xlwI8Pgw+DDyP/Wq7mH6MEPgzAD/Czlp3HrVfK91op5WkxJxU0HwYfBh8GH4bzuJZK+UVaKS8saMCPD8MThvM4PoyunzAWF/NcQfNhAH7O45zHAX751nK0oPkw+DCsZT4MwK974LdK7t/k5U+rFjTgZy3zYQB+u+XD6PIJY66YX46LuUhwHuc8jg+DD8NazvOEUV7LsQRr2Xmc8zjAjw+j37V8P7KWEwuaD4MPw3kc4Af49b2WFxS08zjAD/DbtbUM+PW5ln9qlMCHAfjxYQB+1nL3wG+1/HOUAPgBfnwYfBjWcp4njFgplxMAP8AP8LOW+TC6B36ppXz/1TQB8OPD2OrzOD4M53EbspbLxRwpaMBvM30Y1rLzOD6MTQB+qaU8U9B8GIAfH4bzOOdxXQO/1FIe51+jBD4M53HO4/gwAL/8a7ko5gelBOdxfBiAH+DHh9HGWm6nlOMF7TzOeRwfBuAH+A2imKcF7TzOeRzgx4fBhzGYUh7l9TjBeRzgx4cB+FnLXQK/xGJ+PZt/NyloPgzAjw+DD8N5XNtruVzMRQLgx4cB+FnLzuPaPY9bp5QTC9p5HB8GH4bzOOdxfa3lxIIG/AA/a9l5HB9GrlKOFDQfBh8GH4YnDOdxXQK/Jgl8GNay8zg+DMAv/1qu5u31g6u312GYwM95HB+G8zjAb7uAX2opFzldXtB8GM7j+DA8YQB+3RXz20oxn84kOI/jwwD8+DD4MPI8YcRKuaagncfxYfBhWMuAX6dr+SqtmEsF7TwO8AP8+DCcx+Vey/P5eaag+TD4MAA/a5kPoxPgl1rK5QQ+DGuZD8N5nPO4nGv559oEwI8Pw1p2Huc8Ls8TRjSfTxMAPz4MPgzncYBfu+dx65TyTEG/sZYBP+dxfBiAX+a1PJ//zBc0H4bzOOdxgB8fRvvAL62Ux8VcJPBhWMvO4wA/TxjdA7/UUq4UtPM4PgzAD/AD/PKv5SIPSwnO45zH8WEAftZy3lKeLeZpQfNhAH6AHx8GH0b2tVzJF+ME53GAH+AH+PFh5F/LRSmP899RAh8G4MeHwYdhLbd7HtdkLRelXE4A/PgwAD9rmQ8j/1qO5X+WmP7G6ow2ZwAAAABJRU5ErkJggg==" alt="An ordinary primary image">
+      <span class="tag">primary layer</span>
+      <div class="playhead" id="playhead" aria-hidden="true"><div class="ph-band"></div><div class="ph-dot"></div></div>
+    </div>
+    <p>This is a normal picture. The nine vectors above are hidden on a layer beneath it, unseen.
+    <label class="peekbox" style="margin-top:.8rem"><input type="checkbox" id="peek"> Peek beneath to glimpse the hidden pixel bars.</label></p>
+    <div class="carrier-play">
+      <button class="btn" id="playbtn" type="button">&#9654;&nbsp; Play as sound</button>
+      <p class="play-cap">Every hidden vector becomes one note, read straight from the image: its pitch follows
+      the value it holds (a higher place, a higher altitude, a later year sounds higher), and its timbre follows
+      its kind. The picture, heard.</p>
+    </div>
+    <div class="scopewrap"><canvas id="scope"></canvas><span class="scope-lbl">waveform</span></div>
+    <details class="dossier" style="flex-basis:100%">
+      <summary>How the sound is mapped<span class="tagx">sonification</span></summary>
+      <div class="body">
+        <p>The nine vectors play left to right, in the exact order they sit in the image. As each one sounds,
+        a bright band marks the two pixels that carry it, and a dot rises to the note's pitch.</p>
+        <p><b>Pitch</b> is the value the vector holds, folded onto a minor-pentatonic scale (base near D3, about
+        three octaves) so every note stays consonant:</p>
+        <pre><code>vSpace   latitude   south -&gt; low,   north -&gt; high
+vHeight  altitude   ground -&gt; low,  orbit -&gt; high (log)
+dTime    year       ancient -&gt; low, modern -&gt; high</code></pre>
+        <p><b>Timbre</b> is the kind of vector: <span style="color:var(--space)">triangle for a place</span>,
+        <span style="color:var(--height)">sine for a height</span>,
+        <span style="color:var(--time)">square for a moment</span>. Nothing is composed in advance; the melody
+        is simply the image, read as tone.</p>
+      </div>
+    </details>
+  </div>
+
+  <p class="foot"><strong>ColourSpace &amp; dTree</strong> are a research prototype, made as an academic
+  project in Manuel Pina's workshop, exploring how physical and digital reality might share one
+  address. Everything here was decoded in your browser from colour alone: the raw PNG bytes are inflated
+  directly, never through a 2D canvas, which premultiplies alpha and would corrupt the data. The whole idea
+  leans on <span class="term" data-tip="Cantor showed in 1878 that a line and a plane hold the same number of points, so a lower-dimensional space folds into a higher, sparse one. Reversed, a 3D position folds into 8 bytes.">Cantor's 1878 proof</span>.
+  A prototype and a set of ideas, not a finished standard.</p>
+</div>
+<script>
+const META = [{"kind": "vspace", "label": "UBC, Vancouver"}, {"kind": "vspace", "label": "Tokyo"}, {"kind": "vspace", "label": "S\u00e3o Paulo, Brazil"}, {"kind": "vspace", "label": "Accra, Ghana"}, {"kind": "vheight", "label": "Everest summit"}, {"kind": "vheight", "label": "Cruising airliner"}, {"kind": "vheight", "label": "ISS orbit"}, {"kind": "dtime", "label": "The invention of paper"}, {"kind": "dtime", "label": "Apollo 11 landing"}];
+const UNDERLAY_B64 = "iVBORw0KGgoAAAANSUhEUgAAABIAAAABCAYAAADTjP5iAAAAVElEQVR42gFJALb/ACbn0z9Q52jmE9WZnNkE2PW85+7g3fC/O0ww4lP56GFLAALLff6r9CAAAsu7wA0bgAAC+EGnNusHAAEFAQEAAAABCUUHFBQRAIMlHnrQDKlLAAAAAElFTkSuQmCC";
+
+const AU_M = 149597870700, ORDER = 30, NSIDE = 1 << 30;
+const JRLL = [2,2,2,2,3,3,3,3,4,4,4,4], JPLL = [1,3,5,7,0,2,4,6,1,3,5,7];
+
+function _big(u8){ let n = 0n; for (let i = 0; i < 8; i++) n = (n << 8n) | BigInt(u8[i]); return n; }
+
+function vspaceLonLat(u8){                         // HEALPix nested pix2ang, order 30
+  const pix = _big(u8), face = Number(pix >> 60n), ipf = pix & ((1n << 60n) - 1n);
+  let ix = 0, iy = 0;
+  for (let i = 0; i < ORDER; i++){
+    ix |= Number((ipf >> BigInt(2*i)) & 1n) << i;
+    iy |= Number((ipf >> BigInt(2*i+1)) & 1n) << i;
+  }
+  const jr = JRLL[face]*NSIDE - ix - iy - 1;
+  let nr, kshift, z;
+  if (jr < NSIDE){ nr = jr; kshift = 0; z = 1 - (nr/NSIDE)**2 / 3; }
+  else if (jr > 3*NSIDE){ nr = 4*NSIDE - jr; kshift = 0; z = (nr/NSIDE)**2 / 3 - 1; }
+  else { nr = NSIDE; kshift = (jr - NSIDE) & 1; z = (2*NSIDE - jr) * 2 / (3*NSIDE); }
+  let jp = Math.floor((JPLL[face]*nr + (ix - iy) + 1 + kshift) / 2);
+  if (jp > 4*NSIDE) jp -= 4*NSIDE; else if (jp < 1) jp += 4*NSIDE;
+  const phi = (jp - (kshift + 1)*0.5) * (Math.PI/2 / nr), theta = Math.acos(z);
+  let lon = phi*180/Math.PI % 360; if (lon < 0) lon += 360;
+  return [lon, 90 - theta*180/Math.PI];
+}
+
+function vheightM(u8){ return Number(_big(u8)) / 2**64 * AU_M; }   // approx (float) for display
+
+function dtimeStr(u8){
+  const [mm,c,y,mo,d,h,mi,inst] = u8, year = mm*1000 + c*100 + y, sec = inst*15/64;
+  const p = (n,w=2) => String(n).padStart(w,'0');
+  return `${p(year,6)}-${p(mo)}-${p(d)} ${p(h)}:${p(mi)}:${sec.toFixed(3).padStart(6,'0')}`;
+}
+
+async function parseUnderlay(png){                 // png: Uint8Array -> [Uint8Array(8), ...]
+  const dv = new DataView(png.buffer, png.byteOffset, png.byteLength);
+  let pos = 8, width = 0, height = 0; const idat = [];
+  while (pos < png.length){
+    const len = dv.getUint32(pos), t = String.fromCharCode(png[pos+4],png[pos+5],png[pos+6],png[pos+7]);
+    if (t === 'IHDR'){ width = dv.getUint32(pos+8); height = dv.getUint32(pos+12); }
+    else if (t === 'IDAT'){ idat.push(png.subarray(pos+8, pos+8+len)); }
+    else if (t === 'IEND') break;
+    pos += 12 + len;
+  }
+  let tot = idat.reduce((s,p) => s + p.length, 0), z = new Uint8Array(tot), o = 0;
+  for (const p of idat){ z.set(p, o); o += p.length; }
+  const ds = new DecompressionStream('deflate');   // PNG IDAT is zlib-wrapped
+  const raw = new Uint8Array(await new Response(new Blob([z]).stream().pipeThrough(ds)).arrayBuffer());
+  const stride = width*4 + 1, out = new Uint8Array(width*height*4);
+  for (let yy = 0; yy < height; yy++) out.set(raw.subarray(yy*stride+1, (yy+1)*stride), yy*width*4);
+  const vecs = []; for (let i = 0; i < out.length; i += 8) vecs.push(out.subarray(i, i+8));
+  return vecs;
+}
+
+
+const AXIS = {
+  vspace:  { name:'vSpace',  cls:'space',  fmt:fmtVspace,  what:'a place'  },
+  vheight: { name:'vHeight', cls:'height', fmt:fmtVheight, what:'a height' },
+  dtime:   { name:'dTime',   cls:'time',   fmt:fmtDtime,   what:'a moment' },
+};
+function fmtVspace(v){ const [lon,lat]=vspaceLonLat(v); const s=((lon+180)%360)-180;
+  return `${Math.abs(lat).toFixed(4)}° ${lat>=0?'N':'S'}, ${Math.abs(s).toFixed(4)}° ${s>=0?'E':'W'}`; }
+function fmtVheight(v){ const m=vheightM(v),km=m/1000,alt=(m-6371000)/1000;
+  const a=alt>=0?`+${alt.toFixed(1)}`:alt.toFixed(1);
+  return `${km.toLocaleString(undefined,{maximumFractionDigits:1})} km from centre  (${a} km up)`; }
+function fmtDtime(v){ return dtimeStr(v)+' UTC'; }
+
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+function typeInto(el,text,reduce){ return new Promise(res=>{ if(reduce){el.textContent=text;res();return;}
+  el.textContent=''; let i=0; const s=()=>{ el.textContent=text.slice(0,++i); i<text.length?setTimeout(s,14):res(); }; s(); }); }
+function lonlatVec(lon,lat){ const la=lat*Math.PI/180,lo=lon*Math.PI/180;
+  return {x:Math.cos(la)*Math.cos(lo), y:Math.sin(la), z:Math.cos(la)*Math.sin(lo)}; }
+function rot(p,yaw,pitch){ const cy=Math.cos(yaw),sy=Math.sin(yaw);
+  const x1=p.x*cy+p.z*sy, z1=-p.x*sy+p.z*cy, cp=Math.cos(pitch),sp=Math.sin(pitch);
+  return {x:x1, y:p.y*cp - z1*sp, z:p.y*sp + z1*cp}; }
+function rgba(rgb,a){ return rgb.replace('rgb(','rgba(').replace(')',','+a+')'); }
+
+(async () => {
+  const bin = atob(UNDERLAY_B64), png = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) png[i] = bin.charCodeAt(i);
+  const vecs = await parseUnderlay(png);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const items = META.map((m,i) => {
+    const v = vecs[i], ax = AXIS[m.kind];
+    const it = { i, kind:m.kind, label:m.label, ax, val:ax.fmt(v), bytes:[...v],
+      rgb0:`rgb(${v[0]},${v[1]},${v[2]})`, rgb1:`rgb(${v[4]},${v[5]},${v[6]})`,
+      a0:(v[3]/255).toFixed(3), a1:(v[7]/255).toFixed(3),
+      hex:[...v].map(b=>b.toString(16).padStart(2,'0')).join(' '), bloom:0 };
+    if (m.kind==='vspace'){ const [lon,lat]=vspaceLonLat(v); it.lon=lon; it.lat=lat; it.p=lonlatVec(lon,lat); }
+    else if (m.kind==='vheight'){ it.altKm=(vheightM(v)-6371000)/1000; }
+    else { it.year=v[0]*1000+v[1]*100+v[2]; }
+    return it;
+  });
+  const spaceItems = items.filter(t => t.kind==='vspace');
+  const heightItems = items.filter(t => t.kind==='vheight');
+  let active = null, hover = null, gen = 0;   // gen: whoever bumps it owns the sequence (scan/tour/play)
+
+  // ---------- subtle glitch audio (Web Audio, no files; only after a gesture) ----------
+  let AC = null, master = null, sfxGain = null, analyser = null, delaySend = null, noiseBuf = null, muted = false, lastSfx = 0;
+  function ensureAudio(){
+    if (AC){ if (AC.state === 'suspended') AC.resume(); return; }
+    try {
+      AC = new (window.AudioContext || window.webkitAudioContext)();
+      master = AC.createGain(); master.gain.value = 0.5;
+      const lp = AC.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2200; lp.Q.value = 0.6;
+      master.connect(lp); lp.connect(AC.destination);
+      analyser = AC.createAnalyser(); analyser.fftSize = 1024; analyser.smoothingTimeConstant = 0.55;
+      master.connect(analyser);                                                     // tap for the carrier scope
+      sfxGain = AC.createGain(); sfxGain.gain.value = 1; sfxGain.connect(master);   // globe sounds, scroll-scaled
+      const dl = AC.createDelay(1.0); dl.delayTime.value = 0.26;                     // ambience: feedback delay
+      const fb = AC.createGain(); fb.gain.value = 0.32;
+      const dlp = AC.createBiquadFilter(); dlp.type = 'lowpass'; dlp.frequency.value = 1600;
+      dl.connect(dlp); dlp.connect(fb); fb.connect(dl); dlp.connect(master);        // loop + wet out
+      delaySend = AC.createGain(); delaySend.gain.value = 0.5; delaySend.connect(dl);
+      const n = AC.createBuffer(1, Math.floor(AC.sampleRate * 0.2), AC.sampleRate), d = n.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; noiseBuf = n;
+      if (AC.state === 'suspended') AC.resume();      // start it on the creating gesture
+    } catch (e){ AC = null; }
+  }
+  function sfxProximity(){                        // globe sounds fade to 0 as you scroll past the globe
+    const stage = document.querySelector('.stage-sky'), reg = document.getElementById('register');
+    if (!stage || !reg) return 1;
+    const g = stage.getBoundingClientRect(), rb = reg.getBoundingClientRect();
+    const vh = innerHeight || document.documentElement.clientHeight;
+    if (g.bottom > 0 && g.top < vh) return 1;                                          // globe on screen -> full
+    if (g.top >= vh) return clamp(1 - (g.top - vh) / Math.max(1, g.height), 0, 1);     // scrolled above the globe
+    return clamp(rb.bottom / Math.max(1, rb.bottom - g.top), 0, 1);  // 1 -> 0 as the register bottom leaves the top
+  }
+  function blip(freq, dur, gain, type){                     // globe sounds; routed through the scroll-scaled bus
+    if (!AC || muted || AC.state !== 'running') return; const t = AC.currentTime;
+    const bus = sfxGain || master; if (sfxGain) sfxGain.gain.setValueAtTime(sfxProximity(), t);
+    const g = AC.createGain(); g.gain.setValueAtTime(0, t); g.connect(bus);
+    const o = AC.createOscillator(); o.type = type || 'triangle';
+    o.frequency.setValueAtTime(freq * (0.985 + Math.random() * 0.03), t);
+    o.frequency.setValueAtTime(freq * 1.5, t + dur * 0.5);   // tiny glitch stutter
+    o.connect(g);
+    g.gain.linearRampToValueAtTime(gain, t + 0.006);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.start(t); o.stop(t + dur + 0.02);
+    const nb = AC.createBufferSource(); nb.buffer = noiseBuf;
+    const nf = AC.createBiquadFilter(); nf.type = 'bandpass'; nf.frequency.value = freq * 2; nf.Q.value = 4;
+    const ng = AC.createGain(); ng.gain.setValueAtTime(gain * 0.4, t); ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+    nb.connect(nf); nf.connect(ng); ng.connect(bus); nb.start(t); nb.stop(t + 0.06);
+  }
+  function tone(freq, dur, gain, type, pan){     // richer melodic voice for "Play as sound": ensemble + sweep + space
+    if (!AC || muted || AC.state !== 'running') return; const t = AC.currentTime;
+    const g = AC.createGain(); g.gain.setValueAtTime(0, t);
+    const lp = AC.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = 1.1;   // filter sweep = movement
+    lp.frequency.setValueAtTime(freq * 2, t);
+    lp.frequency.linearRampToValueAtTime(freq * 6, t + 0.07);
+    lp.frequency.exponentialRampToValueAtTime(freq * 2.2, t + dur);
+    g.connect(lp);
+    let tail = lp;
+    if (AC.createStereoPanner){ const p = AC.createStereoPanner(); p.pan.value = clamp(pan || 0, -1, 1); lp.connect(p); tail = p; }
+    tail.connect(master); if (delaySend) tail.connect(delaySend);                // dry + ambience send
+    const voices = [ [1, 0, type || 'sine', 1.0], [1, 7, type || 'sine', 0.7], [2, -5, 'sine', 0.25] ];  // twin + octave shimmer
+    for (const [mult, cents, ty, vg] of voices){
+      const o = AC.createOscillator(); o.type = ty;
+      o.frequency.setValueAtTime(freq * mult, t); o.detune.setValueAtTime(cents + (Math.random() * 4 - 2), t);
+      const og = AC.createGain(); og.gain.value = vg; o.connect(og); og.connect(g);
+      o.start(t); o.stop(t + dur + 0.06);
+    }
+    g.gain.linearRampToValueAtTime(gain, t + 0.03);          // soft attack, held, long release
+    g.gain.setValueAtTime(gain, t + dur * 0.45);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    const nb = AC.createBufferSource(); nb.buffer = noiseBuf;   // soft glitch tick at the attack
+    const nf = AC.createBiquadFilter(); nf.type = 'bandpass'; nf.frequency.value = freq * 3; nf.Q.value = 6;
+    const ng = AC.createGain(); ng.gain.setValueAtTime(gain * 0.12, t); ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
+    nb.connect(nf); nf.connect(ng); ng.connect(master); nb.start(t); nb.stop(t + 0.05);
+  }
+  const PITCH = { vspace:560, vheight:400, dtime:300 };
+  function sfxHover(it){ if (playing) return; const now = performance.now(); if (now - lastSfx < 60) return; lastSfx = now;
+    blip((it && PITCH[it.kind]) || 480, 0.06, 0.03, 'triangle'); }
+  function sfxClick(it){ if (playing) return; const f = (it && PITCH[it.kind]) || 420; blip(f, 0.05, 0.045, 'square');
+    setTimeout(() => blip(f * 1.33, 0.06, 0.035, 'triangle'), 45); }
+  function sfxTick(it){ if (playing) return; blip(((it && PITCH[it.kind]) || 360) * 0.75, 0.045, 0.028, 'square'); }
+
+  // ---------- live vPixel anatomy readout ----------
+  const anatomy = document.getElementById('anatomy');
+  function renderAnatomy(it){
+    if (!it) return;
+    anatomy.style.setProperty('--ax', `var(--${it.ax.cls})`);
+    const ch = ['R','G','B','A']; let cells = '';
+    it.bytes.forEach((b, k) => { if (k === 4) cells += '<span class="gap"></span>';
+      cells += `<div class="byte"><span class="bch">${ch[k % 4]}</span><span class="bval">${b}</span></div>`; });
+    anatomy.innerHTML =
+        `<div class="an-head"><span class="an-label">${it.label}</span>`
+      + `<span class="pill pill--${it.ax.cls}">${it.ax.name}</span><span class="an-what">${it.ax.what}</span></div>`
+      + `<div class="an-flow"><div class="an-bytes">${cells}</div>`
+      + `<div class="an-pix"><i style="background:${it.rgb0}"></i><i style="background:${it.rgb1}"></i></div>`
+      + `<div class="an-arrow">&rarr;</div><div class="an-mean">${it.val}</div></div>`
+      + `<p class="an-note">Eight bytes become two pixels: bytes 0&ndash;3 are the first pixel's red, green, `
+      + `blue and alpha; 4&ndash;7 the second. Read back exactly, they name ${it.ax.what}.</p>`;
+  }
+
+  // ---------- wall-text register ----------
+  const reg = document.getElementById('register');
+  const stageSky = document.querySelector('.stage-sky');
+  function showGlobe(){ stageSky.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
+  items.forEach(it => {
+    const card = document.createElement('div');
+    card.className = 'card'; card.dataset.i = it.i; card.style.setProperty('--ax', `var(--${it.ax.cls})`);
+    card.innerHTML =
+        `<div class="card-top"><span class="card-label">${it.label}</span>`
+      + `<span class="pill pill--${it.ax.cls}">${it.ax.name}</span><span class="card-what">${it.ax.what}</span></div>`
+      + `<div class="card-val"><span class="typed"></span><span class="caret"></span></div>`
+      + `<div class="swline"><i class="sw" style="--c:${it.rgb0};--a:${it.a0}"></i>`
+      + `<i class="sw" style="--c:${it.rgb1};--a:${it.a1}"></i><span class="hex">${it.hex}</span></div>`;
+    reg.appendChild(card); it.card = card;
+    const set = on => { if (playing) return; card.classList.toggle('active', on);
+      if (on){ active = it; it.bloom = 1; renderAnatomy(it); sfxHover(it); } else active = null; };
+    card.addEventListener('pointerenter', () => set(true));
+    card.addEventListener('pointerleave', () => set(false));
+    card.addEventListener('click', () => { if (playing) return; sfxClick(it);
+      if (it.kind === 'vspace'){ showGlobe(); tourTo(it); }
+      else if (it.kind === 'vheight'){ showGlobe(); active = it; it.bloom = 1; renderAnatomy(it); reveal(it); }
+      else reveal(it); });
+  });
+  function reveal(it){ it.card.classList.add('shown'); it.bloom = 1; typeInto(it.card.querySelector('.typed'), it.val, reduce); }
+
+  // ---------- the void: globe + altitude thread ----------
+  const cv = document.getElementById('sky'), ctx = cv.getContext('2d');
+  let W, H, DPR, cx, cy, R, gx;
+  function resize(){ DPR = Math.min(2, devicePixelRatio || 1); const r = cv.getBoundingClientRect();
+    W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+    cx = W*0.40; cy = H*0.54; R = Math.min(W*0.28, H*0.40); gx = Math.min(W-46, cx + R*1.5); }
+  resize(); addEventListener('resize', resize);
+  const stars = Array.from({length:80}, () => ({ x:Math.random(), y:Math.random(), z:Math.random()*0.8+0.2 }));
+
+  let yaw = 0.5, pitch = -0.34, dragging = false, touring = false, lx = 0, ly = 0;
+  const project = v => ({ x: cx + v.x*R, y: cy - v.y*R, front: v.z > 0, z: v.z });
+
+  function drawStars(t){ for (const s of stars){ const tw = reduce ? 1 : 0.6 + 0.4*Math.sin(t*0.001*s.z + s.x*12);
+    ctx.fillStyle = `rgba(200,212,236,${(0.05 + 0.10*s.z*tw).toFixed(3)})`;
+    ctx.beginPath(); ctx.arc(s.x*W, s.y*H, s.z*1.2, 0, 7); ctx.fill(); } }
+
+  function drawGlobe(){
+    const g = ctx.createRadialGradient(cx,cy,R*0.15, cx,cy,R*1.7);
+    g.addColorStop(0,'rgba(52,96,128,0.22)'); g.addColorStop(0.5,'rgba(28,48,80,0.07)'); g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx,cy,R*1.7,0,7); ctx.fill();
+    for (let lat=-80; lat<=80; lat+=8){
+      const step = Math.max(8, Math.round(15/Math.max(Math.cos(lat*Math.PI/180),0.2)));
+      for (let lon=0; lon<360; lon+=step){ const p = project(rot(lonlatVec(lon,lat),yaw,pitch));
+        const a = p.front ? 0.26*(0.35+0.65*p.z) : 0.045;
+        ctx.fillStyle = `rgba(150,178,212,${a.toFixed(3)})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.front?1.1:0.8, 0, 7); ctx.fill(); } }
+    ctx.strokeStyle = 'rgba(150,182,218,0.22)'; ctx.lineWidth = 1.1;
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,7); ctx.stroke();
+  }
+
+  function glow(x,y,rgb,rad){ const g = ctx.createRadialGradient(x,y,0,x,y,rad);
+    g.addColorStop(0, rgb); g.addColorStop(0.35, rgba(rgb,0.5)); g.addColorStop(1, rgba(rgb,0));
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x,y,rad,0,7); ctx.fill();
+    ctx.fillStyle = rgb; ctx.beginPath(); ctx.arc(x,y,Math.max(2,rad*0.16),0,7); ctx.fill(); }
+
+  function drawSpace(){
+    for (const it of spaceItems){ const p = project(rot(it.p,yaw,pitch));
+      it.sx = p.x; it.sy = p.y; it.sfront = p.front;
+      if (!p.front) continue;
+      const on = (active===it||hover===it), rad = (14 + it.bloom*22) * (on?1.25:1);
+      glow(p.x, p.y, it.rgb0, rad);
+      if (on || it.bloom>0.02){ ctx.strokeStyle = rgba(it.rgb0, 0.6); ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(p.x,p.y, 9 + it.bloom*12, 0, 7); ctx.stroke(); }
+    }
+  }
+
+  function drawAltitude(){
+    const baseY = cy + R*0.02, topY = cy - R*1.15, maxKm = 500;
+    ctx.strokeStyle = 'rgba(150,178,212,0.22)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(gx, baseY); ctx.lineTo(gx, topY); ctx.stroke();
+    ctx.fillStyle = 'rgba(150,178,212,0.5)'; ctx.font = "10px 'Courier Prime',monospace"; ctx.textAlign='left';
+    ctx.fillText('surface', gx+9, baseY+4);
+    for (const it of heightItems){ const f = Math.log10(1+Math.max(0,it.altKm))/Math.log10(1+maxKm);
+      const y = baseY - (baseY-topY)*clamp(f,0,1); it.sx = gx; it.sy = y; it.sfront = true;
+      ctx.strokeStyle = 'rgba(120,152,200,0.2)'; ctx.beginPath(); ctx.moveTo(gx,baseY); ctx.lineTo(gx,y); ctx.stroke();
+      const on = (active===it||hover===it);
+      glow(gx, y, it.rgb0, (13 + it.bloom*18) * (on?1.25:1));
+      if (on){ ctx.fillStyle = 'rgba(236,227,212,0.92)'; ctx.font = "11px 'Courier Prime',monospace";
+        ctx.fillText(`${it.label} · +${it.altKm.toFixed(0)} km`, gx+14, y+4); } }
+  }
+
+  function drawLabel(it){ if (!it || it.kind!=='vspace' || !it.sfront) return;
+    ctx.strokeStyle = 'rgba(236,227,212,0.4)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(it.sx,it.sy); ctx.lineTo(it.sx+16, it.sy-14); ctx.stroke();
+    ctx.font = "13px 'Special Elite','Courier New',monospace"; ctx.fillStyle = 'rgba(236,227,212,0.95)'; ctx.textAlign='left';
+    ctx.fillText(it.label, it.sx+20, it.sy-11); }
+
+  function frame(t){ ctx.clearRect(0,0,W,H);
+    drawStars(t); drawGlobe(); drawAltitude(); drawSpace();
+    drawLabel(active || hover);
+    for (const it of items) if (it.bloom>0 && active!==it && hover!==it) it.bloom *= 0.95;
+    if (!dragging && !touring && !reduce) yaw += 0.0016;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // ---------- interaction ----------
+  cv.style.cursor = 'grab';
+  cv.addEventListener('pointerdown', e => { dragging = true; lx = e.clientX; ly = e.clientY; cv.setPointerCapture(e.pointerId); cv.style.cursor='grabbing'; });
+  cv.addEventListener('pointerup', () => { dragging = false; cv.style.cursor = hover?'pointer':'grab'; });
+  cv.addEventListener('pointermove', e => { if (playing) return; const r = cv.getBoundingClientRect(), mx = e.clientX-r.left, my = e.clientY-r.top;
+    if (dragging){ yaw += (e.clientX-lx)*0.006; pitch = clamp(pitch + (e.clientY-ly)*0.006, -1.2, 1.2); lx = e.clientX; ly = e.clientY; return; }
+    let best = null, bd = 20;
+    for (const it of spaceItems){ if (!it.sfront) continue; const d = Math.hypot(mx-it.sx,my-it.sy); if (d<bd){ bd=d; best=it; } }
+    for (const it of heightItems){ const d = Math.hypot(mx-it.sx,my-it.sy); if (d<bd){ bd=d; best=it; } }
+    if (best !== hover){ if (hover) hover.card.classList.remove('active'); hover = best;
+      if (hover){ hover.card.classList.add('active'); hover.bloom = Math.max(hover.bloom, 0.8); renderAnatomy(hover); sfxHover(hover); }
+      cv.style.cursor = hover?'pointer':'grab'; } });
+  cv.addEventListener('click', () => { if (playing) return; if (hover){ sfxClick(hover); hover.kind==='vspace' ? tourTo(hover) : reveal(hover); } });
+
+  function tween(ty, tp, dur){ const y0=yaw, p0=pitch, st=performance.now(); touring = true;
+    let dy = ((ty-y0+Math.PI)%(2*Math.PI)) - Math.PI; if (dy < -Math.PI) dy += 2*Math.PI;
+    return new Promise(res => { (function step(){ const k = reduce?1:clamp((performance.now()-st)/dur,0,1);
+      const e = k<0.5 ? 2*k*k : 1 - Math.pow(-2*k+2,2)/2; yaw = y0+dy*e; pitch = p0+(tp-p0)*e;
+      k<1 ? requestAnimationFrame(step) : res(); })(); }); }
+  async function tourTo(it){ it.card.classList.add('shown'); active = it;
+    const ty = Math.atan2(-it.p.x, it.p.z), tp = clamp(Math.atan2(it.p.y, Math.hypot(it.p.x,it.p.z))*0.8, -1.0, 1.0);
+    await tween(ty, tp, reduce?0:800); it.bloom = 1; await typeInto(it.card.querySelector('.typed'), it.val, reduce);
+    await wait(reduce?0:250); touring = false; }
+
+  // ---------- guided tour ----------
+  const btn = document.getElementById('scanbtn'), status = document.getElementById('status');
+  async function scan(){ if (playing) return; const my = ++gen; btn.disabled = true;
+    items.forEach(it => { it.card.classList.remove('shown'); it.card.querySelector('.typed').textContent=''; it.bloom=0; });
+    for (const it of items){ if (my !== gen){ btn.disabled = false; return; }   // preempted by play/tour
+      status.textContent = `Reading ${it.label}…`; sfxTick(it); renderAnatomy(it);
+      if (it.kind==='vspace'){ await tourTo(it); }
+      else { active = it; reveal(it); await wait(reduce?0:850); active = null; }
+      await wait(reduce?0:220); }
+    btn.disabled = false; if (my !== gen) return;
+    status.textContent = 'Every value here was read from colour alone — no GPS, no lookup, no network.'; }
+  btn.addEventListener('click', () => { ensureAudio(); sfxClick(); scan(); });
+  document.getElementById('peek').addEventListener('change', e => { sfxClick();
+    document.querySelector('.frame').classList.toggle('peeking', e.target.checked); });
+  document.getElementById('sound').addEventListener('change', e => { muted = !e.target.checked; if (!muted) ensureAudio(); });
+  document.addEventListener('pointerdown', ensureAudio);
+  document.querySelectorAll('.term').forEach(t => { t.tabIndex = 0; });
+  document.querySelectorAll('.dossier').forEach(d => d.addEventListener('toggle', () => { if (d.open) sfxTick(); }));
+  renderAnatomy(items[0]);
+
+  // ---------- sonify the carrier: each hidden vector -> one note ----------
+  let playing = false;
+  const WAVE = { vspace:'triangle', vheight:'sine', dtime:'square' };
+  const AXC  = { vspace:'#5fc9d6', vheight:'#9ed36a', dtime:'#e6b45a' };
+  const PENTA = [0, 3, 5, 7, 10];                        // minor pentatonic: mellow, always consonant
+  function valNorm(it){                                  // 0..1 for the value the vector holds
+    if (it.kind === 'vspace')  return (it.lat + 90) / 180;                                        // south->north
+    if (it.kind === 'vheight') return clamp(Math.log10(1 + Math.max(0, it.altKm)) / Math.log10(1 + 500), 0, 1);
+    return clamp(it.year / 2000, 0, 1);                                                           // ancient->modern
+  }
+  function noteFreq(it){
+    const steps = 15, idx = Math.round(valNorm(it) * (steps - 1));
+    const semi = Math.floor(idx / PENTA.length) * 12 + PENTA[idx % PENTA.length];
+    return 146.83 * Math.pow(2, semi / 12);              // base ~ D3, spanning ~3 octaves
+  }
+  const frameEl = document.querySelector('.frame'), playhead = document.getElementById('playhead');
+  async function playAsSound(){
+    if (playing) return; ensureAudio();
+    if (AC && AC.state !== 'running'){ try { await AC.resume(); } catch (e){} }   // wait until it can play
+    const my = ++gen; touring = false; playing = true;                            // preempt any running scan/tour
+    const pb = document.getElementById('playbtn'); pb.disabled = true; btn.disabled = true;
+    document.getElementById('peek').checked = true; frameEl.classList.add('peeking', 'playing');
+    const N = items.length;
+    for (const it of items){
+      if (my !== gen) break;
+      const nrm = valNorm(it);
+      playhead.style.setProperty('--col', (it.i / N * 100) + '%');   // highlight this vector's two pixels
+      playhead.style.setProperty('--w', (100 / N) + '%');
+      playhead.style.setProperty('--pitch', (7 + nrm * 80) + '%');   // dot rises to the note's pitch
+      playhead.style.setProperty('--phc', AXC[it.kind]);
+      active = it; it.bloom = 1; renderAnatomy(it);
+      it.card.classList.add('shown'); typeInto(it.card.querySelector('.typed'), it.val, reduce);
+      status.textContent = `♪ ${it.label}  →  ${it.val}`;
+      const pan = it.kind === 'vspace'
+        ? clamp((((it.lon + 180) % 360) - 180) / 180, -1, 1) * 0.6   // place: pan by longitude
+        : (valNorm(it) * 2 - 1) * 0.4;
+      tone(noteFreq(it), 0.62, 0.05, WAVE[it.kind], pan);           // notes overlap slightly -> legato
+      await wait(reduce ? 130 : 300);
+    }
+    if (my === gen) await wait(reduce ? 0 : 450);
+    playing = false; pb.disabled = false; btn.disabled = false; frameEl.classList.remove('playing');
+    if (my === gen){ active = null;
+      status.textContent = 'The image, played back as sound: pitch is the value, timbre is the kind.'; }
+  }
+
+  // ---------- carrier oscilloscope: the waveform being played ----------
+  const scope = document.getElementById('scope'), sctx = scope.getContext('2d');
+  const scopeBuf = new Uint8Array(1024);
+  let sW = 0, sH = 0, scopeScale = 0;
+  function scopeResize(){ const dp = Math.min(2, devicePixelRatio || 1), r = scope.getBoundingClientRect();
+    sW = r.width; sH = r.height; scope.width = sW*dp; scope.height = sH*dp; sctx.setTransform(dp,0,0,dp,0,0); }
+  scopeResize(); addEventListener('resize', scopeResize);
+  function drawScope(){
+    sctx.clearRect(0, 0, sW, sH);
+    sctx.strokeStyle = 'rgba(150,178,212,0.12)'; sctx.lineWidth = 1;
+    sctx.beginPath(); sctx.moveTo(0, sH/2); sctx.lineTo(sW, sH/2); sctx.stroke();
+    const col = (active && AXC[active.kind]) || '#5fc9d6';
+    if (analyser){
+      analyser.getByteTimeDomainData(scopeBuf);
+      const SPAN = 220;
+      let peak = 0;                                   // auto-gain: scale the loudest sample to fill the scope
+      for (let i = 0; i < SPAN; i++){ const d = Math.abs(scopeBuf[i] - 128); if (d > peak) peak = d; }
+      const target = peak > 2 ? (sH * 0.5 * 0.92) / peak : 0;   // near-silence -> flat, no runaway gain
+      scopeScale += (target - scopeScale) * 0.25;               // smooth so it doesn't flicker
+      const yOf = i => clamp(sH/2 - (scopeBuf[i] - 128) * scopeScale, 1, sH - 1);
+      sctx.beginPath(); sctx.moveTo(0, sH/2);                   // filled area under the wave
+      for (let i = 0; i < SPAN; i++) sctx.lineTo(i/(SPAN-1)*sW, yOf(i));
+      sctx.lineTo(sW, sH/2); sctx.closePath();
+      sctx.globalAlpha = 0.15; sctx.fillStyle = col; sctx.fill(); sctx.globalAlpha = 1;
+      sctx.strokeStyle = col; sctx.lineWidth = 2; sctx.shadowColor = col; sctx.shadowBlur = 10;
+      sctx.beginPath();
+      for (let i = 0; i < SPAN; i++){ const x = i/(SPAN-1)*sW; i ? sctx.lineTo(x, yOf(i)) : sctx.moveTo(x, yOf(i)); }
+      sctx.stroke(); sctx.shadowBlur = 0;
+    }
+    requestAnimationFrame(drawScope);
+  }
+  requestAnimationFrame(drawScope);
+
+  // intro modal: gates the piece; the Enter tap also unlocks audio (needed on mobile)
+  const intro = document.getElementById('intro');
+  function enter(){ if (intro.classList.contains('gone')) return; ensureAudio();
+    intro.classList.add('gone'); setTimeout(() => intro.remove(), 700);
+    reduce ? scan() : setTimeout(scan, 500); }
+  document.getElementById('enterbtn').addEventListener('click', () => { sfxClick(); enter(); });
+  document.getElementById('playbtn').addEventListener('click', () => { ensureAudio(); sfxClick(); playAsSound(); });
+})();
+
+</script>
