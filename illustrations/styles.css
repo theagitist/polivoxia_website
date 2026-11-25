@@ -1,174 +1,54 @@
-/* Illustrations gallery — matches the polivoxia.ca homepage aesthetic */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* Illustrations gallery: the polivoxia.ca v2 look (board, strip, riso title, buttons and footer come from /assets/site.css).
+   This file only adds the masthead, the clipping grid and the lightbox. */
 
-body {
-  font: 400 15px/1.8 "Lato", sans-serif;
-  color: #eaeaea;
-  min-height: 100vh;
-  background-color: #1a1a1a;
-  background-image: url("../img/polivoxia_logo.jpg");
-  background-image: image-set(url("../img/polivoxia_logo.webp") type("image/webp"), url("../img/polivoxia_logo.jpg") type("image/jpeg"));
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.62);
-  z-index: -1;
-}
+.wrap{max-width:1240px;margin:0 auto;padding:clamp(1.4rem,4vw,3rem) clamp(1rem,4vw,3rem) 4rem}
+.strip > span:last-child{opacity:.8}
 
-.wrap { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+/* masthead: the homepage's off-register title, one word */
+.masthead{margin-bottom:clamp(2rem,5vw,3.4rem);isolation:isolate}  /* keeps the riso multiply inks from blending with the yellow page, as in the homepage hero */
+.masthead h1{font-size:clamp(3rem,11vw,8.5rem)}
+.masthead .tagline{margin-top:1rem}
+.masthead .links{margin-top:1.2rem}
 
-.masthead { text-align: center; margin-bottom: 8px; }
-.masthead h1 {
-  font: 700 3.4rem/1.05 "Special Elite", "Courier New", monospace;
-  letter-spacing: 8px;
-  text-transform: uppercase;
-  color: #fff;
-  text-shadow: 0 2px 18px rgba(0,0,0,0.6);
-}
-.masthead p {
-  margin-top: 14px;
-  font: 400 1.05rem/1.5 "Courier Prime", "Courier New", monospace;
-  color: rgba(255,255,255,0.82);
-}
-.back {
-  display: inline-block;
-  margin-bottom: 34px;
-  font: 700 13px/1 "Special Elite", "Courier New", monospace;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.85);
-  text-decoration: none;
-}
-.back:hover { color: #fff; }
-.masthead-links { text-align: center; }
+/* masonry on CSS grid (not CSS columns: Chromium mis-draws and mis-hit-tests tilted, scaling items inside multicol).
+   Without JS it is a plain top-aligned grid; with JS (.masonry) rows are 6px and each item spans its own height. */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:2.2rem;align-items:start}
+.grid.masonry{grid-auto-rows:6px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:1.4rem}}
+@media (max-width:560px){.grid{grid-template-columns:minmax(0,1fr)}}
 
-@media (max-width: 640px) {
-  .masthead h1 { font-size: 2.3rem; letter-spacing: 4px; }
-}
+.shot{display:block;width:100%;margin:0 0 2.4rem;padding:0;border:0;background:none;cursor:zoom-in;color:var(--ink);text-align:left}
+.shot .paper{--r:-1.4deg;--tp:rgba(255,72,176,.75);position:relative;display:block;background:var(--paper);padding:11px;
+  box-shadow:5px 7px 0 rgba(29,26,43,.28);transform:rotate(var(--r));transition:transform .2s,box-shadow .2s}
+.shot:nth-child(3n+2) .paper{--r:1.2deg;--tp:rgba(126,211,234,.9)}
+.shot:nth-child(3n) .paper{--r:-.5deg;--tp:rgba(196,240,0,.85)}
+.shot:nth-child(4n+1) .paper{--tp:rgba(195,170,255,.9)}
+/* masking tape */
+.shot .paper::before{content:"";position:absolute;z-index:2;top:-13px;left:50%;width:96px;height:26px;transform:translateX(-50%) rotate(-3deg);
+  background:var(--tp);clip-path:polygon(3% 0,97% 6%,100% 100%,0 92%)}
+.shot img{display:block;width:100%;height:auto}
+.shot:hover .paper,.shot:focus-visible .paper{transform:rotate(0) scale(1.02);box-shadow:8px 11px 0 rgba(29,26,43,.3)}
+.shot:focus-visible{outline:none}
+.shot:focus-visible .paper{outline:3px solid var(--blue);outline-offset:4px}
 
-/* Masonry via CSS columns — no JS, no layout library */
-.grid {
-  column-count: 3;
-  column-gap: 16px;
-}
-@media (max-width: 900px) { .grid { column-count: 2; } }
-@media (max-width: 560px) { .grid { column-count: 1; } }
+/* source label (Journeyways), as a stamp */
+.shot .tag{position:absolute;z-index:3;top:20px;right:18px;font:700 .7rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--plum);background:var(--paper);border:2px solid var(--plum);padding:.35rem .5rem;transform:rotate(5deg);pointer-events:none}
 
-.shot {
-  display: block;
-  width: 100%;
-  margin: 0 0 16px;
-  padding: 0;
-  border: 0;
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: zoom-in;
-  background: rgba(0,0,0,0.4);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.08);
-  break-inside: avoid;
-  transition: box-shadow 280ms ease;
-}
-.shot img {
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: transform 320ms ease, filter 320ms ease;
-}
-/* ponytail: never transform the .shot itself — it's a CSS-column child, and a
-   transformed multicol child disappears in Chromium/WebKit. Zoom the inner img. */
-.shot:hover {
-  box-shadow: 0 16px 38px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.14);
-}
-.shot:hover img {
-  transform: scale(1.05);
-  filter: saturate(1.1) contrast(1.03);
-}
-.shot:focus-visible { outline: 2px solid #ffd54a; outline-offset: 3px; }
-
-/* Source label (e.g. Journeyways) */
-.shot .tag {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 5px 9px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.72);
-  color: #fff;
-  font: 600 10px/1 "Special Elite", "Courier New", monospace;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  backdrop-filter: blur(4px);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Lightbox */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.9);
-  z-index: 100;
-  padding: 40px 20px;
-}
-.lightbox.open { display: flex; }
-.lightbox img {
-  max-width: 100%;
-  max-height: calc(100vh - 120px);
-  border-radius: 6px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-}
-.lb-cap {
-  position: absolute;
-  bottom: 18px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font: 400 15px/1.4 "Courier Prime", "Courier New", monospace;
-  color: rgba(255,255,255,0.85);
-  padding: 0 20px;
-}
-.lb-cap a {
-  color: #ffd54a;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,213,74,0.5);
-  white-space: nowrap;
-}
-.lb-cap a:hover { border-bottom-color: #ffd54a; }
-.lb-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 52px;
-  height: 52px;
-  border: 0;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.12);
-  color: #fff;
-  font-size: 26px;
-  line-height: 1;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  transition: background 200ms ease;
-}
-.lb-btn:hover { background: rgba(255,255,255,0.25); }
-.lb-prev { left: 14px; }
-.lb-next { right: 14px; }
-.lb-close {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  transform: none;
-}
-@media (max-width: 560px) {
-  .lb-btn { width: 42px; height: 42px; font-size: 22px; }
-}
+/* lightbox: an ink room, the picture on paper */
+.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;gap:1rem;
+  background:rgba(29,26,43,.94);z-index:100;padding:clamp(1rem,4vw,2.5rem) clamp(3.6rem,8vw,6rem) 5rem}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:calc(100vh - 11rem);background:var(--paper);padding:10px;box-shadow:8px 10px 0 rgba(0,0,0,.45)}
+.lb-cap{position:absolute;bottom:1.2rem;left:1rem;right:1rem;text-align:center;font:700 .85rem/1.5 var(--mono);letter-spacing:.06em;color:var(--board)}
+.lb-cap a{color:var(--lime);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;white-space:nowrap}
+.lb-cap a:hover{color:var(--paper)}
+.lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;display:grid;place-items:center;cursor:pointer;
+  font:900 1.6rem/1 var(--disp);color:var(--ink);background:var(--board);border:2px solid var(--ink);box-shadow:4px 4px 0 rgba(0,0,0,.5);transition:background .15s}
+.lb-btn:hover{background:var(--pink)}
+.lb-btn:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+.lb-prev{left:14px}
+.lb-next{right:14px}
+.lb-close{top:14px;right:14px;transform:none;background:var(--coral)}
+@media (max-width:560px){.lb-btn{width:42px;height:42px}.lightbox{padding:4rem .8rem 6rem}}
+@media (prefers-reduced-motion:reduce){.shot .paper,.lb-btn{transition:none}}
