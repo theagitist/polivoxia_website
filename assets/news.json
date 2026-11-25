@@ -1,0 +1,518 @@
+[
+ {
+  "date": "2026-11",
+  "project": "Journeyways",
+  "kind": "release",
+  "href": {
+   "en": "https://www.journeyways.ca/updates",
+   "es": "https://www.journeyways.ca/es/updates",
+   "fr": "https://www.journeyways.ca/fr/updates"
+  },
+  "title": {
+   "en": "Now fully playable",
+   "es": "Ya se puede jugar completo",
+   "fr": "Désormais entièrement jouable",
+   "pt": "Agora totalmente jogável"
+  },
+  "text": {
+   "en": "Every move in the Game Rules can now be made on screen, on a computer (tablets and phones will come later).",
+   "es": "Cada jugada de las Reglas del juego se puede hacer ahora en pantalla, en una computadora (las tabletas y los teléfonos llegarán más adelante).",
+   "fr": "Chaque coup des Règles du jeu peut maintenant se jouer à l'écran, sur un ordinateur (les tablettes et les téléphones viendront plus tard).",
+   "pt": "Cada jogada das Regras do jogo agora pode ser feita na tela, em um computador (tablets e celulares virão depois)."
+  },
+  "highlight": true
+ },
+ {
+  "date": "2026-11",
+  "project": "Telaris",
+  "kind": "release",
+  "href": {
+   "en": "https://www.telaris.ca/changelog",
+   "es": "https://www.telaris.ca/es/changelog/",
+   "fr": "https://www.telaris.ca/fr/changelog/",
+   "pt": "https://www.telaris.ca/pt/changelog/"
+  },
+  "title": {
+   "en": "Draw the map of a galaxy by hand",
+   "es": "Dibujar a mano el mapa de una galaxia",
+   "fr": "Dessiner à la main la carte d'une galaxie",
+   "pt": "Desenhar à mão o mapa de uma galáxia"
+  },
+  "text": {
+   "en": "Editors can now draw the map of a galaxy themselves.",
+   "es": "Quienes editan ahora pueden dibujar el mapa de una galaxia.",
+   "fr": "Les personnes qui éditent peuvent maintenant dessiner elles-mêmes la carte d'une galaxie.",
+   "pt": "Quem edita agora pode desenhar o mapa de uma galáxia."
+  }
+ },
+ {
+  "date": "2026-10",
+  "project": "Telaris",
+  "kind": "release",
+  "href": {
+   "en": "https://www.telaris.ca/changelog",
+   "es": "https://www.telaris.ca/es/changelog/",
+   "fr": "https://www.telaris.ca/fr/changelog/",
+   "pt": "https://www.telaris.ca/pt/changelog/"
+  },
+  "title": {
+   "en": "Every galaxy now branches like a tree",
+   "es": "Ahora cada galaxia se ramifica como un árbol",
+   "fr": "Chaque galaxie se ramifie désormais comme un arbre",
+   "pt": "Agora cada galáxia se ramifica como uma árvore"
+  },
+  "text": {
+   "en": "The wormholes in a galaxy are now arranged as a branching, self-similar tree that grows out of their shared keywords, instead of floating in a loose cloud.",
+   "es": "Los agujeros de gusano de una galaxia ahora se organizan como un árbol ramificado y autosimilar que crece a partir de sus palabras clave compartidas, en lugar de flotar en una nube suelta.",
+   "fr": "Les trous de ver d'une galaxie sont maintenant disposés comme un arbre ramifié et autosimilaire qui pousse à partir de leurs mots-clés partagés, au lieu de flotter dans un nuage lâche.",
+   "pt": "Os buracos de minhoca de uma galáxia agora se organizam como uma árvore ramificada e autossimilar que cresce a partir de suas palavras-chave compartilhadas, em vez de flutuar em uma nuvem solta."
+  }
+ },
+ {
+  "date": "2026-10",
+  "project": "Manifiesto Caníbal",
+  "kind": "release",
+  "href": {
+   "es": "/manifiesto_canibal/",
+   "fr": "/manifiesto_canibal/",
+   "en": "/manifiesto_canibal/"
+  },
+  "title": {
+   "en": "Manifiesto Caníbal goes live",
+   "fr": "Manifiesto Caníbal en ligne",
+   "es": "Manifiesto Caníbal, en línea",
+   "pt": "Manifiesto Caníbal no ar"
+  },
+  "text": {
+   "en": "An interactive reading of Picabia's 1920 Cannibal Dada Manifesto, presented at UBC's SPAN 550B seminar.",
+   "fr": "Une lecture interactive du Manifeste cannibale Dada de Picabia (1920), présentée au séminaire SPAN 550B de UBC.",
+   "es": "Una lectura interactiva del Manifiesto caníbal dadá de Picabia (1920), presentada en el seminario SPAN 550B de UBC.",
+   "pt": "Uma leitura interativa do Manifesto canibal dadá de Picabia (1920), apresentada no seminário SPAN 550B da UBC."
+  }
+ },
+ {
+  "date": "2026-10",
+  "project": "Critical Play Lab",
+  "kind": "award",
+  "href": {},
+  "title": {
+   "en": "Critical Play Lab fellowship, 2026–27",
+   "fr": "Fellowship du Critical Play Lab, 2026-2027",
+   "es": "Fellowship del Critical Play Lab, 2026-27",
+   "pt": "Fellowship do Critical Play Lab, 2026-27"
+  },
+  "text": {
+   "en": "I joined UBC's Critical Play Lab as a fellow for the 2026–27 year.",
+   "fr": "J'ai rejoint le Critical Play Lab de UBC comme fellow pour l'année 2026-2027.",
+   "es": "Me uní al Critical Play Lab de UBC como fellow para el año 2026-27.",
+   "pt": "Entrei no Critical Play Lab da UBC como fellow para o ano 2026-27."
+  },
+  "highlight": true
+ },
+ {
+  "date": "2026-07",
+  "project": "Illustrations",
+  "kind": "release",
+  "href": {
+   "en": "/illustrations/"
+  },
+  "title": {
+   "en": "A new illustrations gallery",
+   "fr": "Une nouvelle galerie d'illustrations",
+   "es": "Una nueva galería de ilustraciones",
+   "pt": "Uma nova galeria de ilustrações"
+  },
+  "text": {
+   "en": "Digital portraits, line studies and abstract pieces, gathered in one gallery.",
+   "fr": "Portraits numériques, études au trait et œuvres abstraites, réunis dans une galerie.",
+   "es": "Retratos digitales, estudios de línea y piezas abstractas, reunidos en una galería.",
+   "pt": "Retratos digitais, estudos de linha e peças abstratas, reunidos em uma galeria."
+  }
+ },
+ {
+  "date": "2026-06",
+  "project": "Pumice",
+  "kind": "release",
+  "href": {
+   "en": "https://pumice.polivoxia.ca"
+  },
+  "title": {
+   "en": "Pumice is on the App Store",
+   "fr": "Pumice arrive sur l'App Store",
+   "es": "Pumice llega al App Store",
+   "pt": "Pumice chega à App Store"
+  },
+  "text": {
+   "en": "Local-first PDF annotation for iPad, now available on the Canadian App Store.",
+   "fr": "L'annotation de PDF en local pour iPad, désormais offerte sur l'App Store canadien.",
+   "es": "Anotación de PDF local para iPad, ya disponible en el App Store de Canadá.",
+   "pt": "Anotação de PDF local para iPad, agora disponível na App Store do Canadá."
+  }
+ },
+ {
+  "date": "2026-06",
+  "project": "Journeyways",
+  "kind": "lecture",
+  "href": {
+   "en": "https://www.journeyways.ca/updates",
+   "es": "https://www.journeyways.ca/es/updates",
+   "fr": "https://www.journeyways.ca/fr/updates"
+  },
+  "title": {
+   "en": "A guest lecture in GRSJ 306",
+   "es": "Una clase invitada en GRSJ 306",
+   "fr": "Une conférence invitée dans GRSJ 306",
+   "pt": "Uma palestra na GRSJ 306"
+  },
+  "text": {
+   "en": "JOURNEYWAYS was brought into UBC's GRSJ 306 as a guest lecture, sharing the game and its approach to identity, play, and pedagogy with students.",
+   "es": "JOURNEYWAYS se llevó a GRSJ 306 en UBC como clase invitada, para compartir con el estudiantado el juego y su enfoque de la identidad, el juego y la pedagogía.",
+   "fr": "JOURNEYWAYS a été présenté dans le cours GRSJ 306 de UBC lors d'une conférence invitée, pour partager le jeu et son approche de l'identité, du jeu et de la pédagogie avec les personnes étudiantes.",
+   "pt": "JOURNEYWAYS foi levado à disciplina GRSJ 306 da UBC como palestra convidada, compartilhando o jogo e sua abordagem de identidade, jogo e pedagogia com estudantes."
+  },
+  "highlight": true
+ },
+ {
+  "date": "2026-05",
+  "project": "Telaris",
+  "kind": "release",
+  "href": {
+   "en": "https://www.telaris.ca/changelog",
+   "es": "https://www.telaris.ca/es/changelog/",
+   "fr": "https://www.telaris.ca/fr/changelog/",
+   "pt": "https://www.telaris.ca/pt/changelog/"
+  },
+  "title": {
+   "en": "Instances that share their galaxies",
+   "es": "Instancias que comparten sus galaxias",
+   "fr": "Des instances qui partagent leurs galaxies",
+   "pt": "Instâncias que compartilham suas galáxias"
+  },
+  "text": {
+   "en": "Independent Telaris instances can now trust one another, publish galaxies, and mirror each other's published work.",
+   "es": "Las instancias independientes de Telaris ahora pueden confiar unas en otras, publicar galaxias y reflejar el trabajo publicado de las demás.",
+   "fr": "Les instances indépendantes de Telaris peuvent maintenant se faire confiance, publier des galaxies et refléter le travail publié des autres.",
+   "pt": "As instâncias independentes de Telaris agora podem confiar umas nas outras, publicar galáxias e espelhar o trabalho publicado das demais."
+  }
+ },
+ {
+  "date": "2026-05",
+  "project": "Telaris",
+  "kind": "release",
+  "href": {
+   "en": "https://www.telaris.ca/changelog",
+   "es": "https://www.telaris.ca/es/changelog/",
+   "fr": "https://www.telaris.ca/fr/changelog/",
+   "pt": "https://www.telaris.ca/pt/changelog/"
+  },
+  "title": {
+   "en": "The whole archive in four languages",
+   "es": "Todo el archivo en cuatro idiomas",
+   "fr": "Toute l'archive en quatre langues",
+   "pt": "Todo o arquivo em quatro idiomas"
+  },
+  "text": {
+   "en": "Telaris now speaks English, Spanish, Portuguese, and French throughout, with no language treated as a fallback for another.",
+   "es": "Telaris ahora habla inglés, español, portugués y francés de principio a fin, sin tratar ningún idioma como respaldo de otro.",
+   "fr": "Telaris parle maintenant anglais, espagnol, portugais et français de bout en bout, sans traiter aucune langue comme la solution de repli d'une autre.",
+   "pt": "Telaris agora fala inglês, espanhol, português e francês do início ao fim, sem tratar nenhum idioma como reserva de outro."
+  }
+ },
+ {
+  "date": "2026-04",
+  "project": "Tracet",
+  "kind": "release",
+  "href": {
+   "en": "https://tracet.polivoxia.ca"
+  },
+  "title": {
+   "en": "Tracet 0.1 is out",
+   "fr": "Tracet 0.1 est sorti",
+   "es": "Sale Tracet 0.1",
+   "pt": "Sai o Tracet 0.1"
+  },
+  "text": {
+   "en": "Private, local transcription for macOS: whisperX, speaker diarization and editable transcripts, with no cloud.",
+   "fr": "Transcription privée et locale pour macOS : whisperX, identification des locuteurs et transcriptions modifiables, sans nuage.",
+   "es": "Transcripción privada y local para macOS: whisperX, identificación de hablantes y transcripciones editables, sin nube.",
+   "pt": "Transcrição privada e local para macOS: whisperX, identificação de falantes e transcrições editáveis, sem nuvem."
+  }
+ },
+ {
+  "date": "2026-04",
+  "project": "She Came Down from the Mountains",
+  "kind": "release",
+  "href": {
+   "en": "/she_came_down_from_the_mountains/"
+  },
+  "title": {
+   "en": "Vol. 2 and a Spanish edition",
+   "fr": "Le vol. 2 et une édition espagnole",
+   "es": "El vol. 2 y una edición en español",
+   "pt": "O vol. 2 e uma edição em espanhol"
+  },
+  "text": {
+   "en": "The zine gained its academic companion, Vol. 2, The Critique, and a full Spanish translation of Vol. 1, Testigo.",
+   "fr": "Le zine s'enrichit de son volet académique, le vol. 2, The Critique, et d'une traduction espagnole complète du vol. 1, Testigo.",
+   "es": "El zine sumó su volumen académico, el vol. 2, The Critique, y la traducción completa al español del vol. 1, Testigo.",
+   "pt": "O zine ganhou seu volume acadêmico, o vol. 2, The Critique, e a tradução completa para o espanhol do vol. 1, Testigo."
+  }
+ },
+ {
+  "date": "2026-04",
+  "project": "The Somatic Ghost",
+  "kind": "release",
+  "href": {
+   "en": "/the_somatic_ghost/"
+  },
+  "title": {
+   "en": "The Somatic Ghost is published",
+   "fr": "Parution de The Somatic Ghost",
+   "es": "Se publica The Somatic Ghost",
+   "pt": "The Somatic Ghost é publicado"
+  },
+  "text": {
+   "en": "A zine and counter-archive of the 28th cycle.",
+   "fr": "Un zine et une contre-archive du 28e cycle.",
+   "es": "Un zine y contraarchivo del ciclo 28.",
+   "pt": "Um zine e contra-arquivo do 28º ciclo."
+  }
+ },
+ {
+  "date": "2026-04",
+  "project": "Journeyways",
+  "kind": "award",
+  "href": {
+   "en": "https://www.journeyways.ca/updates",
+   "es": "https://www.journeyways.ca/es/updates",
+   "fr": "https://www.journeyways.ca/fr/updates"
+  },
+  "title": {
+   "en": "SSHRC Canada Graduate Scholarship (CGS-M)",
+   "fr": "Bourse d'études supérieures du Canada du CRSH (BESC M)",
+   "es": "Beca CGS-M del SSHRC",
+   "pt": "Bolsa CGS-M do SSHRC"
+  },
+  "text": {
+   "en": "The research behind JOURNEYWAYS was awarded a Canada Graduate Scholarship at the master's level (CGS-M) from the Social Sciences and Humanities Research Council, a national merit-based award supporting the project through its next phase at UBC GRSJ.",
+   "es": "La investigación detrás de JOURNEYWAYS recibió una Canada Graduate Scholarship de nivel de maestría (CGS-M) del Social Sciences and Humanities Research Council, un galardón nacional por méritos que apoya el proyecto a lo largo de su próxima fase en UBC GRSJ.",
+   "fr": "La recherche derrière JOURNEYWAYS a reçu une Canada Graduate Scholarship de niveau maîtrise (CGS-M) du Social Sciences and Humanities Research Council, une distinction nationale au mérite qui soutient le projet tout au long de sa prochaine phase à UBC GRSJ.",
+   "pt": "A pesquisa por trás de JOURNEYWAYS recebeu uma Canada Graduate Scholarship de mestrado (CGS-M) do Social Sciences and Humanities Research Council, uma distinção nacional por mérito que apoia o projeto em sua próxima fase na UBC GRSJ."
+  },
+  "highlight": true
+ },
+ {
+  "date": "2026-02",
+  "project": "Journeyways",
+  "kind": "award",
+  "href": {
+   "en": "https://www.journeyways.ca/updates",
+   "es": "https://www.journeyways.ca/es/updates",
+   "fr": "https://www.journeyways.ca/fr/updates"
+  },
+  "title": {
+   "en": "A critical play fellowship",
+   "es": "Una beca de juego crítico",
+   "fr": "Une bourse de jeu critique",
+   "pt": "Uma bolsa de jogo crítico"
+  },
+  "text": {
+   "en": "JOURNEYWAYS received the Critical Play Fellows Award, a UBC graduate award recognising the project's use of play as a mode of critical inquiry.",
+   "es": "JOURNEYWAYS recibió el Critical Play Fellows Award, un galardón de posgrado de UBC que reconoce el uso que hace el proyecto del juego como forma de indagación crítica.",
+   "fr": "JOURNEYWAYS a reçu le Critical Play Fellows Award, une distinction de cycle supérieur de UBC qui reconnaît l'usage que fait le projet du jeu comme mode d'enquête critique.",
+   "pt": "JOURNEYWAYS recebeu o Critical Play Fellows Award, uma distinção de pós-graduação da UBC que reconhece o uso do jogo pelo projeto como forma de investigação crítica."
+  }
+ },
+ {
+  "date": "2026-01",
+  "project": "The Ground Remains",
+  "kind": "release",
+  "href": {
+   "en": "/the_ground_remains/"
+  },
+  "title": {
+   "en": "The Ground Remains is published",
+   "fr": "Parution de The Ground Remains",
+   "es": "Se publica The Ground Remains",
+   "pt": "The Ground Remains é publicado"
+  },
+  "text": {
+   "en": "A print-and-play game and zine inspired by Jodi A. Byrd's <em>Indigenomicon</em>, free on the site and on itch.io.",
+   "fr": "Un jeu et zine à imprimer inspiré d'<em>Indigenomicon</em> de Jodi A. Byrd, gratuit sur le site et sur itch.io.",
+   "es": "Un juego y zine para imprimir inspirado en <em>Indigenomicon</em> de Jodi A. Byrd, gratis en el sitio y en itch.io.",
+   "pt": "Um jogo e zine para imprimir inspirado em <em>Indigenomicon</em>, de Jodi A. Byrd, gratuito no site e no itch.io."
+  }
+ },
+ {
+  "date": "2026-01",
+  "project": "Journeyways",
+  "kind": "start",
+  "href": {
+   "en": "https://www.journeyways.ca/updates",
+   "es": "https://www.journeyways.ca/es/updates",
+   "fr": "https://www.journeyways.ca/fr/updates"
+  },
+  "title": {
+   "en": "Development begins",
+   "es": "Comienza el desarrollo",
+   "fr": "Le développement commence",
+   "pt": "Começa o desenvolvimento"
+  },
+  "text": {
+   "en": "First commits on the digital companion to the boardgame.",
+   "es": "Primeros commits del complemento digital del juego de mesa.",
+   "fr": "Premiers commits sur le compagnon numérique du jeu de société.",
+   "pt": "Primeiros commits do complemento digital do jogo de tabuleiro."
+  }
+ },
+ {
+  "date": "2026-01",
+  "project": "Telaris",
+  "kind": "start",
+  "href": {
+   "en": "https://www.telaris.ca/changelog",
+   "es": "https://www.telaris.ca/es/changelog/",
+   "fr": "https://www.telaris.ca/fr/changelog/",
+   "pt": "https://www.telaris.ca/pt/changelog/"
+  },
+  "title": {
+   "en": "Telaris development begins",
+   "fr": "Le développement de Telaris commence",
+   "es": "Comienza el desarrollo de Telaris",
+   "pt": "Começa o desenvolvimento de Telaris"
+  },
+  "text": {
+   "en": "The first version of Telaris: a single 3D network of wormholes you can fly through, linked by shared meaning, and open one by one.",
+   "es": "La primera versión de Telaris: una sola red en 3D de agujeros de gusano por la que puedes volar, enlazada por sentido compartido, y que se abre uno a uno.",
+   "fr": "La première version de Telaris : un seul réseau en 3D de trous de ver que tu peux survoler, relié par le sens partagé, et qui s'ouvre un à un.",
+   "pt": "A primeira versão de Telaris: uma só rede em 3D de buracos de minhoca pela qual você pode voar, ligada por sentido compartilhado, e que se abre um a um."
+  }
+ },
+ {
+  "date": "2025-11",
+  "project": "Journeyways",
+  "kind": "release",
+  "href": {
+   "en": "https://www.journeyways.ca/updates",
+   "es": "https://www.journeyways.ca/es/updates",
+   "fr": "https://www.journeyways.ca/fr/updates"
+  },
+  "title": {
+   "en": "Version 1.0, and a second playtest",
+   "es": "Versión 1.0, y una segunda prueba de juego",
+   "fr": "Version 1.0, et un deuxième test de jeu",
+   "pt": "Versão 1.0 e um segundo teste de jogo"
+  },
+  "text": {
+   "en": "The complete first edition came together: 35 map tiles, 81 cards across five colour-coded piles, the rulebook, and a write-in player booklet for each player.",
+   "es": "La primera edición completa tomó forma: 35 losetas de mapa, 81 cartas repartidas en cinco montones codificados por color, el reglamento y un cuadernillo para escribir para cada participante.",
+   "fr": "La première édition complète a pris forme : 35 tuiles de carte, 81 cartes réparties en cinq piles codées par couleur, le livret de règles et un carnet à remplir pour chaque personne qui joue.",
+   "pt": "A primeira edição completa tomou forma: 35 peças de mapa, 81 cartas em cinco pilhas codificadas por cor, o livro de regras e um caderno para escrever para cada pessoa que joga."
+  }
+ },
+ {
+  "date": "2025-10",
+  "project": "Journeyways",
+  "kind": "event",
+  "href": {
+   "en": "https://www.journeyways.ca/updates",
+   "es": "https://www.journeyways.ca/es/updates",
+   "fr": "https://www.journeyways.ca/fr/updates"
+  },
+  "title": {
+   "en": "First public playtest",
+   "es": "Primera prueba de juego pública",
+   "fr": "Premier test de jeu public",
+   "pt": "Primeiro teste de jogo público"
+  },
+  "text": {
+   "en": "JOURNEYWAYS took part in ProtoCON BC in Vancouver, a convention for playtesting game prototypes, and met its first table of players.",
+   "es": "JOURNEYWAYS participó en ProtoCON BC en Vancouver, una convención para probar prototipos de juegos, y conoció a sus primeras personas jugadoras.",
+   "fr": "JOURNEYWAYS a participé à ProtoCON BC à Vancouver, une convention de test de prototypes de jeux, et a rencontré ses premières personnes joueuses.",
+   "pt": "JOURNEYWAYS participou da ProtoCON BC em Vancouver, uma convenção para testar protótipos de jogos, e conheceu suas primeiras pessoas jogadoras."
+  }
+ },
+ {
+  "date": "2025-08",
+  "project": "Journeyways",
+  "kind": "award",
+  "href": {
+   "en": "https://www.journeyways.ca/updates",
+   "es": "https://www.journeyways.ca/es/updates",
+   "fr": "https://www.journeyways.ca/fr/updates"
+  },
+  "title": {
+   "en": "A Faculty of Arts award",
+   "es": "Un galardón de la Facultad de Artes",
+   "fr": "Un prix de la Faculté des arts",
+   "pt": "Um prêmio da Faculdade de Artes"
+  },
+  "text": {
+   "en": "The project received a Faculty of Arts Graduate Award from UBC, early institutional support for the research that became JOURNEYWAYS.",
+   "es": "El proyecto recibió un Faculty of Arts Graduate Award de UBC, un primer apoyo institucional para la investigación que se convirtió en JOURNEYWAYS.",
+   "fr": "Le projet a reçu un Faculty of Arts Graduate Award de UBC, un premier soutien institutionnel à la recherche qui est devenue JOURNEYWAYS.",
+   "pt": "O projeto recebeu um Faculty of Arts Graduate Award da UBC, um primeiro apoio institucional à pesquisa que se tornou JOURNEYWAYS."
+  }
+ },
+ {
+  "date": "2025-07",
+  "project": "Journeyways",
+  "kind": "start",
+  "href": {
+   "en": "https://www.journeyways.ca/updates",
+   "es": "https://www.journeyways.ca/es/updates",
+   "fr": "https://www.journeyways.ca/fr/updates"
+  },
+  "title": {
+   "en": "Design begins",
+   "es": "Comienza el diseño",
+   "fr": "La conception commence",
+   "pt": "Começa o design"
+  },
+  "text": {
+   "en": "General design of JOURNEYWAYS began: a loose-ruled game about identity and becoming, and the first shape of its map tiles, its five colour-coded card piles, and the write-in player booklet.",
+   "es": "Comenzó el diseño general de JOURNEYWAYS: un juego de reglas flexibles sobre la identidad y el devenir, y la primera forma de sus losetas de mapa, sus cinco montones de cartas codificados por color y el cuadernillo para escribir.",
+   "fr": "La conception générale de JOURNEYWAYS a commencé : un jeu aux règles souples sur l'identité et le devenir, et la première forme de ses tuiles de carte, de ses cinq piles de cartes codées par couleur et du carnet à remplir.",
+   "pt": "Começou o design geral de JOURNEYWAYS: um jogo de regras flexíveis sobre identidade e devir."
+  }
+ },
+ {
+  "date": "2024",
+  "project": "TransRants",
+  "kind": "release",
+  "href": {
+   "en": "https://www.transrants.com"
+  },
+  "title": {
+   "en": "TransRants, self-published",
+   "fr": "TransRants, en autoédition",
+   "es": "TransRants, autopublicado",
+   "pt": "TransRants, publicação independente"
+  },
+  "text": {
+   "en": "Rants, poetry and essays, published independently.",
+   "fr": "Coups de gueule, poésie et essais, publiés de façon indépendante.",
+   "es": "Diatribas, poesía y ensayos, en edición independiente.",
+   "pt": "Desabafos, poesia e ensaios, em publicação independente."
+  }
+ },
+ {
+  "date": "2024",
+  "project": "UBC GRSJ",
+  "kind": "lecture",
+  "href": {},
+  "title": {
+   "en": "Guest lecture: Queering Tech",
+   "fr": "Conférence invitée : Queering Tech",
+   "es": "Charla invitada: Queering Tech",
+   "pt": "Palestra convidada: Queering Tech"
+  },
+  "text": {
+   "en": "A guest lecture for UBC's GRSJ 304 course.",
+   "fr": "Une conférence invitée dans le cours GRSJ 304 de UBC.",
+   "es": "Una charla invitada en el curso GRSJ 304 de UBC.",
+   "pt": "Uma palestra convidada na disciplina GRSJ 304 da UBC."
+  },
+  "highlight": true
+ }
+]

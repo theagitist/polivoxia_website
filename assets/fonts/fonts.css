@@ -1,0 +1,7 @@
+/* Latin subsets of the type used on the QTC, QWSP and tarot sites (all SIL OFL). */
+@font-face{font-family:"Big Shoulders Display";src:url("BigShoulders-Bold.woff2") format("woff2");font-weight:700 900;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url("BricolageGrotesque-Bold.woff2") format("woff2");font-weight:700 800;font-display:swap}
+@font-face{font-family:"Work Sans";src:url("WorkSans-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Work Sans";src:url("WorkSans-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Red Hat Mono";src:url("RedHatMono-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Red Hat Mono";src:url("RedHatMono-Bold.woff2") format("woff2");font-weight:700;font-display:swap}

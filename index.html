@@ -2,1074 +2,205 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>POLIVOXIA.CA - Portfolio of Liminal Spaces by Adri M. | Interactive Art, Writing & Creative Projects</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Portfolio website showcasing liminal spaces by Adri M. Featuring interactive art projects, poetry creation platforms, human rights documentation, games, writing, and creative multimedia works.">
-<meta name="keywords" content="Adri M, polivoxia, liminal spaces, interactive art, poetry, creative projects, portfolio, Stories in Whispers, Journeyways, TransRants, Costa Rica, human rights">
+<title>POLIVOXIA.CA · Adri M. | Art · Computers · Community</title>
+<meta name="description" content="Portfolio of Adri M.: interactive works, games, zines and apps. Art, computers and community.">
 <meta name="author" content="Adri M. (theagitist)">
-<meta name="robots" content="index, follow">
 <link rel="canonical" href="https://polivoxia.ca/">
-
-<!-- Open Graph / Facebook -->
+<link rel="alternate" hreflang="en" href="https://polivoxia.ca/?lang=en">
+<link rel="alternate" hreflang="fr" href="https://polivoxia.ca/?lang=fr">
+<link rel="alternate" hreflang="es" href="https://polivoxia.ca/?lang=es">
+<link rel="alternate" hreflang="pt" href="https://polivoxia.ca/?lang=pt">
+<link rel="alternate" hreflang="x-default" href="https://polivoxia.ca/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="POLIVOXIA.CA">
 <meta property="og:url" content="https://polivoxia.ca/">
-<meta property="og:title" content="POLIVOXIA.CA - Portfolio of Liminal Spaces by Adri M.">
-<meta property="og:description" content="Portfolio website showcasing liminal spaces by Adri M. Featuring interactive art projects, poetry creation platforms, human rights documentation, games, writing, and creative multimedia works.">
-<meta property="og:image" content="https://polivoxia.ca/img/polivoxia_logo.jpg">
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://polivoxia.ca/">
-<meta property="twitter:title" content="POLIVOXIA.CA - Portfolio of Liminal Spaces by Adri M.">
-<meta property="twitter:description" content="Portfolio website showcasing liminal spaces by Adri M. Featuring interactive art projects, poetry creation platforms, human rights documentation, games, writing, and creative multimedia works.">
-<meta property="twitter:image" content="https://polivoxia.ca/img/polivoxia_logo.jpg">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="preload" href="fonts/Lato/Lato-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/SpecialElite/SpecialElite-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css?v=2">
-<style>
-body, html {
-  height: 100%;
-  margin: 0;
-  font: 400 15px/1.8 "Lato", sans-serif;
-  color: #777;
-  background-color: #e5e5e5;
-  background-image: url("img/polivoxia_logo.jpg");
-  background-image: image-set(url("img/polivoxia_logo.webp") type("image/webp"), url("img/polivoxia_logo.jpg") type("image/jpeg"));
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-.bgimg-1, .bgimg-2, .bgimg-3 {
-  position: relative;
-  /*opacity: 0.65;*/
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-}
-.bgimg-1 {
-  height: 100vh;
-  position: relative;
-}
-
-@media (max-width: 768px) {
-  .bgimg-1 {
-    height: auto;
-    min-height: 180px;
-    padding-bottom: 0;
-  }
-}
-
-.caption {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 100%;
-  text-align: center;
-  color: #000;
-}
-
-.caption span.border {
-  background-color: #111;
-  color: #fff;
-  padding: 18px;
-  font-size: 25px;
-  letter-spacing: 10px;
-}
-
-h3 {
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  font: 20px "Lato", sans-serif;
-  color: #111;
-}
-
-/* Graffiti title styles */
-.graffiti-title {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Special Elite', 'Courier New', monospace;
-  font-size: 6.5rem;
-  font-weight: 700;
-  color: #000;
-  letter-spacing: 10px;
-  text-transform: uppercase;
-  z-index: 10;
-  margin: 0;
-  padding: 0;
-}
-
-.tagline-dot {
-  font-weight: 800;
-  margin: 0 0.35em;
-  color: #000;
-}
-
-.graffiti-subtitle {
-  position: absolute;
-  top: 140px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Special Elite', 'Courier New', monospace;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #333;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  z-index: 10;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.graffiti-subtitle-text {
-  display: block;
-}
-
-.graffiti-subtitle-icons {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.instagram-icon {
-  width: 28px;
-  height: 28px;
-  opacity: 0.8;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-  color: #000;
-}
-
-.instagram-icon:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-.github-icon {
-  width: 24px;
-  height: 24px;
-  opacity: 0.8;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-  color: #000;
-}
-
-.github-icon:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-.orcid-icon {
-  width: 28px;
-  height: 28px;
-  opacity: 0.8;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-  color: #000;
-}
-
-.orcid-icon:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-.itch-icon {
-  width: 28px;
-  height: 28px;
-  opacity: 0.8;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-  color: #000;
-}
-
-.itch-icon:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-@media (max-width: 1400px) and (min-width: 769px) {
-  .graffiti-title {
-    font-size: 4rem;
-    letter-spacing: 5px;
-    top: 0px;
-  }
-  .graffiti-subtitle {
-    font-size: 1.8rem;
-    top: 120px;
-    letter-spacing: 2px;
-    width: 100%;
-    text-align: center;
-    padding: 0 20px;
-    box-sizing: border-box;
-    white-space: normal;
-    line-height: 1.4;
-    justify-content: center;
-  }
-  .gallery {
-    top: 200px;
-    padding: 30px 20px 50px;
-  }
-}
-
-@media (max-width: 768px) {
-  .graffiti-title {
-    font-size: 3.5rem;
-    letter-spacing: 5px;
-    top: 10px;
-  }
-  .graffiti-subtitle {
-    font-size: 1.8rem;
-    top: 120px;
-    letter-spacing: 2px;
-    width: 100%;
-    text-align: center;
-    padding: 0 20px;
-    box-sizing: border-box;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 640px) {
-  .graffiti-title {
-    font-size: 3rem;
-    letter-spacing: 4px;
-    top: 8px;
-  }
-  .graffiti-subtitle {
-    font-size: 1.6rem;
-    top: 110px;
-    letter-spacing: 1.5px;
-    width: 100%;
-    text-align: center;
-    padding: 0 15px;
-    box-sizing: border-box;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .graffiti-title {
-    font-size: 2.5rem;
-    letter-spacing: 3px;
-    top: 5px;
-  }
-  .graffiti-subtitle {
-    font-size: 1.4rem;
-    top: 100px;
-    letter-spacing: 1px;
-    width: 100%;
-    text-align: center;
-    padding: 0 10px;
-    box-sizing: border-box;
-    justify-content: center;
-  }
-}
-
-/* Gallery styles */
-.gallery {
-  position: absolute;
-  top: 220px;
-  left: 0;
-  right: 0;
-  padding: 40px 20px 60px;
-}
-
-/* Mobile Gallery */
-.mobile-gallery {
-  display: none;
-  background: transparent;
-  padding: 20px 20px 20px;
-  margin-top: 0;
-}
-
-@media (max-width: 768px) {
-  .gallery {
-    display: none;
-  }
-  .mobile-gallery {
-    display: block;
-  }
-}
-.gallery-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.gallery-title {
-  margin: 0 0 18px;
-  color: #fff;
-  font: 700 20px/1.3 'Rock Salt', 'Arial Black', Arial, sans-serif;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-.card-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
-  min-width: 0;
-}
-.card-wrapper .card-text-above {
-  color: #fff;
-  text-align: left;
-  order: -1;
-  flex-shrink: 0;
-}
-.card-wrapper .card-text-above .title {
-  color: #fff;
-  font: 700 16px/1.3 'Special Elite', 'Courier New', monospace;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-  margin-top: 0;
-}
-.card-wrapper .card-text-above .subtitle {
-  margin-top: 0;
-  color: rgba(255,255,255,0.9);
-  font: 400 15px/1.4 'Courier Prime', 'Courier New', monospace;
-}
-.card-wrapper .card {
-  order: 1;
-  width: 100%;
-  flex: 1 1 auto;
-  min-height: 240px;
-}
-.card-wrapper .card .card-content {
-  display: none !important;
-}
-@media (max-width: 1200px) {
-  .cards { 
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 15px;
-  }
-}
-@media (max-width: 900px) {
-  .cards { 
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-}
-@media (max-width: 640px) {
-  .cards { 
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-}
-@media (max-width: 480px) {
-  .cards { 
-    gap: 8px;
-  }
-}
-.card {
-  position: relative;
-  display: block;
-  height: 240px;
-  border-radius: 12px;
-  overflow: hidden;
-  text-decoration: none;
-  color: #eaeaea;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.08);
-  transform: translateZ(0);
-  transition: transform 320ms ease, box-shadow 320ms ease, filter 320ms ease;
-  will-change: transform;
-}
-@media (max-width: 1200px) {
-  .card { height: 220px; }
-}
-@media (max-width: 900px) {
-  .card { height: 200px; }
-}
-@media (max-width: 640px) {
-  .card { height: 180px; }
-}
-@media (max-width: 480px) {
-  .card { height: 160px; }
-}
-/* Media layer for real site screenshots */
-.card-media {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: rgba(0,0,0,0.5);
-  filter: saturate(1.08) contrast(1.03) brightness(0.9);
-  transform: scale(1.0);
-  transition: transform 600ms ease, filter 320ms ease, opacity 320ms ease;
-  opacity: 0.75;
-}
-.card:after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(1000px 400px at -10% -10%, rgba(255,255,255,0.18), transparent 40%),
-              linear-gradient(135deg, rgba(0,0,0,0.35), rgba(0,0,0,0.25)),
-              conic-gradient(from 180deg at 60% 0%, rgba(255,99,71,0.20), rgba(255,215,0,0.16), rgba(72,209,204,0.18), rgba(186,85,211,0.14), rgba(255,99,71,0.20));
-  mix-blend-mode: overlay;
-  transition: opacity 320ms ease;
-}
-.card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.10);
-}
-
-/* Different card hover effects */
-.card:nth-child(1):hover {
-  transform: translateY(-8px) scale(1.05) rotate(1deg);
-  box-shadow: 0 25px 50px rgba(255,99,71,0.3), inset 0 0 0 1px rgba(255,255,255,0.15);
-}
-
-.card:nth-child(2):hover {
-  transform: translateY(-10px) scale(1.03) rotate(-1deg);
-  box-shadow: 0 30px 60px rgba(72,209,204,0.4), inset 0 0 0 1px rgba(255,255,255,0.12);
-}
-
-.card:nth-child(3):hover {
-  transform: translateY(-12px) scale(1.08) rotate(2deg);
-  box-shadow: 0 35px 70px rgba(186,85,211,0.35), inset 0 0 0 1px rgba(255,255,255,0.18);
-}
-
-.card:nth-child(4):hover {
-  transform: translateY(-7px) scale(1.04) rotate(-0.5deg);
-  box-shadow: 0 20px 45px rgba(255,215,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.14);
-}
-
-.card:nth-child(5):hover {
-  transform: translateY(-9px) scale(1.06) rotate(1.5deg);
-  box-shadow: 0 28px 55px rgba(255,99,71,0.4), inset 0 0 0 1px rgba(255,255,255,0.16);
-}
-
-.card:nth-child(6):hover {
-  transform: translateY(-11px) scale(1.07) rotate(-2deg);
-  box-shadow: 0 32px 65px rgba(72,209,204,0.35), inset 0 0 0 1px rgba(255,255,255,0.13);
-}
-.card:hover .card-media {
-  transform: scale(1.08);
-  filter: saturate(1.25) contrast(1.1) brightness(0.85);
-}
-
-/* Different hover effects for each card */
-.card:nth-child(1):hover .card-media {
-  transform: scale(1.15) rotate(3deg);
-  filter: saturate(1.4) contrast(1.3) brightness(0.9) hue-rotate(20deg);
-}
-
-.card:nth-child(2):hover .card-media {
-  transform: scale(1.12) rotate(-2deg);
-  filter: saturate(1.6) contrast(1.2) brightness(1.1) hue-rotate(-15deg);
-}
-
-.card:nth-child(3):hover .card-media {
-  transform: scale(1.2) rotate(1deg);
-  filter: saturate(1.3) contrast(1.4) brightness(0.8) hue-rotate(45deg);
-}
-
-.card:nth-child(4):hover .card-media {
-  transform: scale(1.1) rotate(-1deg);
-  filter: saturate(1.8) contrast(1.1) brightness(0.95) hue-rotate(-30deg);
-}
-
-.card:nth-child(5):hover .card-media {
-  transform: scale(1.18) rotate(2deg);
-  filter: saturate(1.5) contrast(1.5) brightness(0.85) hue-rotate(60deg);
-}
-
-.card:nth-child(6):hover .card-media {
-  transform: scale(1.14) rotate(-3deg);
-  filter: saturate(1.7) contrast(1.3) brightness(1.05) hue-rotate(-45deg);
-}
-
-.card:nth-child(7):hover .card-media {
-  transform: scale(1.16) rotate(2.5deg);
-  filter: saturate(1.6) contrast(1.4) brightness(0.9) hue-rotate(30deg);
-}
-.card-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.15) 60%, transparent);
-}
-
-.card-text-container {
-  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.6) 100%);
-  padding: 18px;
-  border-radius: 0;
-  backdrop-filter: blur(1px);
-  margin: 0;
-}
-.badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  font: 600 11px/1 'Special Elite', 'Courier New', monospace;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  backdrop-filter: blur(4px);
-}
-.fav-star {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(4px);
-  z-index: 2;
-}
-.fav-star svg {
-  width: 16px;
-  height: 16px;
-  fill: #ffd54a;
-}
-.title {
-  color: #fff;
-  font: 700 19px/1.3 'Special Elite', 'Courier New', monospace;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-  text-transform: uppercase;
-}
-.subtitle {
-  margin-top: 0;
-  color: rgba(255,255,255,0.9);
-  font: 400 17px/1.4 'Courier Prime', 'Courier New', monospace;
-}
-
-@media (max-width: 640px) {
-  .title {
-    font-size: 15px;
-  }
-  .subtitle {
-    font-size: 14px;
-  }
-  .badge {
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .title {
-    font-size: 14px;
-  }
-  .subtitle {
-    font-size: 13px;
-  }
-  .badge {
-    font-size: 9px;
-    padding: 3px 6px;
-  }
-  .fav-star {
-    width: 24px;
-    height: 24px;
-    top: 10px;
-    right: 10px;
-  }
-  .fav-star svg {
-    width: 13px;
-    height: 13px;
-  }
-}
-
-/* Subtle float animation */
-@keyframes floaty {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-}
-
-/* Super intense vibration effect - BRRRRR! */
-@keyframes shiver {
-  0%, 99.5%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-  0.5% { transform: translateX(-3px) translateY(-1.5px) rotate(-2deg); }
-  1% { transform: translateX(3px) translateY(1.5px) rotate(2deg); }
-  1.5% { transform: translateX(-1.5px) translateY(3px) rotate(-1.5deg); }
-  2% { transform: translateX(1.5px) translateY(-3px) rotate(1.5deg); }
-  2.5% { transform: translateX(-3px) translateY(1.5px) rotate(-2.5deg); }
-  3% { transform: translateX(3px) translateY(-1.5px) rotate(2.5deg); }
-  3.5% { transform: translateX(-1.5px) translateY(-1.5px) rotate(-1deg); }
-  4% { transform: translateX(1.5px) translateY(1.5px) rotate(1deg); }
-  4.5% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-}
-
-@keyframes shiver2 {
-  0%, 99.2%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-  0.4% { transform: translateX(3px) translateY(-1.5px) rotate(2.5deg); }
-  0.8% { transform: translateX(-3px) translateY(1.5px) rotate(-2.5deg); }
-  1.2% { transform: translateX(1.5px) translateY(3px) rotate(1.8deg); }
-  1.6% { transform: translateX(-1.5px) translateY(-3px) rotate(-1.8deg); }
-  2% { transform: translateX(3px) translateY(-1.5px) rotate(2deg); }
-  2.4% { transform: translateX(-3px) translateY(1.5px) rotate(-2deg); }
-  2.8% { transform: translateX(1.5px) translateY(-1.5px) rotate(1.2deg); }
-  3.2% { transform: translateX(-1.5px) translateY(1.5px) rotate(-1.2deg); }
-  3.6% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-}
-
-@keyframes shiver3 {
-  0%, 99.8%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-  0.2% { transform: translateX(-2.5px) translateY(1.5px) rotate(-3deg); }
-  0.4% { transform: translateX(2.5px) translateY(-1.5px) rotate(3deg); }
-  0.6% { transform: translateX(-1.5px) translateY(-2.5px) rotate(-2deg); }
-  0.8% { transform: translateX(1.5px) translateY(2.5px) rotate(2deg); }
-  1% { transform: translateX(-2.5px) translateY(1.5px) rotate(-2.8deg); }
-  1.2% { transform: translateX(2.5px) translateY(-1.5px) rotate(2.8deg); }
-  1.4% { transform: translateX(-1.5px) translateY(1.5px) rotate(-1.5deg); }
-  1.6% { transform: translateX(1.5px) translateY(-1.5px) rotate(1.5deg); }
-  1.8% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-}
-
-.card { 
-  animation: floaty 6s ease-in-out infinite, shiver3 25s linear infinite; 
-}
-.card:nth-child(2) { 
-  animation: floaty 6s ease-in-out infinite 0.6s, shiver3 30s linear infinite 5s; 
-}
-.card:nth-child(3) { 
-  animation: floaty 6s ease-in-out infinite 1.2s, shiver3 35s linear infinite 12s; 
-}
-.card:nth-child(4) { 
-  animation: floaty 6s ease-in-out infinite 1.8s, shiver3 20s linear infinite 3s; 
-}
-.card:nth-child(5) { 
-  animation: floaty 6s ease-in-out infinite 2.4s, shiver3 28s linear infinite 8s; 
-}
-.card:nth-child(6) { 
-  animation: floaty 6s ease-in-out infinite 3s, shiver3 22s linear infinite 15s; 
-}
-.card:nth-child(7) { 
-  animation: floaty 6s ease-in-out infinite 3.6s, shiver3 26s linear infinite 18s; 
-}
-
-</style>
+<meta property="og:title" content="POLIVOXIA.CA · Adri M.">
+<meta property="og:description" content="Interactive works, games, zines and apps by Adri M. Art, computers and community.">
+<meta property="og:image" content="https://polivoxia.ca/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The POLIVOXIA.CA homepage: the word POLIVOXIA in off-register blue and pink over a yellow dotted page, beside pasted-up project prints.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=2">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/site.css?v=20">
 </head>
 <body>
-<!-- Hidden image for SEO - background logo -->
-<img src="img/polivoxia_logo.jpg" alt="POLIVOXIA.CA logo - Portfolio website showcasing liminal spaces and creative projects by Adri M." style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;">
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<div class="strip"><a href="/" class="home">POLIVOXIA.CA</a><span data-i18n="strip">Portfolio of liminal spaces</span>
+  <nav class="lang-switch" aria-label="Language"><a href="?lang=en" hreflang="en" lang="en">EN</a><a href="?lang=fr" hreflang="fr" lang="fr">FR</a><a href="?lang=es" hreflang="es" lang="es">ES</a><a href="?lang=pt" hreflang="pt" lang="pt">PT</a></nav></div>
 
-<div class="bgimg-1">
-  <h1 class="graffiti-title">POLIVOXIA.CA</h1>
-  <h2 class="graffiti-subtitle">
-    <span class="graffiti-subtitle-text">Art <span class="tagline-dot">•</span> Computers <span class="tagline-dot">•</span> Community</span>
-    <span class="graffiti-subtitle-icons">
-    <a href="https://www.instagram.com/theagitist/" target="_blank" rel="noopener" title="Instagram">
-      <svg class="instagram-icon" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-      </svg>
-    </a>
-    <a href="https://github.com/theagitist" target="_blank" rel="noopener" title="GitHub">
-      <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-      </svg>
-    </a>
-    <a href="https://polivoxia.itch.io" target="_blank" rel="noopener" title="itch.io">
-      <svg class="itch-icon" viewBox="0 0 245.371 220.736" fill="currentColor">
-        <path d="M31.99 1.365C21.287 7.72 0.2 31.945 0 38.298v10.516C0 62.144 12.46 73.86 23.773 73.86c13.584 0 24.902-11.258 24.903-24.62 0 13.362 10.93 24.62 24.515 24.62 13.586 0 24.165-11.258 24.165-24.62 0 13.362 11.622 24.62 25.207 24.62h.246c13.586 0 25.208-11.258 25.208-24.62 0 13.362 10.58 24.62 24.164 24.62 13.585 0 24.515-11.258 24.515-24.62 0 13.362 11.32 24.62 24.903 24.62 11.313 0 23.773-11.714 23.773-25.046V38.298c-.2-6.354-21.287-30.58-31.988-36.933C180.118.197 157.056-.005 122.685 0c-34.37.003-81.228.54-90.697 1.365zm65.194 66.217a28.025 28.025 0 0 1-4.78 6.155c-5.128 5.014-12.157 8.122-19.906 8.122a28.482 28.482 0 0 1-19.948-8.126c-1.858-1.82-3.27-3.766-4.563-6.032l-.006.004c-1.292 2.27-3.092 4.215-4.954 6.037a28.5 28.5 0 0 1-19.948 8.12c-.934 0-1.906-.258-2.692-.528-1.092 11.372-1.553 22.24-1.716 30.164l-.002.045c-.02 4.024-.04 7.333-.06 11.93.21 23.86-2.363 77.334 10.52 90.473 19.964 4.655 56.7 6.775 93.555 6.788h.006c36.854-.013 73.59-2.133 93.554-6.788 12.883-13.14 10.31-66.614 10.52-90.474-.022-4.596-.04-7.905-.06-11.93l-.003-.045c-.162-7.926-.623-18.793-1.715-30.165-.786.27-1.757.528-2.692.528a28.5 28.5 0 0 1-19.948-8.12c-1.862-1.822-3.662-3.766-4.955-6.037l-.006-.004c-1.294 2.266-2.705 4.213-4.563 6.032a28.48 28.48 0 0 1-19.947 8.125c-7.748 0-14.778-3.11-19.906-8.123a28.025 28.025 0 0 1-4.78-6.155 27.99 27.99 0 0 1-4.736 6.155 28.49 28.49 0 0 1-19.95 8.124c-.27 0-.54-.012-.81-.02h-.007c-.27.008-.54.02-.813.02a28.49 28.49 0 0 1-19.95-8.123 27.992 27.992 0 0 1-4.736-6.155zm-20.486 26.49l-.002.01h.015c8.113.017 15.32 0 24.25 9.746 7.028-.737 14.372-1.105 21.722-1.094h.006c7.35-.01 14.694.357 21.723 1.094 8.93-9.747 16.137-9.73 24.25-9.746h.014l-.002-.01c3.833 0 19.166 0 29.85 30.007L210 165.244c8.504 30.624-2.723 31.373-16.727 31.4-20.768-.773-32.267-15.855-32.267-30.935-11.496 1.884-24.907 2.826-38.318 2.827h-.006c-13.412 0-26.823-.943-38.318-2.827 0 15.08-11.5 30.162-32.267 30.935-14.004-.027-25.23-.775-16.726-31.4L46.85 124.08C57.534 94.073 72.867 94.073 76.7 94.073zm45.985 23.582v.006c-.02.02-21.863 20.08-25.79 27.215l14.304-.573v12.474c0 .584 5.74.346 11.486.08h.006c5.744.266 11.485.504 11.485-.08v-12.474l14.304.573c-3.928-7.135-25.79-27.215-25.79-27.215v-.006l-.003.002z"/>
-      </svg>
-    </a>
-    <a href="https://orcid.org/0009-0000-2834-2780" target="_blank" rel="noopener" title="ORCID">
-      <img src="img/orcid_24x24_black.png" alt="ORCID" class="orcid-icon" width="28" height="28">
-    </a>
-    </span>
-  </h2>
-  <section class="gallery">
-  <div class="gallery-inner">
-    <div class="cards" id="cards">
-      <a class="card" href="https://www.telaris.ca" target="_blank" rel="noopener">
-        <img class="card-media" alt="Telaris homepage showing the wordmark TELARIS over a dark starfield with a glowing constellation of linked nodes and the tagline weaving memory" src="img/telaris.jpg"/>
-        <span class="fav-star" aria-label="Favourite project" title="Favourite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26 6.9.6-5.2 4.52 1.56 6.74L12 17.27 5.84 20.62 7.4 13.88 2.2 9.36l6.9-.6z"/></svg></span>
-        <span class="badge">Interactive</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Telaris</div>
-            <div class="subtitle">A decolonial knowledge archive. Relational, P2P, non-hierarchical. Threaded by meaning.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://pumice.polivoxia.ca" target="_blank" rel="noopener">
-        <img class="card-media" alt="The Pumice app icon, a stylized pumice stone, centered on a dark charcoal background" src="img/pumice.jpg"/>
-        <span class="badge">App</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Pumice</div>
-            <div class="subtitle">Local-first PDF annotation for iPad. Apple Pencil markup written back into the file, no cloud.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://tracet.polivoxia.ca" target="_blank" rel="noopener">
-        <img class="card-media" alt="Tracet homepage showing the app name over a dark background with the tagline private, local transcription for macOS, a waveform icon, and download buttons for Apple Silicon and Intel Macs" src="img/tracet.jpg"/>
-        <span class="badge">App</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Tracet</div>
-            <div class="subtitle">Private, local transcription for macOS. whisperX, speaker diarization, editable transcripts. No cloud, no telemetry.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/manifiesto_canibal/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Poster reading DADÁ in red above the word NADA in black outline, for the Cannibal Dada Manifesto interactive piece" src="img/manifiesto_canibal.svg"/>
-        <span class="badge">Interactive</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Manifiesto Caníbal</div>
-            <div class="subtitle">Picabia's 1920 Cannibal Dada Manifesto that devours itself as you scroll. ES / FR / EN.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/she_came_down_from_the_mountains/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Cover of She Came Down from the Mountains, Vol. 1, The Witness, showing the title in serif type over three topographic bands in black, rust, and slate blue" src="she_came_down_from_the_mountains/img/cover_vol1.jpg"/>
-        <span class="badge">Zine</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">She Came Down from the Mountains</div>
-            <div class="subtitle">A fractured archive in two volumes. Five generations of women, from the stolen land of the Huetar to Turtle Island.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/the_somatic_ghost/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Cover of The Somatic Ghost zine showing the title in bold typewriter text over a dark, scratched background with the subtitle: A counter-archive of the 28th cycle" src="the_somatic_ghost/img/cover_v2.jpg"/>
-        <span class="badge">Zine</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">The Somatic Ghost</div>
-            <div class="subtitle">A counter-archive of the 28th cycle. From liquid fire to first light.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/the_ground_remains/" target="_blank" rel="noopener">
-        <picture>
-          <source srcset="the_ground_remains/img/map_bg.webp" type="image/webp">
-          <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by <em>Indigenomicon</em> by Jodi A. Byrd" src="the_ground_remains/img/map_bg.png"/>
-        </picture>
-        <span class="badge">Game</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">The Ground Remains</div>
-            <div class="subtitle">A print-and-play game/zine inspired by <em>Indigenomicon</em> by Jodi A. Byrd.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/stories_in_whispers/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Screenshot of Stories in Whispers interactive poetry creation platform showing the game interface where users catch whispers to build poems" src="img/stories_in_whispers.jpg"/>
-        <span class="badge">Interactive</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Stories in Whispers</div>
-            <div class="subtitle">Catch whispers. Create poetry. Share. Inspired by <em>Of Floating Isles</em> by Kawika Guillermo.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/denounce/costarica/">
-        <img class="card-media" alt="Transphobia in Costa Rica human rights documentation website featuring Costa Rican flag colors representing the compilation of reports, stories and news about trans rights" src="img/costarica.jpg"/>
-        <span class="badge">Human Rights</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Transphobia in Costa Rica</div>
-            <div class="subtitle">An updated compilation of reports, stories and news.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://www.journeyways.ca" target="_blank" rel="noopener">
-        <img class="card-media" alt="Journeyways, a game about becoming, screenshot showing the board game components for this UBC GRSJ research project" src="img/journeyways.jpg"/>
-        <span class="fav-star" aria-label="Favourite project" title="Favourite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26 6.9.6-5.2 4.52 1.56 6.74L12 17.27 5.84 20.62 7.4 13.88 2.2 9.36l6.9-.6z"/></svg></span>
-        <span class="badge">Game</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">JOURNEYWAYS</div>
-            <div class="subtitle">A board game and a digital game about becoming. A UBC research project exploring identity through collaborative play.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://www.transrants.com" target="_blank" rel="noopener">
-        <img class="card-media" alt="TransRants writing blog homepage showing rants, poetry, essays and thoughts in motion by Adri M." src="img/transrants.jpg"/>
-        <span class="badge">Writing</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">TransRants</div>
-            <div class="subtitle">Rants. Poetry. Essays. Thoughts in motion.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/sujeto_del_inconsciente/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Sujeto del Inconsciente video dance ensemble performance still showing live visuals and dancers in this artistic collaboration" src="img/sujeto.jpg"/>
-        <span class="badge">Art</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Sujeto del Inconsciente</div>
-            <div class="subtitle">A video dance ensemble with live visuals and dancers.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/ounces_stemmata/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Ounces Stemmata concert visuals showing synchronized multi-screen video installation for live music performances" src="img/ounces.png"/>
-        <span class="badge">Music</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Ounces - Stemmata</div>
-            <div class="subtitle">Concert visuals: in-sync video across four screens for live shows.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/programa_convivir/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Programa Convivir documentary series homepage showing three short documentaries about rural high school communities in Costa Rica" src="img/programa_convivir.jpg"/>
-        <span class="badge">Documentary</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Programa Convivir</div>
-            <div class="subtitle">Three short documentaries about rural high school communities in Costa Rica.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/illustrations/" target="_blank" rel="noopener">
-        <picture>
-          <source srcset="img/illustrations.webp" type="image/webp">
-          <img class="card-media" alt="A grid of four stylized digital pop-art portraits in bold duotone colours, a preview of the illustrations gallery" src="img/illustrations.jpg"/>
-        </picture>
-        <span class="badge">Art</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Illustrations</div>
-            <div class="subtitle">A gallery of digital portraits, line studies and abstract pieces.</div>
-          </div>
-        </div>
-      </a>
-    </div>
+<header class="hero">
+  <div>
+  <h1><a href="/" class="logo" aria-label="Polivoxia, homepage" data-i18n-aria="homeLabel"><span data-t="POLI" aria-hidden="true">POLI</span><span data-t="VOXIA" aria-hidden="true">VOXIA</span></a></h1>
+  <p class="tagline" data-i18n="tagline">Art · Computers · Community</p>
+  <nav class="links" aria-label="Elsewhere">
+    <a href="https://www.instagram.com/theagitist/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://github.com/theagitist" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://polivoxia.itch.io" target="_blank" rel="noopener">itch.io</a>
+    <a href="https://orcid.org/0009-0000-2834-2780" target="_blank" rel="noopener">ORCID</a>
+  </nav>
   </div>
-  </section>
+  <div class="pile" id="pile">
+    <a class="print mark" href="#about"><span class="ink"><img class="plate" src="/assets/img/hero-me-plate.webp" width="640" height="640" alt="Stencil self-portrait of Adri M." data-i18n-alt="altMe"><img class="orig" src="/assets/img/hero-me.webp" width="640" height="640" alt="" loading="lazy"></span><span class="label"><span data-i18n="aboutLabel">About me</span> <span aria-hidden="true">↓</span></span></a>
+  </div>
+</header>
+
+
+<main id="main">
+<div class="band" role="tablist" aria-label="Sections" data-i18n-aria="sections">
+  <button role="tab" id="tab-news" aria-controls="news" aria-selected="false" tabindex="-1" data-i18n="tabNews">News</button><span aria-hidden="true">✶</span><button role="tab" id="tab-work" aria-controls="work" aria-selected="true" data-i18n="tabWork">Work</button><span aria-hidden="true">✶</span><button role="tab" id="tab-about" aria-controls="about" aria-selected="false" tabindex="-1" data-i18n="aboutLabel">About me</button>
 </div>
 
-<!-- Mobile Gallery Section -->
-<section class="mobile-gallery">
-  <div class="gallery-inner">
-    <div class="cards" id="mobile-cards">
-      <a class="card" href="https://www.telaris.ca" target="_blank" rel="noopener">
-        <img class="card-media" alt="Telaris homepage showing the wordmark TELARIS over a dark starfield with a glowing constellation of linked nodes and the tagline weaving memory" src="img/telaris.jpg"/>
-        <span class="fav-star" aria-label="Favourite project" title="Favourite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26 6.9.6-5.2 4.52 1.56 6.74L12 17.27 5.84 20.62 7.4 13.88 2.2 9.36l6.9-.6z"/></svg></span>
-        <span class="badge">Interactive</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Telaris</div>
-            <div class="subtitle">A decolonial knowledge archive. Relational, P2P, non-hierarchical. Threaded by meaning.</div>
-          </div>
-        </div>
-      </a>
+<section class="news" id="news" role="tabpanel" aria-labelledby="tab-news">
+  <div class="sec"><h2 id="news-h" data-i18n="news">Latest news</h2><a class="sec-link" href="/news/"><span data-i18n="newsAll">All news</span> <span aria-hidden="true">→</span></a></div>
+  <ol class="news-list" id="news-list"></ol>
+</section>
 
-      <a class="card" href="https://pumice.polivoxia.ca" target="_blank" rel="noopener">
-        <img class="card-media" alt="The Pumice app icon, a stylized pumice stone, centered on a dark charcoal background" src="img/pumice.jpg"/>
-        <span class="badge">App</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Pumice</div>
-            <div class="subtitle">Local-first PDF annotation for iPad. Apple Pencil markup written back into the file, no cloud.</div>
-          </div>
-        </div>
-      </a>
+<section class="work" id="work" role="tabpanel" aria-labelledby="tab-work">
+  <div class="sec"><h2 id="work-h" data-i18n="work">The work</h2><span data-i18n="workNote">Things I've built</span></div>
+  <div class="cards" id="cards"></div>
+</section>
 
-      <a class="card" href="https://tracet.polivoxia.ca" target="_blank" rel="noopener">
-        <img class="card-media" alt="Tracet homepage showing the app name over a dark background with the tagline private, local transcription for macOS, a waveform icon, and download buttons for Apple Silicon and Intel Macs" src="img/tracet.jpg"/>
-        <span class="badge">App</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Tracet</div>
-            <div class="subtitle">Private, local transcription for macOS. whisperX, speaker diarization, editable transcripts. No cloud, no telemetry.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/the_ground_remains/" target="_blank" rel="noopener">
-        <picture>
-          <source srcset="the_ground_remains/img/map_bg.webp" type="image/webp">
-          <img class="card-media" alt="The Ground Remains print-and-play game/zine showing the game board and map background inspired by <em>Indigenomicon</em> by Jodi A. Byrd" src="the_ground_remains/img/map_bg.png"/>
-        </picture>
-        <span class="badge">Game</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">The Ground Remains</div>
-            <div class="subtitle">A print-and-play game/zine inspired by <em>Indigenomicon</em> by Jodi A. Byrd.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/stories_in_whispers/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Screenshot of Stories in Whispers interactive poetry creation platform showing the game interface where users catch whispers to build poems" src="img/stories_in_whispers.jpg"/>
-        <span class="badge">Interactive</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Stories in Whispers</div>
-            <div class="subtitle">Catch whispers. Create poetry. Share. Inspired by <em>Of Floating Isles</em> by Kawika Guillermo.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/denounce/costarica/">
-        <img class="card-media" alt="Transphobia in Costa Rica human rights documentation website featuring Costa Rican flag colors representing the compilation of reports, stories and news about trans rights" src="img/costarica.jpg"/>
-        <span class="badge">Human Rights</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Transphobia in Costa Rica</div>
-            <div class="subtitle">An updated compilation of reports, stories and news.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://www.journeyways.ca" target="_blank" rel="noopener">
-        <img class="card-media" alt="Journeyways, a game about becoming, screenshot showing the board game components for this UBC GRSJ research project" src="img/journeyways.jpg"/>
-        <span class="fav-star" aria-label="Favourite project" title="Favourite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26 6.9.6-5.2 4.52 1.56 6.74L12 17.27 5.84 20.62 7.4 13.88 2.2 9.36l6.9-.6z"/></svg></span>
-        <span class="badge">Game</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">JOURNEYWAYS</div>
-            <div class="subtitle">A board game and a digital game about becoming. A UBC research project exploring identity through collaborative play.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://www.transrants.com" target="_blank" rel="noopener">
-        <img class="card-media" alt="TransRants writing blog homepage showing rants, poetry, essays and thoughts in motion by Adri M." src="img/transrants.jpg"/>
-        <span class="badge">Writing</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">TransRants</div>
-            <div class="subtitle">Rants. Poetry. Essays. Thoughts in motion.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/sujeto_del_inconsciente/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Sujeto del Inconsciente video dance ensemble performance still showing live visuals and dancers in this artistic collaboration" src="img/sujeto.jpg"/>
-        <span class="badge">Art</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Sujeto del Inconsciente</div>
-            <div class="subtitle">A video dance ensemble with live visuals and dancers.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/ounces_stemmata/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Ounces Stemmata concert visuals showing synchronized multi-screen video installation for live music performances" src="img/ounces.png"/>
-        <span class="badge">Music</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Ounces - Stemmata</div>
-            <div class="subtitle">Concert visuals: in-sync video across four screens for live shows.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/programa_convivir/" target="_blank" rel="noopener">
-        <img class="card-media" alt="Programa Convivir documentary series homepage showing three short documentaries about rural high school communities in Costa Rica" src="img/programa_convivir.jpg"/>
-        <span class="badge">Documentary</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Programa Convivir</div>
-            <div class="subtitle">Three short documentaries about rural high school communities in Costa Rica.</div>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="https://polivoxia.ca/illustrations/" target="_blank" rel="noopener">
-        <picture>
-          <source srcset="img/illustrations.webp" type="image/webp">
-          <img class="card-media" alt="A grid of four stylized digital pop-art portraits in bold duotone colours, a preview of the illustrations gallery" src="img/illustrations.jpg"/>
-        </picture>
-        <span class="badge">Art</span>
-        <div class="card-content">
-          <div class="card-text-container">
-            <div class="title">Illustrations</div>
-            <div class="subtitle">A gallery of digital portraits, line studies and abstract pieces.</div>
-          </div>
-        </div>
-      </a>
+<section class="about" id="about" role="tabpanel" aria-labelledby="tab-about">
+  <div class="sec"><h2 id="about-h" data-i18n="about">About me</h2><span data-i18n="aboutNote">The person behind the projects</span></div>
+  <div class="about-grid">
+    <div class="about-pics">
+      <figure class="me">
+        <a href="/illustrations/" data-langs="en"><img src="/assets/img/about-portrait.webp" width="900" height="900" loading="lazy" data-i18n-alt="altPortrait" alt="Stencil-style illustrated self-portrait of Adri M. on diagonal pastel bands of yellow, white, lavender and charcoal, the colours of the nonbinary pride flag."><span class="sr-only" data-i18n="gallery">Illustrations gallery</span></a>
+        <figcaption data-i18n="selfPortrait">Self-portrait</figcaption>
+      </figure>
+      <figure class="me second">
+        <a href="/illustrations/" data-langs="en"><img src="/assets/img/about-abstract.webp" width="760" height="760" loading="lazy" data-i18n-alt="altAbstract" alt="Abstract self-portrait of Adri M.: dark indigo and cobalt-blue tendrils curling over a pale ice-blue background."><span class="sr-only" data-i18n="gallery">Illustrations gallery</span></a>
+        <figcaption data-i18n="selfPortrait">Self-portrait</figcaption>
+      </figure>
     </div>
+    <div class="bio-wrap">
+    <div class="bio">
+      <span class="byline" data-i18n-html="byline">Adri M. · they / them / <em class="any">any</em></span>
+      <p data-i18n="bio1">I make interactive works, games, zines and apps, where art, computers and community meet.</p>
+      <p data-i18n-html="bio2">I'm a master's student at the UBC <a href="https://grsj.arts.ubc.ca/" target="_blank" rel="noopener" data-langs="en">Institute for Gender, Race, Sexuality and Social Justice</a> (GRSJ). My research centres on <a href="https://www.journeyways.ca" target="_blank" rel="noopener" data-langs="en es fr">JOURNEYWAYS</a>, a board game and a digital game used as research instruments to study how people self-identify in a narrative-driven, safe, collaborative play space.</p>
+      <p data-i18n="bio3">The project was awarded the Canada Graduate Research Scholarship: Master's (CGS-M) in April 2026, and was selected for UBC's Critical Play Fellowship in September 2025.</p>
+      <h3 class="pos-h" data-i18n="posH">Positionality</h3>
+      <p data-i18n="pos1">I am a trans/nonbinary refugee from the land of the Huetar people (so-called Costa Rica), now living in Vancouver. I navigate multiple borders, geographic, cultural and gendered, and those crossings shape the transdisciplinary, decolonial perspective I bring to my work.</p>
+      <p data-i18n="pos2">My commitment to social justice is personal. It centres the lived experiences of equity-seeking communities, particularly forced migrants and gender-diverse people, and it is held in community: I have organized with the Vancouver Trans March and facilitated peer support for trans, nonbinary and gender-diverse people. Through research, activism and storytelling, I aim to amplify voices often left at the margins and to imagine futures grounded in joy, dignity and collective care.</p>
+    </div>
+    </div>
+  </div>
+  <div class="contact" id="contact">
+    <h3 data-i18n="contact">Contact</h3>
+    <p class="note" data-i18n="contactNote">Write to me about a project, a collaboration or anything else. Your message goes straight to my inbox; this site doesn't store it.</p>
+    <form id="contact-form" novalidate>
+      <label><span data-i18n="name">Name</span><input id="cf-name" name="name" type="text" autocomplete="name" maxlength="100" required></label>
+      <label><span data-i18n="email">Email</span><input id="cf-email" name="email" type="email" autocomplete="email" maxlength="200" required></label>
+      <label class="wide"><span data-i18n="message">Message</span><textarea id="cf-message" name="message" maxlength="3000" required></textarea></label>
+      <label class="hp" aria-hidden="true">Website<input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off"></label>
+      <div class="row"><button type="submit" data-i18n="send">Send message</button><p class="status" id="cf-status" role="status" aria-live="polite"></p></div>
+    </form>
   </div>
 </section>
 
+</main>
+
+<footer><span>© Adri M.</span><span data-i18n="footer">Art · Computers · Community</span></footer>
+
+<script src="/assets/projects.js?v=7"></script>
+<script src="/assets/i18n.js?v=13"></script>
 <script>
-  // Pin Telaris and Journeyways as the first two cards; shuffle the rest each load
-  (function(){
-    const pinned = ['telaris.ca', 'journeyways.ca']; // in display order
-    const rank = href => { const i = pinned.findIndex(p => href.includes(p)); return i === -1 ? pinned.length : i; };
-    ['cards', 'mobile-cards'].forEach(id => {
-      const container = document.getElementById(id);
-      if (!container) return;
-      const cards = Array.from(container.querySelectorAll('.card'));
-      // Fisher-Yates shuffle, then stable-sort pinned cards to the front in fixed order
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-      }
-      cards.sort((a, b) => rank(a.href) - rank(b.href));
-      cards.forEach(card => container.appendChild(card));
-    });
-  })();
+applyI18n();
 
-  // Subtle parallax on mouse move
-  (function(){
-    const containers = [document.getElementById('cards'), document.getElementById('mobile-cards')];
-    
-    containers.forEach(container => {
-      if (!container) return;
-      const cards = Array.from(container.querySelectorAll('.card'));
-      let raf = null;
-      
-      function onMove(e){
-        const rect = container.getBoundingClientRect();
-        const cx = e.clientX - rect.left;
-        const cy = e.clientY - rect.top;
-        const nx = (cx / rect.width) - 0.5;
-        const ny = (cy / rect.height) - 0.5;
-        if (raf) cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => {
-          cards.forEach((card, i) => {
-            const depth = 3 + i * 2;
-            card.style.transform = `translateY(${Math.sin((Date.now()/900)+(i*0.6)) * 3}px) translateZ(0) rotateX(${ny*depth}deg) rotateY(${nx*-depth}deg)`;
-          });
-        });
-      }
-      
-      container.addEventListener('mousemove', onMove);
-      container.addEventListener('mouseleave', () => {
-        cards.forEach((card) => { card.style.transform = ''; });
-      });
-    });
-  })();
+// latest news: the 18 newest items plus every highlight, terse (all of them are on news.html)
+loadNews().then(items => {
+  document.getElementById('news-list').innerHTML = newsForHome(items, 18).map(e => { const l = newsLink(e);
+    const hl = e.highlight ? ' class="hl"' : '';
+    const open = l ? `<a href="${l.href}"${l.ext} data-kind="${e.kind}"${hl}>` : `<div data-kind="${e.kind}"${hl}>`;
+    return `
+    <li>${open}
+      ${hlBadge(e)}<span class="news-meta"><time datetime="${e.date}">${newsDate(e.date)}</time> · <span class="kind">${T.kinds[e.kind]}</span></span>
+      <span class="news-proj">${e.project}</span>
+      <span class="news-title">${pick(e.title)}${l ? l.tag : ''}</span>
+    ${l ? '</a>' : '</div>'}</li>`; }).join('');
+});
+
+// favourites pasted on the hero pile (laid out for up to 5)
+document.getElementById('pile').insertAdjacentHTML('beforeend', PROJECTS.filter(p => p.fav).slice(0, 5).map(p => {
+  const ext = p.href.startsWith('http') ? ' target="_blank" rel="noopener"' : '';
+  const src = '../img/' + p.img;
+  return `<a class="print fav-print" href="${p.href}"${ext}><span class="ink"><img class="plate" src="${src}" alt="${p.t}: ${p.alt}"><img class="orig" src="${src}" alt=""></span><span class="label"><span aria-hidden="true">★ </span><span${p.tl ? ` lang="${p.tl}"` : ''}>${p.t}</span> <span aria-hidden="true">↗</span>${langTag(p.langs)}</span></a>`;
+}).join(''));
+
+renderCards(document.getElementById('cards'), p => `
+  <a class="card" href="${p.href}"${p.ext}>
+    ${p.fav ? `<span class="fav">${T.fave}</span>` : ''}
+    <div class="cut"><img src="${p.src}" alt="${p.alt}" loading="lazy"></div>
+    <span class="stamp">${p.tag}</span>
+    <h3><span${p.tl ? ` lang="${p.tl}"` : ''}>${p.t}</span>${langTag(p.langs)}</h3>
+    <p>${p.d}</p>
+  </a>`, false);
+
+// contact form: JSON to the PHP handler; a Turnstile token is sent when that widget is on the page
+document.getElementById('contact-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const f = e.target, btn = f.querySelector('button'), st = document.getElementById('cf-status');
+  if (!f.reportValidity()) return;
+  btn.disabled = true; st.className = 'status'; st.textContent = T.sending;
+  const el = f.elements;
+  const body = {name: el['name'].value, email: el['email'].value, message: el['message'].value, website: el['website'].value, lang: LANG,
+    turnstileToken: f.querySelector('[name="cf-turnstile-response"]')?.value || ''};
+  try {
+    const r = await fetch('/api/contact.php', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+    const d = await r.json().catch(() => ({}));
+    if (r.ok && d.ok) { f.reset(); st.className = 'status ok'; st.textContent = T.sent; }
+    else { st.className = 'status err'; st.textContent = d.error || T.failed; }
+  } catch { st.className = 'status err'; st.textContent = T.offline; }
+  btn.disabled = false;
+});
+
+// Sections as tabs (WAI-ARIA tabs pattern). Work is the default; #news, #work, #about (and #contact) open a tab,
+// so the hero's "About me" print and shared links land on the right one. Without JS all three stay visible.
+const TABS = [...document.querySelectorAll('[role="tab"]')];
+function showTab(id, {focus = false, scroll = false} = {}) {
+  TABS.forEach(t => {
+    const on = t.getAttribute('aria-controls') === id;
+    t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1;
+    document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    if (on && focus) t.focus();
+  });
+  if (tabFor(location.hash.slice(1)) !== id) history.replaceState(null, '', (id === 'work' ? location.pathname + location.search : '#' + id));
+  // the bar is sticky: bring the start of the new panel into view (only when we are below it)
+  const main = document.getElementById('main');
+  if (scroll || main.getBoundingClientRect().top < 0) main.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+}
+const tabFor = h => ({news: 'news', work: 'work', about: 'about', contact: 'about'})[h];
+TABS.forEach((t, i) => {
+  t.addEventListener('click', () => showTab(t.getAttribute('aria-controls')));
+  t.addEventListener('keydown', e => {
+    const n = {ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: TABS.length - 1}[e.key];
+    if (n === undefined) return;
+    e.preventDefault(); showTab(TABS[(n + TABS.length) % TABS.length].getAttribute('aria-controls'), {focus: true});
+  });
+});
+// open the tab for an in-page address (#news, #work, #about, #contact); #contact also scrolls to the form
+function goHash(h) {
+  const id = tabFor(h); if (!id) return false;
+  showTab(id, {scroll: true});
+  if (h === 'contact') document.getElementById('contact').scrollIntoView();
+  return true;
+}
+addEventListener('hashchange', () => goHash(location.hash.slice(1)));
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  if (goHash(a.getAttribute('href').slice(1))) e.preventDefault();
+}));
+if (!goHash(location.hash.slice(1))) showTab('work');
+
+// straighten the tab bar while it is stuck to the top (a 1px marker just above it leaves the screen)
+const bandMark = document.createElement('div'); bandMark.style.height = '1px';
+document.querySelector('.band').before(bandMark);
+new IntersectionObserver(([en]) => document.querySelector('.band').classList.toggle('stuck', !en.isIntersecting && en.boundingClientRect.top < 0)).observe(bandMark);
 </script>
-
 </body>
 </html>
