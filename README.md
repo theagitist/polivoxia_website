@@ -94,6 +94,13 @@ Requires `libnginx-mod-http-brotli-filter` and `libnginx-mod-http-brotli-static`
 
 Verify after editing: `sudo nginx -t && sudo systemctl reload nginx`.
 
+## Images
+
+- **Homepage cards** load `img/cards/<slug>.webp`: 800px wide, WebP quality 80, cropped to the 4:3 the card shows when the source is taller (`magick SRC -resize '800x600^' -gravity center -extent 800x600` then `cwebp -q 80 -m 6`). The originals (`img/*.jpg`, minisite covers) stay as sources and for the old Open Graph uses. `assets/projects.js` appends `?v=2` to every card URL; bump it when a card image is replaced (Cloudflare caches images for 30 days).
+- **Illustrations**: the grid loads `illustrations/img/thumb/<name>.webp` (800px wide, WebP 80), the lightbox the full-size `img/<name>.webp`; the watermarked `.jpg` originals stay as the source and the fallback.
+- **Before committing** any JPG or PNG: `jpegoptim --strip-all --all-progressive` and `optipng -o5 -strip all` (lossless).
+- After replacing any image in place: `sudo systemctl reload nginx` before the first request (open_file_cache), then bump its `?v=`.
+
 ## Contact form
 
 `api/contact.php` is the only server-side code on the site: it takes a JSON POST from the homepage contact form and emails it through ZeptoMail (adapted from `www.journeyways.ca/api/contact.php`). Nothing is stored.
