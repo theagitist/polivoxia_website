@@ -108,7 +108,7 @@
 
 <footer><span>© Adri M.</span><span data-i18n="footer">Art · Computers · Community</span></footer>
 
-<script src="/assets/projects.js?v=7"></script>
+<script src="/assets/projects.js?v=10"></script>
 <script src="/assets/i18n.js?v=13"></script>
 <script>
 applyI18n();
@@ -129,7 +129,7 @@ loadNews().then(items => {
 // favourites pasted on the hero pile (laid out for up to 5)
 document.getElementById('pile').insertAdjacentHTML('beforeend', PROJECTS.filter(p => p.fav).slice(0, 5).map(p => {
   const ext = p.href.startsWith('http') ? ' target="_blank" rel="noopener"' : '';
-  const src = '../img/' + p.img;
+  const src = '/img/' + p.img + '?v=2'; // same URL as the card below, so each image downloads once
   return `<a class="print fav-print" href="${p.href}"${ext}><span class="ink"><img class="plate" src="${src}" alt="${p.t}: ${p.alt}"><img class="orig" src="${src}" alt=""></span><span class="label"><span aria-hidden="true">★ </span><span${p.tl ? ` lang="${p.tl}"` : ''}>${p.t}</span> <span aria-hidden="true">↗</span>${langTag(p.langs)}</span></a>`;
 }).join(''));
 
