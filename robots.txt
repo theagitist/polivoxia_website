@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://polivoxia.ca/sitemap.xml
+Sitemap: https://polivoxia.ca/denounce/costarica/sitemap.xml
