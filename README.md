@@ -3,7 +3,7 @@
 Portfolio site for Adri M. (theagitist): Art • Computers • Community — interactive art, writing, games, and creative projects.
 
 Live: <https://polivoxia.ca>  
-Site version: 2.0.0 (see `VERSION`).
+Site version: 2.1.0 (see `VERSION`).
 
 ## Structure
 
